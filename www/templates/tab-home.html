@@ -2,23 +2,31 @@
   <ion-header-bar align-title="center" class="wrap bar-positive">
     <div class="place">广州</span></div>
     <div class="search">商家名称</div>
-    <img src="../img/swipe.png" alt="" class="swipe">
+    <img ng-src="img/swipe.png" alt="" class="swipe">
   </ion-header-bar>
   <ion-content>
-    <ion-scroll zooming="true" direction="y">
+    
       <ion-slide-box class="slideshow" does-continue="true" slide-interval="3000" auto-play="true">
-        <ion-slide><img src="../img/img1.jpg" alt=""></ion-slide>
-        <ion-slide><img src="../img/img2.jpg" alt=""></ion-slide>
-        <ion-slide><img src="../img/img3.jpg" alt=""></ion-slide>
+        <ion-slide><img ng-src="img/img1.jpg" alt=""></ion-slide>
+        <ion-slide><img ng-src="img/img2.jpg" alt=""></ion-slide>
+        <ion-slide><img ng-src="img/img3.jpg" alt=""></ion-slide>
       </ion-slide-box>
-    </ion-scroll>
-    <ul class="sort">
+    <div class="kinds">
+      <span>火锅</span>
+      <span>川菜</span>
+      <span>海鲜</span>
+      <span>烧烤</span>
+      <span>西餐</span>
+      <span>粤菜</span>
+    </div>
+    <!-- <ion-scroll direction="y" scrollbar-y="false" style="height: 1000px;"> -->
+    <ul class="sort" ng-if="isItemSort">
       <li>全部</li>
-      <li>距离优先</li>
+      <li>距离优先</li> 
     </ul>
     <ion-list>
-      <ion-item  ng-repeat="item in items" href="#/tab/home/{{item.id}}" class="item">
-        <img src="../img/img1.jpg" alt="">
+      <ion-item ng-repeat="item in items" href="#/{{item.id}}" class="item" ng-click="forwardAnim()">
+        <img src="http://img3.imgtn.bdimg.com/it/u=214931719,1608091472&fm=21&gp=0.jpg" alt="">
         <div>
           <h3>{{item.id}}饭店</h3>
           <p>天河区</p>
@@ -29,5 +37,6 @@
         
       </ion-item>
     </ion-list>
+    <!-- </ion-scroll> -->
   </ion-content>
 </ion-view>

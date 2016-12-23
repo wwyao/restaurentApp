@@ -1,11 +1,22 @@
 angular.module('starter.controllers', [])
 
-.controller('HomeCtrl', function($scope) {
+.controller('HomeCtrl', function($scope,$ionicHistory,$ionicViewSwitcher) {
+  $scope.isItemSort = false;
   $scope.items = [{id:1},{id:2},{id:3},{id:4},{id:5},{id:6},{id:7},{id:8},{id:1},{id:2},{id:3},{id:4},{id:5},{id:6},{id:7}];
-})
+  $scope.forwardAnim = function(){
+    $ionicViewSwitcher.nextDirection("forward"); 
+  };
+  // $('#home').onscroll = function(){
+  //   console.log('asd'); 
+  // };
+}) 
 
-.controller('DetailCtrl', function($scope,$stateParams) {
+.controller('DetailCtrl', function($scope,$stateParams,$ionicHistory,$ionicViewSwitcher,$location) {
   $scope.id = $stateParams.id;
+  $scope.goBack = function(){
+    $location.path("/tab/home");
+    $ionicViewSwitcher.nextDirection("back");
+  };
 })
 
 .controller('SettingCtrl', function($scope, Chats) {

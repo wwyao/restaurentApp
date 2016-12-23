@@ -1,13 +1,19 @@
-<ion-view title="{{id}}饭店">
+<ion-view title="{{id}}饭店" nav-transition="android" class="fade-in">
     <ion-nav-bar class="bar bar-positive">
-      <ion-nav-back-button class="button-clear">
+      <ion-nav-buttons side="primary">
+      	<button ng-click="goBack()" ><i class="ion-chevron-left"></i></button>
+      </ion-nav-buttons>
+  
+    <!-- <ion-nav-back-button class="button-clear">
       <i class="ion-arrow-left-c"></i>
-      </ion-nav-back-button>
+    </ion-nav-back-button> -->
     </ion-nav-bar>
+   
   <ion-content>
 	<div class="top">
-    	<img src="../img/img1.jpg" alt="" class="res-img">
-		<img src="../img/share.png" alt="" ><img src="../img/collect2.png" alt="">
+    	<img ng-src="img/img1.jpg" alt="" class="res-img">
+			<img ng-src="img/share.png" alt="" >
+			<img ng-src="img/collect2.png" alt="">
 	</div>
 	<ul class="content">
 		<li>
