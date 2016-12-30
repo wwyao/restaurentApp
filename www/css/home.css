@@ -1,119 +1,182 @@
-.wrap{
-	position: relative;
-	padding-top:10px;
-	display: flex;
-	justify-content: center;
-	/*align-items: center;*/
-}
-.place{
-	position: absolute;
-	left: 9px;
-	padding-right:15px;
-	background: url(../img/down.png) no-repeat 90% 60%;
-	background-size: 7px 7px; 
-	line-height: 28px;
-}
-.search{
-	padding-left: 12%;
-	margin-left: 5%;
-	width: 60%;
-	height: 28px;
-	background: url(../img/search.png) no-repeat 8% center;
-	background-size: 20px 20px;
-	color:#B5B5B5;
-	line-height: 28px;
-	border:1px solid #C5D2DC;
-	/*box-shadow: 0 0 1px 0 #fff;*/
-	border-radius: 10px;
-}
-.swipe{
-	position: absolute;
-	right: 2px;
-	width: 30px;
-	height:30px;
-}
-.slideshow{
-	/*margin-top: 5px; */
-	/*width: 100%;*/
-	height: 150px;
-	background: red;
-}
-.slideshow ion-slide img{
-	width: 100%;
-	height: 100%;
-}
-.kinds span{
-	display: inline-block;
-	margin:7px 7px 3px;
-	padding: 25px 10px 0;
-	font-size: 12px;
-	text-align: center;
-}
-.kinds span:nth-child(1){
-	background: url(../img/huoguo.png) no-repeat center top;
-	background-size: 25px 25px;
-}
-.kinds span:nth-child(2){
-	background: url(../img/chuan.png) no-repeat center top;
-	background-size: 25px 25px;
-}
-.kinds span:nth-child(3){
-	background: url(../img/fish.png) no-repeat center top;
-	background-size: 25px 25px;
-}
-.kinds span:nth-child(4){
-	background: url(../img/bbq.png) no-repeat center top;
-	background-size: 25px 25px;
-}
-.kinds span:nth-child(5){
-	background: url(../img/xican.png) no-repeat center top;
-	background-size: 25px 25px;
-}
-.kinds span:nth-child(6){
-	background: url(../img/yuecai.png) no-repeat center top;
-	background-size: 25px 25px;
+.wrap {
+  position: relative;
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  background: rgb(32, 119, 182);
+  /*align-items: center;*/
 }
 
-.sort{
-	position: fixed;
-	top:0;
-	width: 100%;
-	background: #fff;
-	border-top: 1px solid #f0f0f0;
-	border-bottom: 1px solid #f0f0f0;
-	text-align: center;
+.place {
+  position: absolute;
+  left: 9px;
+  /*padding-right:15px;
+	background: url(../img/down.png) no-repeat 90% 60%;
+	background-size: 7px 7px; */
+  line-height: 24px;
+  color: #fff;
 }
-.sort li{ 
-	padding: 3px 0;
-	display: inline-block;
-	width:49%;
-	background: url(../img/down.png) no-repeat 72% 60%;
-	background-size: 8px 8px; 
+
+.place i {
+  margin-right: 5px;
 }
-.sort li:first-child{
-	background-position: 65% 60%;
-	border-right: 1px solid #f0f0f0;
+
+.search {
+  padding-left: 10%;
+  margin-left: 15px;
+  width: 60%;
+  height: 24px;
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.2) url(../img/search.png) no-repeat 8% center;
+  background-size: 15px 15px;
+  color: #fff;
+  line-height: 24px;
+  border: 1px solid #C5D2DC;
+  /*box-shadow: 0 0 1px 0 #fff;*/
+  border-radius: 5px;
 }
-.item img{
-	float: left;
-	width:110px;
-	height: 80px;
-	border-radius: 5px;
+
+.swipe {
+  position: absolute;
+  bottom: 10px;
+  right: 8px;
+  width: 22px;
+  height: 22px;
 }
-.item div{
-	position: relative;
-	margin-left: 120px;
-	
+
+.slideshow {
+  height: 150px;
 }
-.item div p{
-	font-size: 12px;
+
+.slideshow ion-slide img {
+  width: 100%;
+  height: 100%;
 }
-.item div p:last-child{
+
+.kinds {
+  margin-bottom: 3px;
+  display: flex;
+  justify-content: space-around;
+  /*width: 120%;*/
+  box-shadow: 0 0 1px 1px #e0e0e0;
+}
+
+.kinds span {
+  display: inline-block;
+  margin: 7px 7px 3px;
+  padding: 25px 5px 0;
+  font-size: 12px;
+  text-align: center;
+}
+
+.kinds span:nth-child(1) {
+  background: url(../img/huoguo.png) no-repeat center top;
+  background-size: 25px 25px;
+}
+
+.kinds span:nth-child(2) {
+  background: url(../img/chuan.png) no-repeat center top;
+  background-size: 25px 25px;
+}
+
+.kinds span:nth-child(3) {
+  background: url(../img/fish.png) no-repeat center top;
+  background-size: 25px 25px;
+}
+
+.kinds span:nth-child(4) {
+  background: url(../img/bbq.png) no-repeat center top;
+  background-size: 25px 25px;
+}
+
+.kinds span:nth-child(5) {
+  background: url(../img/xican.png) no-repeat center top;
+  background-size: 25px 25px;
+}
+
+.kinds span:nth-child(6) {
+  background: url(../img/yuecai.png) no-repeat center top;
+  background-size: 25px 25px;
+}
+
+.sort {
+  position: fixed;
+  display: flex;
+  justify-content: space-around;
+  z-index: 1000;
+  /*top:0;*/
+  width: 100%;
+  background: #B5BECA;
+  border-bottom: 1px solid #B5BECA;
+  box-shadow: 0 0 5px 0 #B5BECA;
+  text-align: center;
+}
+
+.sort li {
+  flex-grow: 1;
+  padding: 5px 0;
+  display: inline-block;
+  width: 20%;
+}
+
+.sort li i {
+  margin-left: 3px;
+}
+
+.sort li:nth-child(2) {
+  border-left: 1px solid #f0f0f0;
+  border-right: 1px solid #f0f0f0;
+}
+
+.item {
+  border: none;
+}
+
+.aitem img {
+  float: left;
+  width: 110px;
+  height: 80px;
+  /*border-radius: 5px;*/
+}
+
+.aitem div {
+  /*position: relative;*/
+  margin-left: 120px;
+}
+
+.aitem div p {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+}
+
+
+/*.item div p:last-child{
 	position: absolute;
 	right: -30px;
 	top:40%;
-}
-.item div .light-text{
+}*/
+
+
+/*.item div .light-text{
 	font-size: 25px;
 	color: red;
+}*/
+
+.item-complex .item-content {
+  padding: 10px;
+  margin: 2px 1px;
+  /*box-shadow: 0 0 20px 0px #e0e0e0;*/
+}
+
+.toTop {
+  position: fixed;
+  z-index: 3000;
+  bottom: 10px;
+  right: 10px;
+}
+
+.toTop img {
+  width: 40px;
+  height: 40px;
 }

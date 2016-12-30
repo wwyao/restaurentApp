@@ -1,0 +1,92 @@
+.me-icon {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  width: 1.3em;
+  height: 1.3em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.me-header {
+  position: relative;
+  color: #fff;
+}
+
+.mh-top {
+  width: 100%;
+  background: rgb(32, 119, 182);
+  text-align: center;
+}
+
+.mh-top h3 {
+  padding-top: 10px;
+  font-size: 20px;
+  color: #fff;
+}
+
+.mh-top div {
+  padding: 15px 0 25px 10px;
+  text-align: left;
+}
+
+.mh-top div img, .mh-top div span {
+  vertical-align: middle;
+}
+
+.mh-top div img {
+  margin-right: 10px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50px;
+}
+
+.mh-bottom {
+  padding: 5px 0;
+  display: flex;
+  justify-content: space-around;
+  color: #000;
+  list-style: none;
+  /*border-bottom: 1px solid #909090;*/
+  box-shadow: 0 1px 1px 0 #c0c0c0;
+}
+
+.mh-bottom li {
+  padding-top: 20px;
+}
+
+.mh-bottom li:nth-child(1) {
+  background: url(../img/yaoqing.png) no-repeat center top;
+  background-size: 20px 20px;
+}
+
+.mh-bottom li:nth-child(2) {
+  background: url(../img/cash.png) no-repeat center top;
+  background-size: 20px 20px;
+}
+
+.mh-bottom li:nth-child(3) {
+  background: url(../img/card.png) no-repeat center top;
+  background-size: 20px 20px;
+}
+
+.mh-bottom li:nth-child(4) {
+  background: url(../img/msg.png) no-repeat center top;
+  background-size: 20px 20px;
+}
+
+#me .scroll-content {
+  top: 194px;
+  /*border-top: 1px solid #e0e0e0;*/
+}
+
+.list .item {
+  font-size: 14px;
+  border: 1px solid #e0e0e0;
+}
+
+.iright {
+  position: absolute;
+  right: 16px;
+}

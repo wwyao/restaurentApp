@@ -1,31 +1,37 @@
-<ion-view title="{{id}}饭店" nav-transition="android" class="fade-in">
-    <ion-nav-bar class="bar bar-positive">
-      <ion-nav-buttons side="primary">
-      	<button ng-click="goBack()" ><i class="ion-chevron-left"></i></button>
-      </ion-nav-buttons>
-  
-    <!-- <ion-nav-back-button class="button-clear">
-      <i class="ion-arrow-left-c"></i>
-    </ion-nav-back-button> -->
-    </ion-nav-bar>
-   
-  <ion-content>
-	<div class="top">
-    	<img ng-src="img/img1.jpg" alt="" class="res-img">
-			<img ng-src="img/share.png" alt="" >
-			<img ng-src="img/collect2.png" alt="">
-	</div>
-	<ul class="content">
-		<li>
-			<div> <i class="icon ion-navigate"></i>天河区 正阳二路163号<i class="icon ion-chevron-right iright"></i></div>
-			<div><i class="icon ion-ios-clock-outline"></i>营业时间：10:00-22:00<i class="icon ion-android-call iright"></i></div>
-		</li>
-		<li>环境：<span>4.0</span>味道：<span>4.0</span>服务：<span>4.0</span></li>
-		<li>
-			<p>店铺介绍:</p>
-			<p>店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍</p>
-		</li>
-		<li><button>预约</button><button>点菜</button></li>
-	</ul>
-  </ion-content>
+<ion-view title="{{id}}饭店">
+
+	<ion-nav-bar class="bar bar-positive">
+		<ion-nav-buttons side="left" class="backBtn">
+			<img ng-src="img/back.png" ng-click="goBack()" />
+		</ion-nav-buttons>
+	</ion-nav-bar>
+
+
+
+	<ion-content>
+		<div class="top">
+			<img ng-src="img/img1.jpg" alt="" class="res-img">
+		</div>
+		<ul class="content">
+			<li>
+				<div> <i class="icon ion-navigate"></i>天河区 正阳二路163号<i class="icon ion-chevron-right iright"></i></div>
+				<div><i class="icon ion-ios-clock-outline"></i>营业时间：10:00-22:00<i class="icon ion-android-call iright"></i></div>
+			</li>
+			<li>环境：<span>4.0</span>味道：<span>4.0</span>服务：<span>4.0</span></li>
+			<li>
+				<p>店铺介绍:</p>
+				<p>店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍</p>
+			</li>
+		</ul>
+	</ion-content>
+	<ion-footer-bar>
+		<ion-tabs class="tabs-icon-top tabs-color-active-positive">
+			<ion-tab title="预约" icon-off="ion-document-text" icon-on="ion-document-text">
+
+			</ion-tab>
+
+			<ion-tab title="点菜" icon-off="ion-android-clipboard" icon-on="ion-android-clipboard">
+
+			</ion-tab>
+		</ion-tabs>
 </ion-view>

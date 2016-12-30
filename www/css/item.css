@@ -20,6 +20,8 @@
 	padding: 0 10px;
 }
 .content li{
+	padding-bottom: 15px;
+	margin: 15px 0;
 	width: 100%;
 	border-bottom:1px solid #c0c0c0;
 }
@@ -28,7 +30,6 @@
 }
 .content li:first-child{
 	position: relative;
-
 }
 .content li:first-child div{
 	margin: 5px 0;
@@ -36,4 +37,21 @@
 .content li:first-child .iright{
 	position: absolute;
 	right: 3px; 
+}
+.content li:nth-child(2) span{
+	margin-right: 25px;
+	color: #D91E27;
+}
+.backBtn{
+	border: none;
+	outline: none;
+	background: blue;
+}
+.left-buttons img{
+	width: 15px;
+	height: 15px;
+}
+.left-buttons{
+	padding-left: 5px;
+	padding-top: 9px;
 }

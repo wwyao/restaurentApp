@@ -1,0 +1,21 @@
+<ion-view title="账户登录" id="login">
+  <ion-header-bar class="bar">
+    <ion-nav-bar>
+      <ion-nav-buttons side="left" class="backBtn">
+        <img ng-src="img/back.png" ng-click="goBack()" />
+      </ion-nav-buttons>
+    </ion-nav-bar>
+  </ion-header-bar>
+
+  <ion-content>
+    <div class="username">
+      <span>账户</span><input type="text" id="username" ng-model="msg.username" placeholder="手机号/会员名">
+    </div>
+    <div class="password">
+      <span>登录密码</span><input type="password" id="password" ng-model="msg.password" placeholder="请输入密码">
+    </div>
+    <button type="button" class="loginbtn" ng-click="login()">登录</button>
+    <a href="###" class="forget">忘记密码</a>
+    <a href="###" class="register">免费注册</a>
+  </ion-content>
+</ion-view>
