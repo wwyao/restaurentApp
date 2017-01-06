@@ -76,7 +76,7 @@ angular.module('starter.controllers', [])
 	$scope.id = $stateParams.id;
 	console.log($state);
 	$scope.goBack = function() {
-		$state.go('tab');
+		$state.go('tab.home');
 		$ionicViewSwitcher.nextDirection("back");
 	};
 })
@@ -98,19 +98,39 @@ angular.module('starter.controllers', [])
 })
 
 .controller('MeCtrl', function($scope, $rootScope, $stateParams, $state, $ionicViewSwitcher) {
-		$rootScope.isLogined = false;
-		$scope.userImg = 'img/img1.jpg';
-		$rootScope.loginedText = '登录/注册';
-		$scope.meItems = ['推荐餐厅', '我的关注', '意见反馈', '清除缓存', '检查更新', '联系客服', '加价投诉', '关于小明点餐', '小明点餐用户协议'];
-		$scope.toLogin = function() {
-			if (!$rootScope.isLogined) {
-				$state.go('login');
-				$ionicViewSwitcher.nextDirection("forward");
-			}
-		};
+	$rootScope.isLogined = false;
+	$scope.userImg = 'img/img1.jpg';
+	$rootScope.loginedText = '登录/注册';
+	$scope.meItems = ['推荐餐厅', '我的关注', '意见反馈', '清除缓存', '检查更新', '联系客服', '加价投诉', '关于小明点餐', '小明点餐用户协议'];
+	$rootScope.toLogin = function() {
+		if (!$rootScope.isLogined) {
+			$state.go('login');
+			$ionicViewSwitcher.nextDirection("forward");
+		}
+	};
+	$rootScope.settingClick = function() {
+		console.log('setting');
+		if ($rootScope.isLogined) {
+			$state.go('setting');
+			$ionicViewSwitcher.nextDirection("forward");
+		}
+	};
+
+})
+
+
+.controller('page1', function($scope) {
+
+})
+
+.controller('page2', function($scope) {
 
 	})
-	.controller('LoginCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $cordovaToast) {
+	.controller('page3', function($scope) {
+
+	})
+
+.controller('LoginCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $cordovaToast) {
 		// $rootScope.username = '';
 		$scope.msg = {
 			username: '',
@@ -127,6 +147,7 @@ angular.module('starter.controllers', [])
 				if ($scope.msg.username == "admin" && $scope.msg.password == "admin") {
 					$rootScope.loginedText = $scope.msg.username;
 					$rootScope.isLogined = true;
+					$rootScope.toLogin = null;
 					$scope.goBack();
 				} else {
 					$cordovaToast
@@ -138,5 +159,17 @@ angular.module('starter.controllers', [])
 						});
 				}
 			}
+		};
+
+
+
+	})
+	.controller('SettingCtrl', function($scope, $state, $ionicViewSwitcher) {
+		$scope.slItem1 = ['修改头像', '昵称', '性别', '生日'];
+		$scope.slItem2 = ['修改登录密码', '修改支付密码'];
+
+		$scope.goBack = function() {
+			$state.go('tab.me');
+			$ionicViewSwitcher.nextDirection("back");
 		};
 	});

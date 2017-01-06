@@ -6,7 +6,7 @@
         <img ng-src="{{userImg}}" alt="无法显示" class="user-img">
         <span ng-bind="loginedText"></span>
       </div>
-      <svg class="me-icon" aria-hidden="true">
+      <svg class="me-icon" aria-hidden="true" ng-click="settingClick()">
         <use xlink:href="#icon-setting"></use>
       </svg>
     </div>

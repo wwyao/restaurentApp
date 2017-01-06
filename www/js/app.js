@@ -97,6 +97,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 	.state('tab.order', {
 		url: '/order',
+		// abstract: true,
 		views: {
 			'tab-order': {
 				templateUrl: 'templates/tab-orders.html',
@@ -104,6 +105,37 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 			}
 		}
 	})
+
+	.state('tab.order.page1', {
+		url: '/page1',
+		views: {
+			'page1': {
+				templateUrl: 'templates/orderPage1.html',
+				controller: 'page1'
+			}
+		}
+	})
+
+	.state('tab.order.page2', {
+		url: '/page2',
+		views: {
+			'page2': {
+				templateUrl: 'templates/orderPage2.html',
+				controller: 'page2'
+			}
+		}
+	})
+
+	.state('tab.order.page3', {
+		url: '/page3',
+		views: {
+			'page3': {
+				templateUrl: 'templates/orderPage3.html',
+				controller: 'page3'
+			}
+		}
+	})
+
 
 	.state('tab.me', {
 			url: '/me',
@@ -118,7 +150,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 			url: '/tab/login',
 			templateUrl: 'templates/login.html',
 			controller: 'LoginCtrl'
-		});
+		})
+
+	.state('setting', {
+		url: '/tab/setting',
+		templateUrl: 'templates/setting.html',
+		controller: 'SettingCtrl'
+	});
 	// if none of the above states are matched, use this as the fallback
 	$urlRouterProvider.otherwise('/tab/home');
 

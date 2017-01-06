@@ -1,9 +1,22 @@
-<ion-view view-title="order">
+<ion-view view-title="order" class="orders">
   <ion-header-bar align-title="center" class="wrap">
     <span class="orderTitle">订单</span><img ng-src="img/swipe.png" alt="" class="swipe" ng-click="scan()">
   </ion-header-bar>
+  <ion-tabs class="tabs-color-active-positive">
 
-  <ion-content>
+    <!-- Dashboard Tab -->
+    <ion-tab title="未付款" href="#/tab/order/page1">
+      <ion-nav-view name="page1"></ion-nav-view>
+    </ion-tab>
 
-  </ion-content>
+    <ion-tab title="就餐中" href="#/tab/order/page2">
+      <ion-nav-view name="page2"></ion-nav-view>
+    </ion-tab>
+
+    <ion-tab title="已消费" href="#/tab/order/page3">
+      <ion-nav-view name="page3"></ion-nav-view>
+    </ion-tab>
+
+
+  </ion-tabs>
 </ion-view>

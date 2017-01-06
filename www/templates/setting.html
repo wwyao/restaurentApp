@@ -1,0 +1,27 @@
+<ion-view title="设置" id="setting">
+  <ion-header-bar class="bar">
+    <ion-nav-bar>
+      <ion-nav-buttons side="left" class="backBtn">
+        <img ng-src="img/back.png" ng-click="goBack()" />
+      </ion-nav-buttons>
+    </ion-nav-bar>
+  </ion-header-bar>
+
+  <ion-content>
+    <ion-list class="setting-List1">
+      <ion-item ng-repeat="listItem1 in slItem1">
+        {{listItem1}}
+        <i class="ion-chevron-right iright"></i>
+      </ion-item>
+    </ion-list>
+    <div class="divmargin"></div>
+    <ion-list class="setting-List2">
+      <ion-item ng-repeat="listItem2 in slItem2">
+        {{listItem2}}
+        <i class="ion-chevron-right iright"></i>
+      </ion-item>
+    </ion-list>
+
+    <div class="exitBtn">退出当前账号</div>
+  </ion-content>
+</ion-view>
