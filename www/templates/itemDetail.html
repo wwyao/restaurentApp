@@ -1,4 +1,4 @@
-<ion-view title="{{id}}饭店">
+<ion-view title="{{id}}饭店" class="headerBg">
 
 	<ion-nav-bar class="bar bar-positive">
 		<ion-nav-buttons side="left" class="backBtn">
@@ -8,7 +8,7 @@
 
 
 
-	<ion-content>
+	<ion-content scrollbar-y="false">
 		<div class="top">
 			<img ng-src="img/img1.jpg" alt="" class="res-img">
 		</div>
@@ -18,6 +18,7 @@
 				<div><i class="icon ion-ios-clock-outline"></i>营业时间：10:00-22:00<i class="icon ion-android-call iright"></i></div>
 			</li>
 			<li>环境：<span>4.0</span>味道：<span>4.0</span>服务：<span>4.0</span></li>
+			<li><a href="##">顾客评价 <i class="icon ion-chevron-right iright"></i></a></li>
 			<li>
 				<p>店铺介绍:</p>
 				<p>店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍</p>
@@ -25,13 +26,14 @@
 		</ul>
 	</ion-content>
 	<ion-footer-bar>
-		<ion-tabs class="tabs-icon-top tabs-color-active-positive">
+		<ion-tabs class="tabs-icon-top">
 			<ion-tab title="预约" icon-off="ion-document-text" icon-on="ion-document-text">
 
 			</ion-tab>
 
-			<ion-tab title="点菜" icon-off="ion-android-clipboard" icon-on="ion-android-clipboard">
+			<ion-tab title="菜单" icon-off="ion-android-clipboard" icon-on="ion-android-clipboard">
 
 			</ion-tab>
 		</ion-tabs>
+	</ion-footer-bar>
 </ion-view>

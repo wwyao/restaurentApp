@@ -1,0 +1,16 @@
+<ion-view title="关于小明订餐" id="about" class="headerBg">
+  <ion-header-bar class="bar">
+    <ion-nav-bar>
+      <ion-nav-buttons side="left" class="backBtn">
+        <img ng-src="img/back.png" ng-click="goBack()" />
+      </ion-nav-buttons>
+    </ion-nav-bar>
+  </ion-header-bar>
+
+  <ion-content>
+    <p ng-repeat="item in aboutText">
+      {{item}}
+    </p>
+
+  </ion-content>
+</ion-view>

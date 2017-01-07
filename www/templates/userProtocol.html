@@ -1,0 +1,16 @@
+<ion-view title="小明订餐用户协议" id="userProtocol" class="headerBg">
+  <ion-header-bar class="bar">
+    <ion-nav-bar>
+      <ion-nav-buttons side="left" class="backBtn">
+        <img ng-src="img/back.png" ng-click="goBack()" />
+      </ion-nav-buttons>
+    </ion-nav-bar>
+  </ion-header-bar>
+
+  <ion-content>
+    <p ng-repeat="item in protocolText">
+      {{item}}
+    </p>
+
+  </ion-content>
+</ion-view>

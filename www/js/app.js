@@ -71,6 +71,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 		}
 	})
 
+
+	.state('search', {
+		url: '/tab/search',
+		templateUrl: 'templates/search.html',
+		controller: 'SearchCtrl'
+	})
+
 	.state('detail', {
 		url: '/tab/home/:id',
 		templateUrl: 'templates/itemDetail.html',
@@ -138,25 +145,43 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 
 	.state('tab.me', {
-			url: '/me',
-			views: {
-				'tab-me': {
-					templateUrl: 'templates/tab-me.html',
-					controller: 'MeCtrl'
-				}
+		url: '/me',
+		views: {
+			'tab-me': {
+				templateUrl: 'templates/tab-me.html',
+				controller: 'MeCtrl'
 			}
-		})
-		.state('login', {
-			url: '/tab/login',
-			templateUrl: 'templates/login.html',
-			controller: 'LoginCtrl'
-		})
+		}
+	})
+
+	.state('login', {
+		url: '/tab/login',
+		templateUrl: 'templates/login.html',
+		controller: 'LoginCtrl'
+	})
 
 	.state('setting', {
 		url: '/tab/setting',
 		templateUrl: 'templates/setting.html',
 		controller: 'SettingCtrl'
-	});
+	})
+
+	.state('fedback', {
+		url: '/tab/fedback',
+		templateUrl: 'templates/fedback.html',
+		controller: 'FedbackCtrl'
+	})
+
+	.state('userprotocol', {
+			url: '/tab/userprotocol',
+			templateUrl: 'templates/userProtocol.html',
+			controller: 'UserProtocolCtrl'
+		})
+		.state('about', {
+			url: '/tab/about',
+			templateUrl: 'templates/about.html',
+			controller: 'AboutlCtrl'
+		});
 	// if none of the above states are matched, use this as the fallback
 	$urlRouterProvider.otherwise('/tab/home');
 

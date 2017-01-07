@@ -1,0 +1,18 @@
+<ion-view id="search">
+  <ion-header-bar class="headerBg">
+    <ion-nav-bar>
+      <ion-nav-buttons side="left" class="backBtn">
+        <img ng-src="img/back.png" ng-click="goBack()" />
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <input type="searchText" placeholder="搜索商家" class="search-text">
+  </ion-header-bar>
+
+  <ion-content scrollbar-y="false">
+    <ion-list>
+      <ion-item ng-repeat="item in searchData">
+        {{item}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

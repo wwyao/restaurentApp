@@ -12,15 +12,32 @@
     </div>
     <ul class="mh-bottom">
       <li>邀请</li>
-      <li>体现</li>
+      <li>提现</li>
       <li>刷卡</li>
       <li>消息</li>
     </ul>
   </div>
   <ion-content overflow-scroll="true" scrollbar-y="false">
     <ion-list class="me-List">
-      <ion-item ng-repeat="item in meItems">
-        {{item}}
+      <ion-item ng-repeat="item in meItems1" href="{{item.href}}" nav-direction="forward">
+        {{item.tagText}}
+        <span ng-if="item.show" class="me-item-othermsg">{{item.otherMsg}}</span>
+        <i class="ion-chevron-right iright"></i>
+      </ion-item>
+    </ion-list>
+    <div class="divDiving"></div>
+    <ion-list class="me-List">
+      <ion-item ng-repeat="item in meItems2" href="{{item.href}}">
+        {{item.tagText}}
+        <span ng-if="item.show" class="me-item-othermsg">{{item.otherMsg}}</span>
+        <i class="ion-chevron-right iright"></i>
+      </ion-item>
+    </ion-list>
+    <div class="divDiving"></div>
+    <ion-list class="me-List">
+      <ion-item ng-repeat="item in meItems3" href="{{item.href}}" nav-direction="forward">
+        {{item.tagText}}
+        <span ng-if="item.show" class="me-item-othermsg">{{item.otherMsg}}</span>
         <i class="ion-chevron-right iright"></i>
       </ion-item>
     </ion-list>

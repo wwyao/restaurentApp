@@ -1,3 +1,7 @@
+#me {
+  background: #f5f5f5;
+}
+
 .me-icon {
   position: absolute;
   top: 10px;
@@ -77,7 +81,7 @@
 }
 
 #me .scroll-content {
-  top: 194px;
+  top: 200px;
   /*border-top: 1px solid #e0e0e0;*/
 }
 
@@ -89,4 +93,13 @@
 .iright {
   position: absolute;
   right: 16px;
+}
+
+.me-item-othermsg {
+  float: right;
+  margin-right: 25px;
+}
+
+.divDiving {
+  margin: 10px 0;
 }

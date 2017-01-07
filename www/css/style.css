@@ -1,6 +1,66 @@
 /* Empty. Add your own CSS if you like */
 
+.tabs {
+  background: #fff !important;
+  box-shadow: 0 0 3px 0 #909090;
+}
+
 .order-pages {
   margin-top: 30px;
   /*background: red;*/
+}
+
+.headerBg .bar {
+  background: rgb(32, 119, 182);
+  color: #fff;
+}
+
+#userProtocol .scroll-content, #about .scroll-content {
+  padding: 10px 15px;
+  font-size: 12px;
+}
+
+#fedback {
+  background: #f5f5f5;
+  text-align: center;
+}
+
+#fedback .fedbackText {
+  padding: 5px;
+  width: 100%;
+  font-size: 14px;
+  word-break: break-all;
+}
+
+#fedback .btn {
+  margin-top: 50px;
+  width: 150px;
+  height: 30px;
+  background: rgb(107, 219, 47);
+  border: none;
+  outline: none;
+  box-shadow: 1px 1px 2px 0 #909090;
+}
+
+#search .headerBg {
+  position: relative;
+}
+
+#search .search-text {
+  padding: 5px 10px;
+  position: absolute;
+  z-index: 100000;
+  top: 14%;
+  left: 15%;
+  background: rgb(32, 119, 182);
+  width: 70%;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #f0f0f0;
+  color: #fff;
+}
+
+#search .backBtn {
+  position: absolute;
+  z-index: 20000;
 }
