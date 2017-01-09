@@ -4,6 +4,7 @@ angular.module('starter.controllers', [])
 	// $cordovaStatusbar.overlaysWebView(true);
 	// $cordovaStatusbar.style(1);
 	// $cordovaStatusbar.styleColor('blue');
+	$scope.currentCity = "广州";
 	$scope.isItemSort = false;
 	$scope.items = [{
 		id: 1
@@ -115,12 +116,12 @@ angular.module('starter.controllers', [])
 	$scope.userImg = 'img/img1.jpg';
 	$rootScope.loginedText = '登录/注册';
 	$scope.meItems1 = [{
-		href: '#/tab/userprotocol',
+		href: '#/tab/RecommendRestaurent',
 		show: false,
 		otherMsg: "18826255298",
 		tagText: '推荐餐厅'
 	}, {
-		href: '#/tab/userprotocol',
+		href: '#/tab/myconcern',
 		show: false,
 		otherMsg: "18826255298",
 		tagText: '我的关注'
@@ -287,25 +288,61 @@ angular.module('starter.controllers', [])
 
 
 .controller('AboutlCtrl', function($scope, $rootScope, $state, $ionicHistory, $ionicViewSwitcher) {
-		$rootScope.goBack = function() {
-			// $state.go('tab.me');
-			$ionicHistory.goBack();
-			$ionicViewSwitcher.nextDirection("back");
-		};
-		$scope.aboutText = ["小明点餐系统支持在线预定、电子菜单、到店扫码点菜/结账等功能，顾客通过手机端可以全程自助完成预定+点菜+结账，降低每个环节的等待时间，提升餐馆服务效率。",
-			"同时为了满足不同用户的需求点餐猫还支持iPad点菜、微信预定/点菜功能。",
-			"真正实现一个系统支持多端融合的“互联网+”餐馆。"
-		];
-	})
-	.controller('FedbackCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {
-		$rootScope.goBack = function() {
-			// $state.go('setting');
-			// $ionicNavBarDelegate.back();
-			$ionicHistory.goBack();
-			$ionicViewSwitcher.nextDirection("back");
-		};
+	$rootScope.goBack = function() {
+		// $state.go('tab.me');
+		$ionicHistory.goBack();
+		$ionicViewSwitcher.nextDirection("back");
+	};
+	$scope.aboutText = ["小明点餐系统支持在线预定、电子菜单、到店扫码点菜/结账等功能，顾客通过手机端可以全程自助完成预定+点菜+结账，降低每个环节的等待时间，提升餐馆服务效率。",
+		"同时为了满足不同用户的需求点餐猫还支持iPad点菜、微信预定/点菜功能。",
+		"真正实现一个系统支持多端融合的“互联网+”餐馆。"
+	];
+})
 
-	})
+
+.controller('FedbackCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {
+	$rootScope.goBack = function() {
+		// $state.go('setting');
+		// $ionicNavBarDelegate.back();
+		$ionicHistory.goBack();
+		$ionicViewSwitcher.nextDirection("back");
+	};
+
+})
+
+.controller('MsgCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {
+	$scope.msgDatas = [];
+	$scope.goBack = function() {
+		$state.go('tab.me');
+		// $ionicNavBarDelegate.back();
+		// $ionicHistory.goBack();
+		$ionicViewSwitcher.nextDirection("back");
+	};
+
+})
+
+.controller('MyconcernCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {
+	// $scope.msgDatas = [];
+	$scope.goBack = function() {
+		$state.go('tab.me');
+		// $ionicNavBarDelegate.back();
+		// $ionicHistory.goBack();
+		$ionicViewSwitcher.nextDirection("back");
+	};
+
+})
+
+.controller('RecommendRestaurentCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {
+	// $scope.msgDatas = [];
+	$scope.goBack = function() {
+		$state.go('tab.me');
+		// $ionicNavBarDelegate.back();
+		// $ionicHistory.goBack();
+		$ionicViewSwitcher.nextDirection("back");
+	};
+
+})
+
 
 
 

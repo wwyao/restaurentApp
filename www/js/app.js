@@ -172,6 +172,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 		controller: 'FedbackCtrl'
 	})
 
+	.state('msg', {
+		url: '/tab/msg',
+		templateUrl: 'templates/msg.html',
+		controller: 'MsgCtrl'
+	})
+
+	.state('myconcern', {
+		url: '/tab/myconcern',
+		templateUrl: 'templates/myConcern.html',
+		controller: 'MyconcernCtrl'
+	})
+
+	.state('recommendRestaurent', {
+		url: '/tab/RecommendRestaurent',
+		templateUrl: 'templates/recommendRestaurent.html',
+		controller: 'RecommendRestaurentCtrl'
+	})
+
+
+
+
 	.state('userprotocol', {
 			url: '/tab/userprotocol',
 			templateUrl: 'templates/userProtocol.html',
