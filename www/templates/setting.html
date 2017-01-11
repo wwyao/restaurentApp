@@ -9,7 +9,7 @@
 
   <ion-content>
     <ion-list class="setting-List1">
-      <ion-item ng-repeat="listItem1 in slItem1">
+      <ion-item ng-repeat="listItem1 in slItem1" href="{{listItem1.href}}" nav-direction="forward">
         {{listItem1.tagText}}
         <i class="ion-chevron-right iright"></i>
       </ion-item>

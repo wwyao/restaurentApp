@@ -8,7 +8,11 @@
   </ion-header-bar>
 
   <ion-content scroll="false">
-
-
+    <ion-list>
+      <ion-item ng-repeat="item in itemDatas">
+        {{item.tag}}<input type="text" name="name" placeholder="{{item.text}}">
+      </ion-item>
+    </ion-list>
+    <button class="commendRestaurentBtn">提交</button>
   </ion-content>
 </ion-view>

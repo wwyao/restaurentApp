@@ -64,3 +64,37 @@
   position: absolute;
   z-index: 20000;
 }
+
+#commendRestaurent{
+  background: #f5f5f5;
+}
+
+.commendRestaurentBtn{
+  margin:20px auto;
+  display: block;
+  width: 80%;
+  height: 30px;
+  color: red;
+  background: #fff;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 5px 0 #909090;
+}
+
+.account-edit{
+  position: absolute;
+  top: 13px;
+  right: 10px;
+  z-index: 1000;
+}
+.account-List .accountInput{
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 16px;
+  // background: red;
+  width: 70%;
+}
+.account-radois{
+  display: inline-block;
+  margin-left: 10px;
+}

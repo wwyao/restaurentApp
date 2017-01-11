@@ -221,7 +221,7 @@ angular.module('starter.controllers', [])
 
 .controller('SettingCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory, $ionicLoading, $cordovaProgress) {
 	$scope.slItem1 = [{
-		href: '#/tab/userprotocol',
+		href: '#/tab/account',
 		show: false,
 		otherMsg: "",
 		tagText: '账号'
@@ -244,9 +244,9 @@ angular.module('starter.controllers', [])
 		otherMsg: "v1.0.0",
 		tagText: '检查更新'
 	}];
-	$rootScope.goBack = function() {
-		// $state.go('tab.me');
-		$ionicHistory.goBack();
+	$scope.goBack = function() {
+		$state.go('tab.me');
+		// $ionicHistory.goBack();
 		$ionicViewSwitcher.nextDirection("back");
 	};
 
@@ -301,7 +301,7 @@ angular.module('starter.controllers', [])
 
 
 .controller('FedbackCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {
-	$rootScope.goBack = function() {
+	$scope.goBack = function() {
 		// $state.go('setting');
 		// $ionicNavBarDelegate.back();
 		$ionicHistory.goBack();
@@ -332,7 +332,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('RecommendRestaurentCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {
+.controller('InviteCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {
 	// $scope.msgDatas = [];
 	$scope.goBack = function() {
 		$state.go('tab.me');
@@ -342,6 +342,50 @@ angular.module('starter.controllers', [])
 	};
 
 })
+
+.controller('AccountCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {
+	$scope.accountData = [{tag:'修改头像',isShow:false,isSex:false}, 
+						  {tag:'昵称',isShow:true,value:'admin',isSex:false}, 
+						  {tag:'性别',isShow:false,isSex:true},
+						  {tag:'生日',isShow:true,isSex:false},
+						  {tag:'修改登录密码',isShow:false,isSex:false}, 
+						  {tag:'修改支付密码',isShow:false,isSex:false}];
+	$scope.goBack = function() {
+		$state.go('setting');
+		// $ionicNavBarDelegate.back();
+		// $ionicHistory.goBack();
+		$ionicViewSwitcher.nextDirection("back");
+	};
+
+})
+
+
+
+.controller('RecommendRestaurentCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {
+	// $scope.msgDatas = [];
+	$scope.goBack = function() {
+		$state.go('tab.me');
+		// $ionicNavBarDelegate.back();
+		// $ionicHistory.goBack();
+		$ionicViewSwitcher.nextDirection("back");
+	};
+	$scope.itemDatas = [{
+		tag:'餐厅名称',
+		text:'请填写餐厅名称'
+	},{
+		tag:'餐厅类型',
+		text:'请填写餐厅类型'
+	},{
+		tag:'餐厅地址',
+		text:'请填写餐厅地址'
+	},{
+		tag:'餐厅电话',
+		text:'请填写餐厅电话'
+	}];
+
+})
+
+
 
 
 

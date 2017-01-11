@@ -80,3 +80,16 @@
   padding-left: 5px;
   padding-top: 9px;
 }
+#footer .bar{
+  padding:0;
+}
+#footer a{
+  display: inline-block;
+  padding: 0;
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  background: #f5f5f5;
+  color: #000;
+  line-height: 40px;
+}

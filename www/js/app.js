@@ -190,6 +190,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 		controller: 'RecommendRestaurentCtrl'
 	})
 
+	.state('account', {
+		url: '/tab/account',
+		templateUrl: 'templates/account.html',
+		controller: 'AccountCtrl'
+	})
+
+	.state('invite', {
+		url: '/tab/invite',
+		templateUrl: 'templates/invite.html',
+		controller: 'InviteCtrl'
+	})
 
 
 
