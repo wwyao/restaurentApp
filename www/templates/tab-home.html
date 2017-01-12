@@ -1,6 +1,6 @@
-<ion-view>
+<ion-view id="home">
   <ion-header-bar align-title="center" class="wrap">
-    <div class="place"><i class="ion-ios-location-outline" ng-bind="currentCity"></i></div>
+    <div class="place"><i class="ion-ios-location-outline location" ng-bind="currentCity"></i></div>
     <a class="search" href="#/tab/search" nav-direction="forward">商家名称</a>
     <img ng-src="img/swipe.png" alt="" class="swipe" ng-click="scan()">
   </ion-header-bar>
@@ -9,14 +9,14 @@
     <li>所有分类<i class="ion-ios-arrow-down"></i></li>
     <li>距离优先<i class="ion-ios-arrow-down"></i></li>
   </ul> -->
-  <ion-content overflow-scroll="true" scrollbar-y="false">
+
+  <ion-content overflow-scroll="true" scrollbar-y="false" class="home-list">
     <!-- <ion-scroll zooming="true" direction="y" class="bigScroll" delegate-handle="mainScroll" on-scroll="showNav($event)"> -->
     <ion-slide-box class="slideshow" does-continue="true" slide-interval="3000" auto-play="true">
       <ion-slide><img ng-src="img/img1.jpg" alt=""></ion-slide>
       <ion-slide><img ng-src="img/img2.jpg" alt=""></ion-slide>
       <ion-slide><img ng-src="img/img3.jpg" alt=""></ion-slide>
     </ion-slide-box>
-
     <div class="kinds">
       <span>火锅</span>
       <span>川菜</span>
@@ -25,7 +25,6 @@
       <span>西餐</span>
       <span>粤菜</span>
     </div>
-
     <ion-list>
       <ion-item collection-repeat="item in items" href="#/tab/home/{{item.id}}" class="aitem" ng-click="forwardAnim()">
         <img src="http://img3.imgtn.bdimg.com/it/u=214931719,1608091472&fm=21&gp=0.jpg" alt="">
@@ -39,8 +38,7 @@
 
       </ion-item>
     </ion-list>
-    <ion-infinite-scroll on-infinite="loadMore()" distance="1%" ng-if="ist">
-
+    <ion-infinite-scroll ng-if="moreDataCanBeLoaded" on-infinite="loadMoreData()">
     </ion-infinite-scroll>
     <!-- </ion-scroll> -->
     <!-- <button ng-click="top()" class="toTop"  ng-if="isItemSort"><img ng-src="img/top.png" alt=""></button> -->

@@ -19,13 +19,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 			// org.apache.cordova.statusbar required
 			StatusBar.styleDefault();
 		}
-
 		$cordovaStatusbar.overlaysWebView(true);
 		$cordovaStatusbar.style(1);
-		$cordovaStatusbar.styleHex('#801A93FF');
-
-
-
+		$cordovaStatusbar.styleHex('#1362A8');
 	});
 })
 
@@ -54,8 +50,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 		.state('tab', {
 		url: '/tab',
 		abstract: true,
-		templateUrl: 'templates/tabs.html'
-
+		templateUrl: 'templates/tabs.html',
+		controller: 'tabsCtrl'
 	})
 
 
@@ -200,6 +196,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 		url: '/tab/invite',
 		templateUrl: 'templates/invite.html',
 		controller: 'InviteCtrl'
+	})
+
+
+	.state('bookTable', {
+		url: '/tab/bookTable',
+		templateUrl: 'templates/bookTable.html',
+		controller: 'BookTableCtrl'
 	})
 
 

@@ -1,0 +1,14 @@
+<ion-view title="预约就餐" class="headerBg">
+  <ion-nav-bar class="bar bar-positive">
+    <ion-nav-buttons side="left" class="backBtn">
+      <img ng-src="img/back.png" ng-click="goBack()" />
+    </ion-nav-buttons>
+  </ion-nav-bar>
+  <ion-content scroll="false">
+    <ion-list>
+      <ion-item ng-repeat="item1 in bookDatas1">
+        {{item1.title}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

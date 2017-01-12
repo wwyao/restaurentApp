@@ -18,7 +18,7 @@
     <ion-list class="setting-List2">
       <ion-item ng-repeat="listItem2 in slItem2" href="{{listItem2.href}}" ng-click="listItem2Cilck(listItem2.tag)">
         {{listItem2.tagText}}
-        <span ng-if="listItem2.show" class="me-item-othermsg">{{listItem2.otherMsg}}</span>
+        <span ng-if="listItem2.show" class="me-item-othermsg" ng-bind="version"></span>
         <i class="ion-chevron-right iright"></i>
       </ion-item>
     </ion-list>

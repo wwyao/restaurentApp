@@ -7,12 +7,10 @@
   /*align-items: center;*/
 }
 
-.place {
+#home .location {
   position: absolute;
   left: 9px;
-  /*padding-right:15px;
-	background: url(../img/down.png) no-repeat 90% 60%;
-	background-size: 7px 7px; */
+  font-size: 16px;
   line-height: 24px;
   color: #fff;
 }
@@ -24,17 +22,17 @@
 .search {
   padding-left: 10%;
   margin-left: 15px;
-  width: 60%;
-  height: 24px;
+  width: 65%;
+  height: 28px;
   font-size: 12px;
   background: rgba(255, 255, 255, 0.2) url(../img/search.png) no-repeat 8% center;
   background-size: 15px 15px;
-  color: #fff;
-  line-height: 24px;
+  color: #909090;
+  line-height: 28px;
   border: 1px solid #C5D2DC;
   /*box-shadow: 0 0 1px 0 #fff;*/
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .swipe {

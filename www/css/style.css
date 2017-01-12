@@ -65,36 +65,55 @@
   z-index: 20000;
 }
 
-#commendRestaurent{
+#commendRestaurent {
   background: #f5f5f5;
 }
 
-.commendRestaurentBtn{
-  margin:20px auto;
+.commendRestaurentBtn {
+  margin: 20px auto;
   display: block;
   width: 80%;
   height: 30px;
-  color: red;
-  background: #fff;
+  color: #fff;
+  background: rgb(235, 80, 80);
   border: none;
   border-radius: 5px;
-  box-shadow: 0 0 5px 0 #909090;
+  box-shadow: 0 0 3px 0 #909090;
 }
 
-.account-edit{
+.account-edit {
   position: absolute;
   top: 13px;
   right: 10px;
   z-index: 1000;
 }
-.account-List .accountInput{
+
+.account-List .accountInput {
   display: inline-block;
-  margin-left: 10px;
+  float: right;
+  text-align: right;
+  margin-right: 10px;
   font-size: 16px;
-  // background: red;
   width: 70%;
+  background: #fff;
 }
-.account-radois{
+
+.account-radois {
   display: inline-block;
-  margin-left: 10px;
+  margin-right: 15px;
+  float: right;
+}
+
+#account .birthdate {
+  margin-right: 10px;
+  float: right;
+}
+
+#account .account-img {
+  display: inline-block;
+  float: right;
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
 }

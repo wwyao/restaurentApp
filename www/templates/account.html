@@ -5,18 +5,20 @@
         <img ng-src="img/back.png" ng-click="goBack()" />
       </ion-nav-buttons>
     </ion-nav-bar>
-    <div class="account-edit">编辑</div>
+    <div class="account-edit" ng-bind="editText" ng-click="editClick()"></div>
   </ion-header-bar>
 
   <ion-content>
     <ion-list class="account-List">
       <ion-item ng-repeat="item in accountData">
-        <span>{{item.tag}}</span> 
-        <input type="text" class="accountInput" ng-if="item.isShow" value="{{item.value}}" >
+        <span>{{item.tag}}</span>
+        <img ng-src="{{userData.avatar}}" alt="" class="account-img" ng-if="item.isAvatar" ng-click="imgPicker()">
+        <input type="text" class="accountInput" ng-if="item.isShow" ng-model="userData.name" ng-disabled="isEditable">
         <div class="account-radois" ng-if="item.isSex">
-          <input type="radio" name="sex" checked >男
-          <input type="radio" name="sex">女
+          <input type="radio" name="sex" checked ng-disabled="isEditable">男
+          <input type="radio" name="sex" ng-disabled="isEditable">女
         </div>
+        <span ng-click="openPicker()" ng-if="item.isDate" class="birthdate">{{userData.date}}</span>
       </ion-item>
     </ion-list>
   </ion-content>
