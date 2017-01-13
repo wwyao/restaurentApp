@@ -1,10 +1,11 @@
 angular.module('starter.controllers', [])
 
 //tabs页面
-.controller('tabsCtrl', function($scope, $rootScope, $state) {
-	$rootScope.isLogined = true;
+.controller('tabsCtrl', function($scope, datas, $state) {
 	$scope.goLogin = function() {
-		if (!$rootScope.isLogined) {
+		var tempUser = datas.getUserDatas();
+		console.log(!tempUser, tempUser);
+		if (!tempUser) {
 			$state.go('login');
 		} else {
 			$state.go('tab.me');
@@ -12,11 +13,8 @@ angular.module('starter.controllers', [])
 	};
 })
 
-//主页
-.controller('HomeCtrl', function($scope, $ionicHistory, $ionicViewSwitcher, $ionicScrollDelegate, $cordovaBarcodeScanner) {
-	// $cordovaStatusbar.overlaysWebView(true);
-	// $cordovaStatusbar.style(1);
-	// $cordovaStatusbar.styleColor('blue');
+//主页页面
+.controller('HomeCtrl', function($scope, $ionicHistory, $ionicViewSwitcher, $ionicScrollDelegate, $cordovaBarcodeScanner, $timeout, $state) {
 	$scope.currentCity = "广州";
 	$scope.isItemSort = false;
 	$scope.items = [{
@@ -44,7 +42,6 @@ angular.module('starter.controllers', [])
 		$ionicScrollDelegate.scrollTop(true);
 	};
 	$scope.showNav = function($event) {
-		// console.log(window.getComputedStyle(document.querySelector('.scroll')).transform);
 		var sTop = $ionicScrollDelegate.$getByHandle('mainScroll').getScrollPosition().top;
 		console.log(sTop > 171);
 		if (sTop > 171) {
@@ -54,7 +51,7 @@ angular.module('starter.controllers', [])
 		}
 	};
 	$scope.ist = true;
-	$scope.moreDataCanBeLoaded = true;
+	//下拉加载更多的数据
 	$scope.loadMoreData = function() {
 		var tempArr = [];
 		for (var i = 0; i < 4; i++) {
@@ -64,15 +61,19 @@ angular.module('starter.controllers', [])
 			}
 			tempArr.push(obj);
 		}
-		$scope.items = $scope.items.concat(tempArr);
-		$scope.moreDataCanBeLoaded = false;
+		$timeout(function() {
+			$scope.items = $scope.items.concat(tempArr);
+			$scope.$broadcast('scroll.infiniteScrollComplete');
+		}, 1400);
+
 	};
 	//扫二维码
 	$scope.scan = function() {
 		$cordovaBarcodeScanner
 			.scan()
 			.then(function(barcodeData) {
-				// Success! Barcode data is here 扫描数据：barcodeData.text
+				var url = barcodeData.text;
+				$state.go(url);
 			}, function(error) {
 				// An error occurred
 			});
@@ -82,17 +83,28 @@ angular.module('starter.controllers', [])
 	// document.querySelector('.bigScroll').style.height = window.screen.height + 'px';
 })
 
-//餐厅详细页
+//餐厅详细页页面
 .controller('DetailCtrl', function($scope, $stateParams, $state, $ionicViewSwitcher) {
 	$scope.id = $stateParams.id;
-	console.log($state);
+	$scope.restaurentData = {
+		id: $stateParams.id,
+		title: "小明餐厅",
+		img: "",
+		address: "天河区 正阳二路199号",
+		time: "10:00 - 22:00",
+		phone: "020-1234567",
+		describe: "餐厅描述餐厅描述餐厅描述餐厅描述餐厅描述餐厅描述餐厅描述餐厅描述餐厅描述餐厅描述餐厅描述",
+		eScore: "4.0",
+		tScore: "4.0",
+		sScore: "4.0"
+	}
 	$scope.goBack = function() {
 		$state.go('tab.home');
 		$ionicViewSwitcher.nextDirection("back");
 	};
 })
 
-//搜索
+//搜索页面
 .controller('SearchCtrl', function($scope, $stateParams, $state, $ionicViewSwitcher, $ionicHistory) {
 	$scope.goBack = function() {
 		// $state.go('tab.home');
@@ -102,7 +114,7 @@ angular.module('starter.controllers', [])
 	$scope.searchData = [];
 })
 
-//订单
+//订单页面
 .controller('OrdersCtrl', function($scope, $cordovaBarcodeScanner) {
 	$scope.scan = function() {
 		$cordovaBarcodeScanner
@@ -116,11 +128,16 @@ angular.module('starter.controllers', [])
 	};
 })
 
-//我的
-.controller('MeCtrl', function($scope, $rootScope, $stateParams, $state, $ionicViewSwitcher) {
-	$rootScope.isLogined = true;
-	$scope.userImg = 'img/img1.jpg';
-	$rootScope.loginedText = '登录/注册';
+//我的页面
+.controller('MeCtrl', function($scope, datas, $stateParams, $state, $ionicViewSwitcher) {
+	// $rootScope.isLogined = false;
+	// $scope.userData = {
+	// 	name: '登录/注册',
+	// 	avatar: 'img/noimg.jpg',
+	// 	date: '2011-6-6',
+	// 	phone: "12345678912"
+	// }
+	$scope.userData = datas.getUserDatas();
 	$scope.meItems1 = [{
 		href: '#/tab/RecommendRestaurent',
 		show: false,
@@ -154,44 +171,35 @@ angular.module('starter.controllers', [])
 		otherMsg: "18826255298",
 		tagText: '小明点餐用户协议'
 	}];
-	$rootScope.toLogin = function() {
-		if (!$rootScope.isLogined) {
-			$state.go('login');
-			$ionicViewSwitcher.nextDirection("forward");
-		}
-	};
-	$rootScope.settingClick = function() {
-		console.log('setting');
-		if ($rootScope.isLogined) {
-			$state.go('setting');
-			$ionicViewSwitcher.nextDirection("forward");
-		}
+	$scope.settingClick = function() {
+		$state.go('setting');
+		$ionicViewSwitcher.nextDirection("forward");
 	};
 })
 
-//未消费
+//未消费页面
 .controller('page1', function($scope) {
 
 })
 
-//就餐中
+//就餐中页面
 .controller('page2', function($scope) {
 
 })
 
-//已消费
+//已消费页面
 .controller('page3', function($scope) {
 
 })
 
-//登录
-.controller('LoginCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $cordovaToast) {
+//登录页面
+.controller('LoginCtrl', function($scope, datas, $state, $ionicViewSwitcher, $cordovaToast) {
 	$scope.msg = {
 		username: '',
 		password: ''
 	};
 	$scope.v = '';
-	$rootScope.goBack = function() {
+	$scope.goBack = function() {
 		$state.go('tab.home');
 		$ionicViewSwitcher.nextDirection("back");
 	};
@@ -199,10 +207,15 @@ angular.module('starter.controllers', [])
 		console.log($scope.msg);
 		if ($scope.msg.username !== '' && $scope.msg.password !== '') {
 			if ($scope.msg.username == "admin" && $scope.msg.password == "admin") {
-				$rootScope.loginedText = $scope.msg.username;
-				$rootScope.isLogined = true;
-				$rootScope.toLogin = null;
-				$scope.goBack();
+				var tempObj = {
+					name: $scope.msg.username,
+					date: '2011-6-6',
+					avatar: 'img/img2.jpg',
+					phone: "12345678912"
+				}
+				datas.setUserDatas(tempObj);
+				$state.go('tab.me');
+				$ionicViewSwitcher.nextDirection("back");
 			} else {
 				$cordovaToast
 					.show('账户、密码输入错误!', 'short', 'bottom')
@@ -216,8 +229,8 @@ angular.module('starter.controllers', [])
 	};
 })
 
-//设置
-.controller('SettingCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory, $cordovaProgress, $cordovaToast) {
+//设置页面
+.controller('SettingCtrl', function($scope, datas, $state, $ionicViewSwitcher, $ionicHistory, $cordovaProgress, $cordovaToast) {
 	//缓存大小
 	$scope.cache = "1.0MB";
 	//版本号
@@ -274,41 +287,36 @@ angular.module('starter.controllers', [])
 			}, 1300);
 
 		}
+	};
+	//退出登录
+	$scope.loginOut = function() {
+		datas.setUserDatas(null);
+		$state.go('tab.home');
+		$ionicViewSwitcher.nextDirection("back");
 	}
 })
 
-//小明点餐协议
-.controller('UserProtocolCtrl', function($scope, $rootScope, $state, $ionicHistory, $ionicViewSwitcher) {
-	$rootScope.goBack = function() {
+//小明点餐协议页面
+.controller('UserProtocolCtrl', function($scope, datas, $state, $ionicHistory, $ionicViewSwitcher) {
+	$scope.goBack = function() {
 		// $state.go('tab.me');
 		$ionicHistory.goBack();
 		$ionicViewSwitcher.nextDirection("back");
 	};
-	$scope.protocolText = ["一、总则",
-		"1.1、 用户在使用点餐猫服务前， 应当仔细阅读《 点餐猫用户协议》（ 以下简称“ 本协议”） 的全部内容， 对于本协议中的加重字体、 斜体、 下划线、 颜色标记等条款需重点阅读、 理解。",
-		"1.2、 用户应当同意本协议的全部条款并按照页面上的提示完成全部的注册程序。 用户在进行注册程序过程中点击'注册'", "按钮即表示用户与点餐猫达成以下协议， 完全接受本协议项下的全部条款， 本协议即在用户与点餐猫之间产生法律效力， 对双方均具有法律约束力。",
-		"1.3、 用户注册成功后， 点餐猫将给予每个用户一个用户帐号及相应的密码， 该用户帐号和密码由用户负责保管； 用户应当对以其用户帐号进行的所有活动和事件负法律责任。",
-		"1.4、 点餐猫用户协议、各个频道单项服务条款、全部活动条款及公告可由点餐猫随时更新，且无需另行通知。点餐猫有权对上述条款进行修改，修改后的协议一旦公布即有效替代原有协议。用户可随时查询最新协议。用户在使用点餐猫提供的各项服务之前，应仔细阅读本协议及本协议不可分割的各项服务协议。用户在使用相关服务时,应关注并遵守其所适用的相关条款。用户如不同意本服务协议及/或随时对其的修改，可以主动取消点餐猫提供的服务；用户一旦使用点餐猫服务，即视为用户已了解并完全同意本协议及其他服务条款中的各项内容，包括点餐猫对本协议及其他服务条款随时所做的任何修改，并成为点餐猫用户。",
-		"二、相关定义",
-		"2.1、 点餐猫：指重庆浩品峰电子商务有限公司运营和所有的网络交易服务平台。重庆浩品峰电子商务有限公司通过点餐猫平台向用户和商户提供相关互联网端及移动端交易服务。",
-		"2.2、 消费： 指商户通过点餐猫平台发布其商品信息，用户通过点餐猫网平台购买消费，并以在线支付的方式进行结账的消费行为。"
-	];
+	$scope.protocolText = datas.getProtocol();
 })
 
-//关于小明点餐
-.controller('AboutlCtrl', function($scope, $rootScope, $state, $ionicHistory, $ionicViewSwitcher) {
-	$rootScope.goBack = function() {
+//关于小明点餐页面
+.controller('AboutlCtrl', function($scope, datas, $state, $ionicHistory, $ionicViewSwitcher) {
+	$scope.goBack = function() {
 		// $state.go('tab.me');
 		$ionicHistory.goBack();
 		$ionicViewSwitcher.nextDirection("back");
 	};
-	$scope.aboutText = ["小明点餐系统支持在线预定、电子菜单、到店扫码点菜/结账等功能，顾客通过手机端可以全程自助完成预定+点菜+结账，降低每个环节的等待时间，提升餐馆服务效率。",
-		"同时为了满足不同用户的需求点餐猫还支持iPad点菜、微信预定/点菜功能。",
-		"真正实现一个系统支持多端融合的“互联网+”餐馆。"
-	];
+	$scope.aboutText = datas.getAboutText();
 })
 
-//意见反馈
+//意见反馈页面
 .controller('FedbackCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {
 	$scope.goBack = function() {
 		// $state.go('setting');
@@ -317,7 +325,7 @@ angular.module('starter.controllers', [])
 	};
 })
 
-//消息
+//消息页面
 .controller('MsgCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {
 	$scope.msgDatas = [];
 	$scope.goBack = function() {
@@ -327,47 +335,87 @@ angular.module('starter.controllers', [])
 	};
 })
 
-//我的关注
+//我的关注页面
 .controller('MyconcernCtrl', function($scope, $rootScope, $ionicViewSwitcher, $state, $ionicHistory) {
 	$scope.goBack = function() {
 		$state.go('tab.me');
 		// $ionicHistory.goBack();
 		$ionicViewSwitcher.nextDirection("back");
 	};
-
 })
 
-//邀请
+//邀请页面
 .controller('InviteCtrl', function($scope, $rootScope, $ionicViewSwitcher, $state, $ionicHistory) {
 	$scope.goBack = function() {
 		$state.go('tab.me');
 		// $ionicHistory.goBack();
 		$ionicViewSwitcher.nextDirection("back");
 	};
-
 })
 
-//预约订座
-.controller('BookTableCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {
+//预约订座页面
+.controller('BookTableCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory, $cordovaDatePicker) {
 	$scope.bookDatas1 = [];
 	$scope.goBack = function() {
 		// $state.go('tab.me');
-		// $ionicNavBarDelegate.back();
 		$ionicHistory.goBack();
 		$ionicViewSwitcher.nextDirection("back");
 	};
-
+	$scope.order = {
+		time: "",
+		numOfPeople: "",
+		isRoom: "",
+		contacter: "",
+		phone: "",
+		remark: ""
+	}
+	$scope.bookDatas1 = [{
+		title: "就餐时间",
+		hadInput: true,
+		placeText: "请选择就餐时间"
+	}, {
+		title: "就餐人数",
+	}, {
+		title: "是否需要包房"
+	}];
+	$scope.bookDatas2 = [{
+		title: "联系人",
+		hadInput: true,
+		value: "admin"
+	}, {
+		title: "联系电话",
+		hadInput: true,
+	}, {
+		title: "备注",
+		hadInput: true
+	}];
+	$scope.selectTime = function() {
+		var options = {
+			date: new Date(),
+			mode: 'date', // or 'time'
+			minDate: "",
+			allowOldDates: false,
+			allowFutureDates: true,
+			doneButtonLabel: 'DONE',
+			doneButtonColor: '#F2F3F4',
+			cancelButtonLabel: 'CANCEL',
+			cancelButtonColor: '#000000'
+		};
+		//打开日期选择器
+		$scope.openPicker = function() {
+			$cordovaDatePicker.show(options).then(function(date) {
+				$scope.order.time = date;
+			});
+		};
+	};
 })
 
-//账户
-.controller('AccountCtrl', function($scope, $rootScope, $state, $cordovaImagePicker, $ionicViewSwitcher, $ionicHistory, $cordovaDatePicker) {
+//账户页面
+.controller('AccountCtrl', function($scope, datas, $state, $cordovaImagePicker, $ionicViewSwitcher, $ionicHistory, $cordovaDatePicker) {
 	$scope.editText = '编辑';
 	$scope.isEditable = true;
-	$rootScope.userData = {
-		name: 'admin',
-		date: '2011-2-2',
-		avatar: 'img/img2.jpg'
-	};
+	//获取已登录的用户信息
+	$scope.userData = datas.getUserDatas();
 	$scope.accountData = [{
 		tag: '修改头像',
 		isAvatar: true
@@ -390,7 +438,6 @@ angular.module('starter.controllers', [])
 	//返回按钮
 	$scope.goBack = function() {
 		$state.go('setting');
-		// $ionicNavBarDelegate.back();
 		// $ionicHistory.goBack();
 		$ionicViewSwitcher.nextDirection("back");
 	};
@@ -407,9 +454,10 @@ angular.module('starter.controllers', [])
 	};
 	//打开日期选择器
 	$scope.openPicker = function() {
-		if ($scope.isEditable) {
+		if (!$scope.isEditable) {
 			$cordovaDatePicker.show(options).then(function(date) {
-				alert(date);
+				var dateStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+				$scope.userData.date = dateStr;
 			});
 		}
 	};
@@ -421,13 +469,12 @@ angular.module('starter.controllers', [])
 	};
 	//打开相册
 	$scope.imgPicker = function() {
-		if ($scope.isEditable) {
+		if (!$scope.isEditable) {
 			$cordovaImagePicker.getPictures(imgoptions)
 				.then(function(results) {
-					// for (var i = 0; i < results.length; i++) {
-					// 	alert('Image URI: ' + results[i]);
-					// }
-					$rootScope.userData.avatar = results[0];
+					$scope.userData.avatar = results[0];
+					//*******************
+					datas.setUserDatas($scope.userData);
 				}, function(error) {
 					// error getting photos
 				});
@@ -439,13 +486,14 @@ angular.module('starter.controllers', [])
 			$scope.editText = '完成';
 			$scope.isEditable = false;
 		} else {
+			datas.setUserDatas($scope.userData);
 			$scope.editText = '编辑';
 			$scope.isEditable = true;
 		}
 	};
 })
 
-//推荐餐厅
+//推荐餐厅页面
 .controller('RecommendRestaurentCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {
 	// $scope.msgDatas = [];
 	$scope.goBack = function() {

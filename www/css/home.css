@@ -170,12 +170,16 @@
 
 .toTop {
   position: fixed;
-  z-index: 3000;
-  bottom: 10px;
-  right: 10px;
-}
-
-.toTop img {
-  width: 40px;
-  height: 40px;
+  z-index: 30000;
+  bottom: 70px;
+  right: 15px;
+  background: rgba(232, 91, 1, .6);
+  width: 30px;
+  height: 30px;
+  font-size: 28px;
+  text-align: center;
+  line-height: 30px;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 3px 0 rgb(204, 143, 23);
 }

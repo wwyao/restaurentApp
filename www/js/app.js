@@ -56,149 +56,130 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 
 	// Each tab has its own nav history stack:
-
+	//首页
 	.state('tab.home', {
-		url: '/home',
-		views: {
-			'tab-home': {
-				templateUrl: 'templates/tab-home.html',
-				controller: 'HomeCtrl'
+			url: '/home',
+			views: {
+				'tab-home': {
+					templateUrl: 'templates/tab-home.html',
+					controller: 'HomeCtrl'
+				}
 			}
-		}
-	})
-
-
-	.state('search', {
-		url: '/tab/search',
-		templateUrl: 'templates/search.html',
-		controller: 'SearchCtrl'
-	})
-
-	.state('detail', {
-		url: '/tab/home/:id',
-		templateUrl: 'templates/itemDetail.html',
-		controller: 'DetailCtrl'
-	})
-
-
-
-	// .state('detail', {
-	//   url: '/detail',
-	//   abstract: false,
-	//   templateUrl: 'templates/itemDetail.html'
-	// })
-
-	// .state('tab.orders', {
-	//     url: '/orders',
-	//     views: {
-	//       'tab-orders': {
-	//         templateUrl: 'templates/tab-orders.html',
-	//         controller: 'OrdersCtrl'
-	//       }
-	//     }
-	//   })
-
-	.state('tab.order', {
-		url: '/order',
-		// abstract: true,
-		views: {
-			'tab-order': {
-				templateUrl: 'templates/tab-orders.html',
-				controller: 'OrdersCtrl'
+		})
+		//搜索
+		.state('search', {
+			url: '/tab/search',
+			templateUrl: 'templates/search.html',
+			controller: 'SearchCtrl'
+		})
+		//餐厅详细页
+		.state('detail', {
+			url: '/tab/home/:id',
+			templateUrl: 'templates/itemDetail.html',
+			controller: 'DetailCtrl'
+		})
+		//订单
+		.state('tab.order', {
+			url: '/order',
+			// abstract: true,
+			views: {
+				'tab-order': {
+					templateUrl: 'templates/tab-orders.html',
+					controller: 'OrdersCtrl'
+				}
 			}
-		}
-	})
-
-	.state('tab.order.page1', {
-		url: '/page1',
-		views: {
-			'page1': {
-				templateUrl: 'templates/orderPage1.html',
-				controller: 'page1'
+		})
+		//未付款
+		.state('tab.order.page1', {
+			url: '/page1',
+			views: {
+				'page1': {
+					templateUrl: 'templates/orderPage1.html',
+					controller: 'page1'
+				}
 			}
-		}
-	})
-
-	.state('tab.order.page2', {
-		url: '/page2',
-		views: {
-			'page2': {
-				templateUrl: 'templates/orderPage2.html',
-				controller: 'page2'
+		})
+		//就餐中
+		.state('tab.order.page2', {
+			url: '/page2',
+			views: {
+				'page2': {
+					templateUrl: 'templates/orderPage2.html',
+					controller: 'page2'
+				}
 			}
-		}
-	})
-
-	.state('tab.order.page3', {
-		url: '/page3',
-		views: {
-			'page3': {
-				templateUrl: 'templates/orderPage3.html',
-				controller: 'page3'
+		})
+		//已消费
+		.state('tab.order.page3', {
+			url: '/page3',
+			views: {
+				'page3': {
+					templateUrl: 'templates/orderPage3.html',
+					controller: 'page3'
+				}
 			}
-		}
-	})
+		})
 
-
+	//我的
 	.state('tab.me', {
-		url: '/me',
-		views: {
-			'tab-me': {
-				templateUrl: 'templates/tab-me.html',
-				controller: 'MeCtrl'
+			url: '/me',
+			views: {
+				'tab-me': {
+					templateUrl: 'templates/tab-me.html',
+					controller: 'MeCtrl'
+				}
 			}
-		}
-	})
+		})
+		//登录
+		.state('login', {
+			url: '/tab/login',
+			templateUrl: 'templates/login.html',
+			controller: 'LoginCtrl'
+		})
+		//设置
+		.state('setting', {
+			url: '/tab/setting',
+			templateUrl: 'templates/setting.html',
+			controller: 'SettingCtrl'
+		})
+		//意见反馈
+		.state('fedback', {
+			url: '/tab/fedback',
+			templateUrl: 'templates/fedback.html',
+			controller: 'FedbackCtrl'
+		})
+		//消息
+		.state('msg', {
+			url: '/tab/msg',
+			templateUrl: 'templates/msg.html',
+			controller: 'MsgCtrl'
+		})
+		//我的关注
+		.state('myconcern', {
+			url: '/tab/myconcern',
+			templateUrl: 'templates/myConcern.html',
+			controller: 'MyconcernCtrl'
+		})
+		//推荐餐厅
+		.state('recommendRestaurent', {
+			url: '/tab/RecommendRestaurent',
+			templateUrl: 'templates/recommendRestaurent.html',
+			controller: 'RecommendRestaurentCtrl'
+		})
+		//账户
+		.state('account', {
+			url: '/tab/account',
+			templateUrl: 'templates/account.html',
+			controller: 'AccountCtrl'
+		})
+		//邀请
+		.state('invite', {
+			url: '/tab/invite',
+			templateUrl: 'templates/invite.html',
+			controller: 'InviteCtrl'
+		})
 
-	.state('login', {
-		url: '/tab/login',
-		templateUrl: 'templates/login.html',
-		controller: 'LoginCtrl'
-	})
-
-	.state('setting', {
-		url: '/tab/setting',
-		templateUrl: 'templates/setting.html',
-		controller: 'SettingCtrl'
-	})
-
-	.state('fedback', {
-		url: '/tab/fedback',
-		templateUrl: 'templates/fedback.html',
-		controller: 'FedbackCtrl'
-	})
-
-	.state('msg', {
-		url: '/tab/msg',
-		templateUrl: 'templates/msg.html',
-		controller: 'MsgCtrl'
-	})
-
-	.state('myconcern', {
-		url: '/tab/myconcern',
-		templateUrl: 'templates/myConcern.html',
-		controller: 'MyconcernCtrl'
-	})
-
-	.state('recommendRestaurent', {
-		url: '/tab/RecommendRestaurent',
-		templateUrl: 'templates/recommendRestaurent.html',
-		controller: 'RecommendRestaurentCtrl'
-	})
-
-	.state('account', {
-		url: '/tab/account',
-		templateUrl: 'templates/account.html',
-		controller: 'AccountCtrl'
-	})
-
-	.state('invite', {
-		url: '/tab/invite',
-		templateUrl: 'templates/invite.html',
-		controller: 'InviteCtrl'
-	})
-
-
+	//预约
 	.state('bookTable', {
 		url: '/tab/bookTable',
 		templateUrl: 'templates/bookTable.html',
@@ -206,7 +187,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 	})
 
 
-
+	//小明点餐用户协议
 	.state('userprotocol', {
 			url: '/tab/userprotocol',
 			templateUrl: 'templates/userProtocol.html',

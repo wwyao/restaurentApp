@@ -1,4 +1,4 @@
-<ion-view title="{{id}}饭店" class="headerBg">
+<ion-view title="小明餐厅{{id}}" class="headerBg" id="detail">
 
 	<ion-nav-bar class="bar bar-positive">
 		<ion-nav-buttons side="left" class="backBtn">
@@ -14,20 +14,21 @@
 		</div>
 		<ul class="content">
 			<li>
-				<div> <i class="icon ion-navigate"></i>天河区 正阳二路163号<i class="icon ion-chevron-right iright"></i></div>
-				<div><i class="icon ion-ios-clock-outline"></i>营业时间：10:00-22:00<i class="icon ion-android-call iright"></i></div>
+				<a><i class="icon ion-navigate"></i>{{restaurentData.address}}<i class="icon ion-chevron-right iright2"></i></a>
+				<a href="tel:{{restaurentData.phone}}"><i class=" icon ion-ios-clock-outline "></i>营业时间：{{restaurentData.time}}<i class="icon ion-android-call iright2"></i></a>
 			</li>
-			<li>环境：<span>4.0</span>味道：<span>4.0</span>服务：<span>4.0</span></li>
-			<li><a href="##">顾客评价 <i class="icon ion-chevron-right iright"></i></a></li>
+			<li>环境：<span>{{restaurentData.eScore}}</span>味道：<span>{{restaurentData.tScore}}</span>服务：<span>{{restaurentData.sScore}}</span></li>
+			<li><a href="## ">商家营业资质 <i class="icon ion-chevron-right iright"></i></a></li>
+			<li><a href="## ">顾客评价 <i class="icon ion-chevron-right iright"></i></a></li>
 			<li>
-				<p>店铺介绍:</p>
-				<p>店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍</p>
+				<p>餐厅描述:</p>
+				<p>{{restaurentData.describe}}</p>
 			</li>
 		</ul>
 
 	</ion-content>
 	<div id="footer">
-		<a href="#/tab/bookTable">预约</a>
-		<a href="###">点菜</a>
+		<a href="#/tab/bookTable ">预约</a>
+		<a href="### ">点菜</a>
 	</div>
 </ion-view>

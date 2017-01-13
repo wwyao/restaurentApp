@@ -3,10 +3,14 @@
   color: #fff;
 }
 
-.orders .tabs {
+#orders .tabs {
   padding-top: 0 !important;
-  top: 64px;
-  height: 30px;
-  line-height: 30px;
+  top: 44px;
+  height: 40px;
+  line-height: 40px;
   border-bottom: 1px solid rgba(43, 45, 39, 0.44);
+}
+
+#orders .order-pages {
+  margin-top: 40px;
 }

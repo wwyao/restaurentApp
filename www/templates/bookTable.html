@@ -1,4 +1,4 @@
-<ion-view title="预约就餐" class="headerBg">
+<ion-view title="预约就餐" class="headerBg" id="book-table">
   <ion-nav-bar class="bar bar-positive">
     <ion-nav-buttons side="left" class="backBtn">
       <img ng-src="img/back.png" ng-click="goBack()" />
@@ -7,8 +7,16 @@
   <ion-content scroll="false">
     <ion-list>
       <ion-item ng-repeat="item1 in bookDatas1">
-        {{item1.title}}
+        {{item1.title}} <input type="text" ng-if="item1.hadInput" placeholder="{{item1.placeText}}" disabled ng-click="selectTime()" ng-model="order.time">
+        
+    </ion-item>
+    </ion-list>
+    <div class="list-bottom"></div>
+    <ion-list>
+      <ion-item ng-repeat="item2 in bookDatas2">
+        {{item2.title}} <input type="text" ng-if="item2.hadInput" value="{{item2.value}}">
       </ion-item>
     </ion-list>
+    <button class="button button-assertive go-btn">继续点菜</button>
   </ion-content>
 </ion-view>

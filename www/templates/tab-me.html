@@ -1,10 +1,10 @@
-<ion-view view-title="Me" id="me" ng-click="toLogin()">
+<ion-view view-title="Me" id="me">
   <div class="me-header">
     <div class="mh-top">
       <h3>我的</h3>
       <div>
-        <img ng-src="{{userImg}}" alt="无法显示" class="user-img">
-        <span ng-bind="loginedText"></span>
+        <img ng-src="{{userData.avatar}}" alt="无法显示" class="user-img">
+        <span ng-bind="userData.name"></span>
       </div>
       <svg class="me-icon" aria-hidden="true" ng-click="settingClick()">
         <use xlink:href="#icon-setting"></use>
