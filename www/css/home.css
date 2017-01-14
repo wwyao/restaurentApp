@@ -56,15 +56,17 @@
   margin-bottom: 3px;
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
   /*width: 120%;*/
-  box-shadow: 0 0 1px 1px #e0e0e0;
+  /*box-shadow: 0 0 1px 1px #e0e0e0;*/
 }
 
 .kinds span {
   display: inline-block;
-  margin: 7px 7px 3px;
+  margin: 5px 0;
   padding: 25px 5px 0;
   font-size: 12px;
+  width: 25%;
   text-align: center;
 }
 
@@ -98,6 +100,16 @@
   background-size: 25px 25px;
 }
 
+.kinds span:nth-child(7) {
+  background: url(../img/kuaican.png) no-repeat center top;
+  background-size: 25px 25px;
+}
+
+.kinds span:nth-child(8) {
+  background: url(../img/tea.png) no-repeat center top;
+  background-size: 25px 25px;
+}
+
 .sort {
   position: fixed;
   display: flex;
@@ -105,15 +117,16 @@
   z-index: 1000;
   /*top:0;*/
   width: 100%;
-  background: #B5BECA;
+  background: rgba(32, 119, 182, 0.9);
   border-bottom: 1px solid #B5BECA;
-  box-shadow: 0 0 5px 0 #B5BECA;
+  /*box-shadow: 0 0 5px 0 #B5BECA;*/
   text-align: center;
+  color: #fff;
 }
 
 .sort li {
   flex-grow: 1;
-  padding: 5px 0;
+  padding: 8px 0;
   display: inline-block;
   width: 20%;
 }
@@ -123,8 +136,8 @@
 }
 
 .sort li:nth-child(2) {
-  border-left: 1px solid #f0f0f0;
-  border-right: 1px solid #f0f0f0;
+  border-left: 1px dotted rgba(205, 227, 206, .2);
+  border-right: 1px dotted rgba(205, 227, 206, .2);
 }
 
 .item {

@@ -5,8 +5,6 @@
   box-shadow: 0 0 3px 0 #909090;
 }
 
-
-
 .headerBg .bar {
   background: rgb(32, 119, 182);
   color: #fff;
@@ -115,6 +113,9 @@
   border-radius: 10px;
 }
 
+
+/*预约页面*/
+
 #book-table {
   background: #f5f5f5;
 }
@@ -138,4 +139,53 @@
   display: block;
   margin: 30px auto;
   width: 70%;
+}
+
+#book-table .checkbox {
+  opacity: 0;
+}
+
+#book-table .checkbtn {
+  position: absolute;
+  right: 15px;
+  top: 11px;
+}
+
+.peopleNum-sub {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 18px;
+}
+
+.peopleNum-sub span {
+  display: inline-block;
+  margin: 0 7px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #909090;
+  text-align: center;
+  line-height: 16px;
+}
+
+#book-table .time {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  color: #000;
+}
+
+#qrcode_welcome .welcome-text p {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 16px;
+}
+
+#qrcode_welcome .welcome-text p span {
+  color: red;
+}
+
+#qrcode_welcome .welcome-text p strong {
+  display: block;
+  color: rgb(13, 68, 162);
 }

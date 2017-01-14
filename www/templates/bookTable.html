@@ -7,16 +7,29 @@
   <ion-content scroll="false">
     <ion-list>
       <ion-item ng-repeat="item1 in bookDatas1">
-        {{item1.title}} <input type="text" ng-if="item1.hadInput" placeholder="{{item1.placeText}}" disabled ng-click="selectTime()" ng-model="order.time">
-        
-    </ion-item>
+        {{item1.title}}
+        <!-- <input type="datetime-local" ng-if="item1.isDate" name="name" value="" placeholder="{{item1.placeText}}"> -->
+        <div ng-if="item1.isDate" class="time" ng-click="selectTime()">{{dateText}}</div>
+
+        <!-- 选择人数 -->
+        <div class="peopleNum-sub" ng-if="item1.isPeopleNum">
+          <span ng-click="decPeople()">-</span>{{order.numOfPeople}}<span ng-click="addPeople()">+</span>
+        </div>
+        <!-- 是否需要包房开关 -->
+        <label class="toggle toggle-assertive checkbtn" ng-if="item1.isCheckbox">
+           <input type="checkbox" class="checkbox" ng-checked="order.isRoom" >
+           <div class="track">
+             <div class="handle"></div>
+           </div>
+         </label>
+      </ion-item>
     </ion-list>
     <div class="list-bottom"></div>
     <ion-list>
       <ion-item ng-repeat="item2 in bookDatas2">
-        {{item2.title}} <input type="text" ng-if="item2.hadInput" value="{{item2.value}}">
+        {{item2.title}} <input type="text" ng-if="item2.hadInput" ng-model="item2.value">
       </ion-item>
     </ion-list>
-    <button class="button button-assertive go-btn">继续点菜</button>
+    <button class="button button-assertive go-btn" ng-click="orderClick()">继续点菜</button>
   </ion-content>
 </ion-view>

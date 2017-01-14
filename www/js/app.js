@@ -72,11 +72,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 			templateUrl: 'templates/search.html',
 			controller: 'SearchCtrl'
 		})
+		//扫码跳转的页面
+		.state('qrcodewelcome', {
+			url: '/tab/qrcodewelcome/:name/:deskId',
+			templateUrl: 'templates/qrcode_welcome.html',
+			controller: 'QrcodewelcomeCtrl'
+		})
 		//餐厅详细页
 		.state('detail', {
 			url: '/tab/home/:id',
 			templateUrl: 'templates/itemDetail.html',
 			controller: 'DetailCtrl'
+		})
+		//菜单
+		.state('menu', {
+			url: '/tab/menu',
+			templateUrl: 'templates/menu.html',
+			controller: 'MenuCtrl'
 		})
 		//订单
 		.state('tab.order', {

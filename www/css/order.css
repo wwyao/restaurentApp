@@ -14,3 +14,12 @@
 #orders .order-pages {
   margin-top: 40px;
 }
+
+.order-pages .unlogined {
+  color: red;
+  text-align: center;
+}
+
+.order-pages .robot {
+  margin-left: -55px;
+}

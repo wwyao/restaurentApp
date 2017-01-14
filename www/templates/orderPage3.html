@@ -1,3 +1,5 @@
-<ion-view class="order-pages">
-  page3
+<ion-view class="order-pages" id="order-page3">
+  <div ng-if="!isLogined" class="unlogined">
+    <img ng-src="img/robot.gif" alt="" class="robot"> <span>你还没登录哦!</span>
+  </div>
 </ion-view>

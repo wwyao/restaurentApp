@@ -1,0 +1,126 @@
+#menu #scroll1 {
+  display: inline-block;
+  width: 25%;
+}
+
+#menu #scroll2 {
+  display: inline-block;
+  margin-left: 27%;
+  width: 70%;
+}
+
+#menu .menu-list {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background: #c8c8c8;
+  list-style: none;
+  vertical-align: top;
+}
+
+.menu-list li {
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  text-align: center;
+  padding: 15px 0;
+  background: #c8c8c8;
+}
+
+
+/*.menu-list li:hover {
+  background: #fff;
+}*/
+
+#menu .menu-list-detail {
+  display: inline-block;
+  padding-bottom: 45px;
+  margin-left: 2%;
+  width: 100%;
+  /*background: red;*/
+  list-style: none;
+  vertical-align: top;
+}
+
+#menu .menu-list-detail li {
+  position: relative;
+  margin-top: 20px;
+  height: 75px;
+  border-bottom: 1px solid rgba(187, 186, 187, .6);
+}
+
+.menu-list-detail li img {
+  float: left;
+  margin-left: 3px;
+  width: 55px;
+  height: 55px;
+}
+
+.menu-list-detail li .msg-box {
+  margin: 0 0 0 63px;
+}
+
+.msg-box p {
+  padding-top: 5px;
+  font-size: 12px;
+  color: red;
+}
+
+.menu-list-detail .peopleNum-sub {
+  right: 3px;
+}
+
+#menuFooter {
+  position: absolute;
+  z-index: 10000;
+  bottom: 0;
+  width: 100%;
+  height: 45px;
+  border-top: 1px solid #505050;
+  background: rgb(237, 236, 237);
+}
+
+#menuFooter .shoppingCar {
+  position: absolute;
+  top: -20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgb(130, 130, 130);
+  border-radius: 100%;
+  font-size: 30px;
+  text-align: center;
+  line-height: 40px;
+  background: #fff;
+}
+
+#menuFooter .menu-num {
+  position: absolute;
+  top: -5px;
+  right: 0;
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  line-height: 15px;
+  background: red;
+}
+
+#menuFooter .totle-money {
+  margin: 0 0 0 60px;
+  line-height: 45px;
+}
+
+#menuFooter .menu-btn {
+  position: absolute;
+  padding: 0 20px;
+  right: 0;
+  height: 44px;
+  line-height: 44px;
+  background: red;
+  color: #fff;
+}
+
+.menu-list .item-selected {
+  background: #fff;
+}

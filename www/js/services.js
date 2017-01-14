@@ -4,13 +4,13 @@ angular.module('starter.services', [])
 	// Might use a resource here that returns a JSON array
 
 	// 已登录的用户信息
-	// var userDatas = {
-	// 	name: 'admin',
-	// 	date: '2011-6-6',
-	// 	avatar: 'img/img2.jpg',
-	// 	phone: "12345678912"
-	// };
-	var userDatas = null;
+	var userDatas = {
+		name: 'admin',
+		date: '2011-6-6',
+		avatar: 'img/img2.jpg',
+		phone: "12345678912"
+	};
+	// var userDatas = null;
 
 	//协议文本
 	var protocolText = ["一、总则",

@@ -4,11 +4,11 @@
     <a class="search" href="#/tab/search" nav-direction="forward">商家名称</a>
     <img ng-src="img/swipe.png" alt="" class="swipe" ng-click="scan()">
   </ion-header-bar>
-  <!-- <ul class="sort" ng-if="isItemSort">
+  <ul class="sort" ng-if="isItemSort">
     <li>全部<i class="ion-ios-arrow-down"></i></li>
     <li>所有分类<i class="ion-ios-arrow-down"></i></li>
     <li>距离优先<i class="ion-ios-arrow-down"></i></li>
-  </ul> -->
+  </ul>
 
   <ion-content overflow-scroll="true" scrollbar-y="false" class="home-list" delegate-handle="mainScroll" on-scroll="showNav($event)">
     <!-- <ion-scroll zooming="true" direction="y" class="bigScroll" delegate-handle="mainScroll" on-scroll="showNav($event)"> -->
@@ -24,6 +24,8 @@
       <span>烧烤</span>
       <span>西餐</span>
       <span>粤菜</span>
+      <span>快餐</span>
+      <span>干锅</span>
     </div>
     <ion-list>
       <ion-item collection-repeat="item in items" href="#/tab/home/{{item.id}}" class="aitem" ng-click="forwardAnim()">

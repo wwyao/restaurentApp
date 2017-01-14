@@ -1,0 +1,41 @@
+<ion-view title="菜单" id="menu" class="headerBg">
+  <ion-header-bar class="bar">
+    <ion-nav-bar>
+      <ion-nav-buttons side="left" class="backBtn">
+        <img ng-src="img/back.png" ng-click="goBack()" />
+      </ion-nav-buttons>
+    </ion-nav-bar>
+  </ion-header-bar>
+
+  <ion-content overflow-scroll="true" id="scroll1" scrollbar-y="false">
+    <ul class="menu-list">
+      <li ng-repeat="item in listDatas track by $index" ng-class="{'item-selected':item.isFocus}" ng-click="listClick($index)">
+        {{item.name}}
+      </li>
+    </ul>
+  </ion-content>
+  <ion-content overflow-scroll="true" id="scroll2" scrollbar-y="false">
+    <ul class="menu-list-detail">
+      <li ng-repeat="item in detailDatas">
+        <img ng-src="{{item.img}}" alt="">
+        <div class="msg-box">
+          <h5>{{item.name}}</h5>
+          <p>{{item.priceText}}</p>
+        </div>
+
+        <div class="peopleNum-sub">
+          <span ng-click="dec(item.id)">-</span>0<span ng-click="add(item.id)">+</span>
+        </div>
+      </li>
+    </ul>
+
+  </ion-content>
+  <div id="menuFooter">
+    <div class="shoppingCar">
+      <span class="menu-num" ng-if="numOfMenu">{{numOfMenu}}</span>
+      <i class="ion-ios-cart-outline"></i>
+    </div>
+    <span class="totle-money">共￥{{totleMoney}}</span>
+    <span class="menu-btn">选好了</span>
+  </div>
+</ion-view>

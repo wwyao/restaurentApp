@@ -1,20 +1,23 @@
 angular.module('starter.controllers', [])
 
 //tabs页面
-.controller('tabsCtrl', function($scope, datas, $state) {
+.controller('tabsCtrl', function($scope, $rootScope, datas, $state) {
+	$rootScope.isLogined = false;
 	$scope.goLogin = function() {
 		var tempUser = datas.getUserDatas();
 		console.log(!tempUser, tempUser);
 		if (!tempUser) {
 			$state.go('login');
+			$rootScope.isLogined = false;
 		} else {
 			$state.go('tab.me');
+			$rootScope.isLogined = true;
 		}
 	};
 })
 
 //主页页面
-.controller('HomeCtrl', function($scope, $ionicHistory, $ionicViewSwitcher, $ionicScrollDelegate, $cordovaBarcodeScanner, $timeout, $state) {
+.controller('HomeCtrl', function($scope, $ionicHistory, $ionicViewSwitcher, $ionicScrollDelegate, $cordovaBarcodeScanner, $timeout, $state, $location) {
 	$scope.currentCity = "广州";
 	$scope.isItemSort = false;
 	$scope.items = [{
@@ -43,11 +46,12 @@ angular.module('starter.controllers', [])
 	};
 	$scope.showNav = function($event) {
 		var sTop = $ionicScrollDelegate.$getByHandle('mainScroll').getScrollPosition().top;
-		console.log(sTop > 171);
-		if (sTop > 171) {
+		if (sTop > 228) {
 			$scope.isItemSort = true;
+			$scope.$apply();
 		} else {
 			$scope.isItemSort = false;
+			$scope.$apply();
 		}
 	};
 	$scope.ist = true;
@@ -73,7 +77,7 @@ angular.module('starter.controllers', [])
 			.scan()
 			.then(function(barcodeData) {
 				var url = barcodeData.text;
-				$state.go(url);
+				$location.path(url);
 			}, function(error) {
 				// An error occurred
 			});
@@ -84,9 +88,9 @@ angular.module('starter.controllers', [])
 })
 
 //餐厅详细页页面
-.controller('DetailCtrl', function($scope, $stateParams, $state, $ionicViewSwitcher) {
+.controller('DetailCtrl', function($scope, $rootScope, $stateParams, $state, $ionicViewSwitcher) {
 	$scope.id = $stateParams.id;
-	$scope.restaurentData = {
+	$rootScope.restaurentData = {
 		id: $stateParams.id,
 		title: "小明餐厅",
 		img: "",
@@ -112,6 +116,17 @@ angular.module('starter.controllers', [])
 		$ionicViewSwitcher.nextDirection("back");
 	};
 	$scope.searchData = [];
+})
+
+//扫码进入的页面
+.controller('QrcodewelcomeCtrl', function($scope, $stateParams, $state, $ionicViewSwitcher, $timeout) {
+	console.log($stateParams);
+	$scope.text1 = $stateParams.name;
+	$scope.text2 = $stateParams.deskId;
+	$timeout(function() {
+		$state.go('menu');
+		$ionicViewSwitcher.nextDirection("forward");
+	}, 3000);
 })
 
 //订单页面
@@ -178,22 +193,22 @@ angular.module('starter.controllers', [])
 })
 
 //未消费页面
-.controller('page1', function($scope) {
+.controller('page1', function($scope, $rootScope) {
 
 })
 
 //就餐中页面
-.controller('page2', function($scope) {
+.controller('page2', function($scope, $rootScope) {
 
 })
 
 //已消费页面
-.controller('page3', function($scope) {
+.controller('page3', function($scope, $rootScope) {
 
 })
 
 //登录页面
-.controller('LoginCtrl', function($scope, datas, $state, $ionicViewSwitcher, $cordovaToast) {
+.controller('LoginCtrl', function($scope, $rootScope, datas, $state, $ionicViewSwitcher, $cordovaToast) {
 	$scope.msg = {
 		username: '',
 		password: ''
@@ -203,10 +218,12 @@ angular.module('starter.controllers', [])
 		$state.go('tab.home');
 		$ionicViewSwitcher.nextDirection("back");
 	};
+	//登录事件
 	$scope.login = function() {
 		console.log($scope.msg);
 		if ($scope.msg.username !== '' && $scope.msg.password !== '') {
 			if ($scope.msg.username == "admin" && $scope.msg.password == "admin") {
+				$rootScope.isLogined = true;
 				var tempObj = {
 					name: $scope.msg.username,
 					date: '2011-6-6',
@@ -354,46 +371,53 @@ angular.module('starter.controllers', [])
 })
 
 //预约订座页面
-.controller('BookTableCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory, $cordovaDatePicker) {
+.controller('BookTableCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory, $cordovaDatePicker, datas) {
 	$scope.bookDatas1 = [];
+	$scope.dateText = "请选择就餐时间";
 	$scope.goBack = function() {
 		// $state.go('tab.me');
 		$ionicHistory.goBack();
 		$ionicViewSwitcher.nextDirection("back");
 	};
-	$scope.order = {
+	var userData = datas.getUserDatas();
+	$rootScope.order = {
 		time: "",
-		numOfPeople: "",
-		isRoom: "",
-		contacter: "",
-		phone: "",
+		numOfPeople: 1,
+		isRoom: false,
+		contacter: userData.name,
+		phone: userData.phone,
 		remark: ""
 	}
 	$scope.bookDatas1 = [{
-		title: "就餐时间",
-		hadInput: true,
+		title: "就餐日期",
+		isDate: true,
 		placeText: "请选择就餐时间"
 	}, {
 		title: "就餐人数",
+		isPeopleNum: true
 	}, {
-		title: "是否需要包房"
+		title: "是否需要包房",
+		isCheckbox: true
 	}];
 	$scope.bookDatas2 = [{
 		title: "联系人",
 		hadInput: true,
-		value: "admin"
+		value: $rootScope.order.contacter
 	}, {
 		title: "联系电话",
 		hadInput: true,
+		value: $rootScope.order.phone
 	}, {
 		title: "备注",
-		hadInput: true
+		hadInput: true,
+		value: ""
 	}];
+	//选择就餐时间
 	$scope.selectTime = function() {
 		var options = {
 			date: new Date(),
 			mode: 'date', // or 'time'
-			minDate: "",
+			minDate: new Date() - 10000,
 			allowOldDates: false,
 			allowFutureDates: true,
 			doneButtonLabel: 'DONE',
@@ -401,12 +425,54 @@ angular.module('starter.controllers', [])
 			cancelButtonLabel: 'CANCEL',
 			cancelButtonColor: '#000000'
 		};
-		//打开日期选择器
-		$scope.openPicker = function() {
-			$cordovaDatePicker.show(options).then(function(date) {
-				$scope.order.time = date;
-			});
+		var timeOptions = {
+			date: new Date(),
+			mode: 'time',
+			minDate: new Date() - 10000,
+			allowOldDates: false,
+			allowFutureDates: true,
+			doneButtonLabel: 'DONE',
+			doneButtonColor: '#F2F3F4',
+			cancelButtonLabel: 'CANCEL',
+			cancelButtonColor: '#000000'
 		};
+		var tempStr = "";
+		$cordovaDatePicker.show(options).then(function(date) {
+			tempStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + "  ";
+			// $scope.order.time = date;
+			// $scope.bookDatas1.placeText = date;
+			// alert(date);
+			$cordovaDatePicker.show(timeOptions).then(function(date) {
+				// alert(date);
+				tempStr = tempStr + date.getHours() + ":" + date.getMinutes();
+				// alert(tempStr);
+				$rootScope.order.time = tempStr;
+				$scope.dateText = tempStr;
+				// $scope.$apply();
+			});
+		});
+	};
+	//减少就餐人数
+	$scope.decPeople = function() {
+		if ($rootScope.order.numOfPeople > 1) {
+			$rootScope.order.numOfPeople--;
+		}
+	};
+	//添加就餐人数
+	$scope.addPeople = function() {
+		$rootScope.order.numOfPeople++;
+	};
+	//继续点菜
+	$scope.orderClick = function() {
+		$rootScope.order.contacter = $scope.bookDatas2[0].value;
+		$rootScope.order.phone = $scope.bookDatas2[1].value;
+		$rootScope.order.remark = $scope.bookDatas2[2].value;
+		// for (var key in $scope.order) {
+		// 	alert($scope.order[key]);
+		// }
+		$state.go('menu');
+		// $ionicHistory.goBack();
+		$ionicViewSwitcher.nextDirection("forward");
 	};
 })
 
@@ -516,4 +582,114 @@ angular.module('starter.controllers', [])
 		text: '请填写餐厅电话'
 	}];
 
-});
+})
+
+//菜单
+.controller('MenuCtrl', function($scope, $rootScope, $ionicViewSwitcher, $state, $ionicHistory) {
+	$scope.totleMoney = 0;
+	$scope.numOfMenu = 1;
+	$scope.activeClass = "item-selected";
+	$rootScope.orderMenus = [];
+	$scope.listDatas = [{
+		name: '全部',
+		isFocus: true
+	}, {
+		name: '特色菜',
+		isFocus: false
+	}, {
+		name: '蒸菜',
+		isFocus: false
+	}, {
+		name: '凉菜',
+		isFocus: false
+	}, {
+		name: '热荤菜',
+		isFocus: false
+	}, {
+		name: '热素菜',
+		isFocus: false
+	}, {
+		name: '酒水',
+		isFocus: false
+	}, {
+		name: '饮料',
+		isFocus: false
+	}, {
+		name: '标准餐',
+		isFocus: false
+	}];
+	$scope.detailDatas = [{
+		menuId: 1,
+		name: '江团',
+		priceText: '￥20/份',
+		num: 0,
+		img: 'img/img2.jpg'
+	}, {
+		menuId: 2,
+		name: '江团2',
+		priceText: '￥21/份',
+		num: 0,
+		img: 'img/img2.jpg'
+	}, {
+		menuId: 3,
+		name: '江团3',
+		priceText: '￥23/份',
+		num: 0,
+		img: 'img/img2.jpg'
+	}, {
+		menuId: 4,
+		name: '江团4',
+		priceText: '￥24/份',
+		num: 0,
+		img: 'img/img2.jpg'
+	}, {
+		menuId: 5,
+		name: '江团5',
+		priceText: '￥25/份',
+		num: 0,
+		img: 'img/img2.jpg'
+	}, {
+		menuId: 6,
+		name: '江团6',
+		priceText: '￥26/份',
+		num: 0,
+		img: 'img/img2.jpg'
+	}, {
+		menuId: 7,
+		name: '江团7',
+		priceText: '￥27/份',
+		num: 0,
+		img: 'img/img2.jpg'
+	}, {
+		menuId: 8,
+		name: '江团8',
+		priceText: '￥28/份',
+		num: 0,
+		img: 'img/img2.jpg'
+	}, {
+		menuId: 9,
+		name: '江团9',
+		priceText: '￥29/份',
+		num: 0,
+		img: 'img/img2.jpg'
+	}];
+
+	$scope.listClick = function(index) {
+		for (var i = 0; i < $scope.listDatas.length; i++) {
+			$scope.listDatas[i].isFocus = false;
+		}
+		$scope.listDatas[index].isFocus = true;
+	};
+	//减菜
+	$scope.dec = function() {};
+	//加菜
+	$scope.add = function() {};
+	$scope.goBack = function() {
+		// $state.go('tab.me');
+		$ionicHistory.goBack();
+		$ionicViewSwitcher.nextDirection("back");
+	};
+})
+
+
+;
