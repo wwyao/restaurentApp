@@ -1,6 +1,6 @@
 <ion-view id="home">
   <ion-header-bar align-title="center" class="wrap">
-    <div class="place"><i class="ion-ios-location-outline location" ng-bind="currentCity"></i></div>
+    <a class="place" href="#/tab/selectCity" nav-direction="forward"><i class="ion-ios-location-outline location" ng-bind="currentCity"></i></a>
     <a class="search" href="#/tab/search" nav-direction="forward">商家名称</a>
     <img ng-src="img/swipe.png" alt="" class="swipe" ng-click="scan()">
   </ion-header-bar>

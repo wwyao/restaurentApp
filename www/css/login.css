@@ -27,6 +27,13 @@
   padding-left: 5%;
   width: 63%;
   height: 40px;
+  vertical-align: middle;
+}
+
+.password .eyes {
+  margin-left: 15px;
+  font-size: 18px;
+  vertical-align: middle;
 }
 
 .loginbtn {
@@ -56,4 +63,8 @@
   text-align: center;
   color: rgb(205, 161, 30);
   text-decoration: none;
+}
+
+#login .active {
+  color: red;
 }

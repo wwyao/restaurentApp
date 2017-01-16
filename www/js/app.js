@@ -74,6 +74,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 		})
 		//扫码跳转的页面
 		.state('qrcodewelcome', {
+			cache: false,
 			url: '/tab/qrcodewelcome/:name/:deskId',
 			templateUrl: 'templates/qrcode_welcome.html',
 			controller: 'QrcodewelcomeCtrl'
@@ -198,6 +199,33 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 		controller: 'BookTableCtrl'
 	})
 
+	//商家营业资质
+	.state('enterprise', {
+		url: '/tab/enterprise',
+		templateUrl: 'templates/enterprise.html',
+		controller: 'EnterpriseCtrl'
+	})
+
+	//顾客评价
+	.state('evaluation', {
+		url: '/tab/evaluation',
+		templateUrl: 'templates/evaluation.html',
+		controller: 'EvaluationCtrl'
+	})
+
+	//选择城市
+	.state('selectCity', {
+		url: '/tab/selectCity',
+		templateUrl: 'templates/selectCity.html',
+		controller: 'SelectCityCtrl'
+	})
+
+	//用户注册
+	.state('register', {
+		url: '/tab/register',
+		templateUrl: 'templates/register.html',
+		controller: 'RegisterCtrl'
+	})
 
 	//小明点餐用户协议
 	.state('userprotocol', {

@@ -12,10 +12,11 @@
       <span>账户</span><input type="text" id="username" ng-model="msg.username" placeholder="手机号/会员名">
     </div>
     <div class="password">
-      <span>登录密码</span><input type="password" id="password" ng-model="msg.password" placeholder="请输入密码">
+      <span>登录密码</span><input type="{{btnType}}" id="password" ng-model="msg.password" placeholder="请输入密码">
+      <i class="ion-eye eyes" ng-class="psw?'active':''" ng-click="eyeClick()"></i>
     </div>
     <button type="button" class="loginbtn" ng-click="login()">登录</button>
     <a href="###" class="forget">忘记密码</a>
-    <a href="###" class="register">免费注册</a>
+    <a href="#/tab/register" class="register">免费注册</a>
   </ion-content>
 </ion-view>

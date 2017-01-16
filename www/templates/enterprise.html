@@ -1,0 +1,17 @@
+<ion-view title="商家营业资质" id="enterprise" class="headerBg">
+  <ion-header-bar class="bar">
+    <ion-nav-bar>
+      <ion-nav-buttons side="left" class="backBtn">
+        <img ng-src="img/back.png" ng-click="goBack()" />
+      </ion-nav-buttons>
+    </ion-nav-bar>
+  </ion-header-bar>
+
+  <ion-content>
+    <ion-slide-box show-pager="true" class="slideBox">
+      <ion-slide ng-repeat="imgsrc in imgDatas">
+        <img ng-src="{{imgsrc}}" alt="">
+      </ion-slide>
+    </ion-slide-box>
+  </ion-content>
+</ion-view>

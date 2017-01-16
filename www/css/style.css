@@ -189,3 +189,75 @@
   display: block;
   color: rgb(13, 68, 162);
 }
+
+
+/*商家营业资质*/
+
+#enterprise .scroll-content, #enterprise .scroll {
+  height: 90%;
+  text-align: center;
+}
+
+#enterprise .slideBox {
+  margin-top: 5%;
+  width: 100%;
+  height: 100%;
+}
+
+#enterprise .slideBox img {
+  width: 96%;
+  height: 100%;
+}
+
+
+/*注册*/
+
+#register {
+  /*background: #f5f5f5;*/
+  text-align: center;
+}
+
+.register-box div {
+  margin: 5px auto;
+  padding: 5px 0;
+  width: 90%;
+  border: 1px solid #909090;
+  border-radius: 10px;
+  /*background: #fff;*/
+}
+
+.register-box div:first-child {
+  margin-top: 20%;
+}
+
+.register-box div input {
+  display: inline-block;
+  width: 55%;
+  vertical-align: middle;
+  /*background: red;*/
+  /*border-bottom: 1px solid rgb(11, 108, 222);*/
+}
+
+.register-box div span {
+  padding-right: 10px;
+  display: inline-block;
+  width: 30%;
+  text-align: right;
+  vertical-align: middle;
+}
+
+.register-box .button {
+  padding: 0px;
+  margin-top: 50px;
+  width: 60%;
+}
+
+.register-box .eyes {
+  font-size: 20px;
+  vertical-align: middle;
+  /*color: blue;*/
+}
+
+.register-box .active {
+  color: red;
+}

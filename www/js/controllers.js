@@ -244,6 +244,18 @@ angular.module('starter.controllers', [])
 			}
 		}
 	};
+	$scope.psw = false;
+	$scope.btnType = 'password';
+	//密码显示
+	$scope.eyeClick = function() {
+		if ($scope.psw) {
+			$scope.btnType = 'password';
+			$scope.psw = false;
+		} else {
+			$scope.btnType = 'text';
+			$scope.psw = true;
+		}
+	};
 })
 
 //设置页面
@@ -586,10 +598,17 @@ angular.module('starter.controllers', [])
 
 //菜单
 .controller('MenuCtrl', function($scope, $rootScope, $ionicViewSwitcher, $state, $ionicHistory) {
+	$scope.restaurentName = '小明餐厅';
+	$scope.deskNum = 10;
 	$scope.totleMoney = 0;
-	$scope.numOfMenu = 1;
+	$scope.numOfMenu = 0;
 	$scope.activeClass = "item-selected";
 	$rootScope.orderMenus = [];
+	$scope.showOrderBox = false;
+	//是否显示当前的位置
+	$scope.showLocation = false;
+	//已点的菜单
+	$scope.myOrders = [];
 	$scope.listDatas = [{
 		name: '全部',
 		isFocus: true
@@ -618,72 +637,144 @@ angular.module('starter.controllers', [])
 		name: '标准餐',
 		isFocus: false
 	}];
-	$scope.detailDatas = [{
+	$scope.detailDatas = [];
+	$scope.allMenu = [{
 		menuId: 1,
 		name: '江团',
 		priceText: '￥20/份',
+		price: 20,
 		num: 0,
-		img: 'img/img2.jpg'
+		img: 'img/img2.jpg',
+		tag: '特色菜'
 	}, {
 		menuId: 2,
 		name: '江团2',
 		priceText: '￥21/份',
+		price: 21,
 		num: 0,
-		img: 'img/img2.jpg'
+		img: 'img/img2.jpg',
+		tag: '蒸菜'
 	}, {
 		menuId: 3,
 		name: '江团3',
 		priceText: '￥23/份',
+		price: 23,
 		num: 0,
-		img: 'img/img2.jpg'
+		img: 'img/img2.jpg',
+		tag: '特色菜'
 	}, {
 		menuId: 4,
 		name: '江团4',
 		priceText: '￥24/份',
+		price: 24,
 		num: 0,
-		img: 'img/img2.jpg'
+		img: 'img/img2.jpg',
+		tag: '特色菜'
 	}, {
 		menuId: 5,
 		name: '江团5',
 		priceText: '￥25/份',
+		price: 25,
 		num: 0,
-		img: 'img/img2.jpg'
+		img: 'img/img2.jpg',
+		tag: '蒸菜'
 	}, {
 		menuId: 6,
 		name: '江团6',
 		priceText: '￥26/份',
+		price: 26,
 		num: 0,
-		img: 'img/img2.jpg'
+		img: 'img/img2.jpg',
+		tag: '蒸菜'
 	}, {
 		menuId: 7,
 		name: '江团7',
 		priceText: '￥27/份',
+		price: 27,
 		num: 0,
-		img: 'img/img2.jpg'
+		img: 'img/img2.jpg',
+		tag: '蒸菜'
 	}, {
 		menuId: 8,
 		name: '江团8',
 		priceText: '￥28/份',
+		price: 28,
 		num: 0,
-		img: 'img/img2.jpg'
+		img: 'img/img2.jpg',
+		tag: '蒸菜'
 	}, {
 		menuId: 9,
 		name: '江团9',
 		priceText: '￥29/份',
+		price: 29,
 		num: 0,
-		img: 'img/img2.jpg'
+		img: 'img/img2.jpg',
+		tag: '蒸菜'
 	}];
-
-	$scope.listClick = function(index) {
+	$scope.detailDatas = $scope.allMenu;
+	$scope.listClick = function(index, tag) {
 		for (var i = 0; i < $scope.listDatas.length; i++) {
 			$scope.listDatas[i].isFocus = false;
 		}
 		$scope.listDatas[index].isFocus = true;
+		if (tag == '全部') {
+			$scope.detailDatas = $scope.allMenu;
+		} else {
+			var tempArr = [];
+			for (var i = 0; i < $scope.allMenu.length; i++) {
+				if ($scope.allMenu[i].tag == tag) {
+					tempArr.push($scope.allMenu[i]);
+				}
+			}
+			$scope.detailDatas = tempArr;
+		}
+
 	};
 	//减菜
-	$scope.dec = function() {};
+	$scope.dec = function(id) {
+		for (var i = 0; i < $scope.detailDatas.length; i++) {
+			if ($scope.detailDatas[i].menuId == id && $scope.detailDatas[i].num > 0) {
+				$scope.detailDatas[i].num--;
+				$scope.numOfMenu--;
+				$scope.totleMoney -= $scope.detailDatas[i].price;
+				break;
+			}
+		}
+	};
 	//加菜
-	$scope.add = function() {};
+	$scope.add = function(id) {
+		for (var i = 0; i < $scope.detailDatas.length; i++) {
+			if ($scope.detailDatas[i].menuId == id) {
+				$scope.detailDatas[i].num++;
+				$scope.totleMoney += $scope.detailDatas[i].price;
+				break;
+			}
+		}
+		$scope.numOfMenu++;
+	};
+	$scope.goBack = function() {
+		// $state.go('tab.me');
+		$ionicHistory.goBack();
+		$ionicViewSwitcher.nextDirection("back");
+	};
+	$scope.locationClick = function() {
+		$scope.showLocation = !$scope.showLocation;
+	};
+})
+
+
+//商家营业资质
+.controller('EnterpriseCtrl', function($scope, $ionicHistory, $ionicViewSwitcher) {
+	$scope.goBack = function() {
+		// $state.go('tab.me');
+		$ionicHistory.goBack();
+		$ionicViewSwitcher.nextDirection("back");
+	};
+	$scope.imgDatas = ['img/img1.jpg', 'img/img2.jpg'];
+})
+
+//顾客评论
+.controller('EvaluationCtrl', function($scope, $ionicHistory, $ionicViewSwitcher) {
 	$scope.goBack = function() {
 		// $state.go('tab.me');
 		$ionicHistory.goBack();
@@ -691,5 +782,50 @@ angular.module('starter.controllers', [])
 	};
 })
 
+//城市选择
+.controller('SelectCityCtrl', function($scope, $ionicHistory, $ionicViewSwitcher) {
+	$scope.goBack = function() {
+		// $state.go('tab.me');
+		$ionicHistory.goBack();
+		$ionicViewSwitcher.nextDirection("back");
+	};
+})
 
-;
+//用户注册
+.controller('RegisterCtrl', function($scope, $ionicHistory, $ionicViewSwitcher) {
+	$scope.btnType1 = 'password';
+	$scope.btnType2 = 'password';
+	$scope.psw1 = false;
+	$scope.psw2 = false;
+	$scope.registerMsg = {
+		name: '',
+		psw1: '',
+		psw2: ''
+	};
+
+	$scope.eyeClick = function(index) {
+		if (index == '1') {
+			if ($scope.psw1) {
+				$scope.btnType1 = 'password';
+				$scope.psw1 = false;
+			} else {
+				$scope.btnType1 = 'text';
+				$scope.psw1 = true;
+			}
+		} else if (index == '2') {
+			if ($scope.psw2) {
+				$scope.btnType2 = 'password';
+				$scope.psw2 = false;
+			} else {
+				$scope.btnType2 = 'text';
+				$scope.psw2 = true;
+			}
+		}
+	};
+
+	$scope.goBack = function() {
+		// $state.go('tab.me');
+		$ionicHistory.goBack();
+		$ionicViewSwitcher.nextDirection("back");
+	};
+});

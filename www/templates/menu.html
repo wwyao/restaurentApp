@@ -5,11 +5,14 @@
         <img ng-src="img/back.png" ng-click="goBack()" />
       </ion-nav-buttons>
     </ion-nav-bar>
+    <i class="ion-information-circled current-location" ng-click="locationClick()"></i>
   </ion-header-bar>
-
+  <div class="location-box" ng-if="showLocation">
+    您的位置为：{{restaurentName}} {{deskNum}}号桌
+  </div>
   <ion-content overflow-scroll="true" id="scroll1" scrollbar-y="false">
     <ul class="menu-list">
-      <li ng-repeat="item in listDatas track by $index" ng-class="{'item-selected':item.isFocus}" ng-click="listClick($index)">
+      <li ng-repeat="item in listDatas track by $index" ng-class="{'item-selected':item.isFocus}" ng-click="listClick($index,item.name)">
         {{item.name}}
       </li>
     </ul>
@@ -24,14 +27,20 @@
         </div>
 
         <div class="peopleNum-sub">
-          <span ng-click="dec(item.id)">-</span>0<span ng-click="add(item.id)">+</span>
+          <span ng-click="dec(item.menuId)">-</span>{{item.num}}<span ng-click="add(item.menuId)">+</span>
         </div>
       </li>
     </ul>
-
   </ion-content>
+  <div class="my-order-box" ng-if="showOrderBox">
+    <ul class="my-order">
+      <li>购物车清单<span>清空</span></li>
+      <li ng-repeat="orderItem in myOrders"></li>
+    </ul>
+  </div>
+
   <div id="menuFooter">
-    <div class="shoppingCar">
+    <div class="shoppingCar" ng-click="showOrderBox=!showOrderBox">
       <span class="menu-num" ng-if="numOfMenu">{{numOfMenu}}</span>
       <i class="ion-ios-cart-outline"></i>
     </div>

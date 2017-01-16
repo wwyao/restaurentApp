@@ -1,0 +1,19 @@
+<ion-view title="用户注册" id="register" class="headerBg">
+  <ion-header-bar class="bar">
+    <ion-nav-bar>
+      <ion-nav-buttons side="left" class="backBtn">
+        <img ng-src="img/back.png" ng-click="goBack()" />
+      </ion-nav-buttons>
+    </ion-nav-bar>
+  </ion-header-bar>
+
+  <ion-content>
+    <div class="register-box">
+      <div><span>用户名:</span><input type="text" ng-model="registerMsg.name" placeholder="请输入用户名"></div>
+      <div><span>密码:</span><input type="{{btnType1}}" ng-model="registerMsg.psw1" placeholder="请输入密码"> <i class="ion-eye eyes" ng-class="psw1?'active':''" ng-click="eyeClick('1')"></i></div>
+      <div><span>确认密码:</span><input type="{{btnType2}}" ng-model="registerMsg.psw2" placeholder="请输入确认密码"> <i class="ion-eye eyes" ng-class="psw2?'active':''" ng-click="eyeClick('2')"></i></div>
+      <button type="button" name="button" class="button button-assertive">立即注册</button>
+    </div>
+
+  </ion-content>
+</ion-view>

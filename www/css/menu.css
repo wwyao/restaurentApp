@@ -16,6 +16,18 @@
   background: #c8c8c8;
   list-style: none;
   vertical-align: top;
+  /*padding-bottom: 45px;*/
+}
+
+#menu .location-box {
+  position: absolute;
+  padding: 5px 0;
+  z-index: 100000;
+  top: 64px;
+  width: 100%;
+  background: rgba(32, 119, 182, .9);
+  color: #fff;
+  text-align: center;
 }
 
 .menu-list li {
@@ -23,6 +35,18 @@
   text-align: center;
   padding: 15px 0;
   background: #c8c8c8;
+}
+
+#menu .current-location {
+  position: absolute;
+  z-index: 10000;
+  right: 10px;
+  top: 14px;
+  font-size: 22px;
+}
+
+#menu .active-location {
+  background: red;
 }
 
 
@@ -74,7 +98,7 @@
   bottom: 0;
   width: 100%;
   height: 45px;
-  border-top: 1px solid #505050;
+  /*border-top: 1px solid #505050;*/
   background: rgb(237, 236, 237);
 }
 
@@ -123,4 +147,29 @@
 
 .menu-list .item-selected {
   background: #fff;
+}
+
+#menu .my-order-box {
+  position: absolute;
+  z-index: 2;
+  background: rgba(0, 0, 0, .3);
+  width: 100%;
+  height: 100%;
+}
+
+#menu .my-order {
+  position: absolute;
+  padding: 5px 5px 30px;
+  bottom: 45px;
+  background: #fff;
+  width: 100%;
+}
+
+.my-order li {
+  list-style: none;
+  font-size: 12px;
+}
+
+.my-order li:first-child span {
+  float: right;
 }
