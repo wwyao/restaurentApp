@@ -26,8 +26,35 @@ angular.module('starter.controllers', [])
 })
 
 //主页页面
-.controller('HomeCtrl', function($scope, $ionicHistory, $ionicViewSwitcher, $ionicScrollDelegate, $cordovaBarcodeScanner, $timeout, $state, $location) {
-	$scope.currentCity = "广州";
+.controller('HomeCtrl', function($scope, $rootScope, $http, $cordovaGeolocation, $ionicHistory, $ionicViewSwitcher, $ionicScrollDelegate, $cordovaBarcodeScanner, $timeout, $state, $location) {
+	$rootScope.currentCity = "";
+
+	//定位
+	//通过经纬度查询城市的地址:https://api.thinkpage.cn/v3/location/search.json?key=mqzzrlzwvkgw0762&q=39.93:116.40
+	var posOptions = {
+		timeout: 100000,
+		enableHighAccuracy: true
+	};
+	document.addEventListener("deviceready", function() {
+		$cordovaGeolocation
+			.getCurrentPosition(posOptions)
+			.then(function(position) {
+				var lat = position.coords.latitude
+				var long = position.coords.longitude
+					// alert(lat + ":" + long);
+				var url = 'https://api.thinkpage.cn/v3/location/search.json?key=mqzzrlzwvkgw0762&q=' + lat + ':' + long;
+				$http.get(url).success(function(data) {
+					// alert(data.results[0].name);
+					$rootScope.currentCity = data.results[0].name;
+
+				}).error(function(data) {
+					alert(data);
+				});
+			}, function(err) {
+				alert(err);
+			});
+	}, false);
+
 	$scope.isItemSort = false;
 	$scope.items = [{
 		id: 1
@@ -208,7 +235,7 @@ angular.module('starter.controllers', [])
 })
 
 //登录页面
-.controller('LoginCtrl', function($scope, $rootScope, datas, $state, $ionicViewSwitcher, $cordovaToast) {
+.controller('LoginCtrl', function($scope, $rootScope, $http, datas, $state, $ionicViewSwitcher, $cordovaToast) {
 	$scope.msg = {
 		username: '',
 		password: ''
@@ -217,26 +244,74 @@ angular.module('starter.controllers', [])
 	$scope.login = function() {
 		console.log($scope.msg);
 		if ($scope.msg.username !== '' && $scope.msg.password !== '') {
-			if ($scope.msg.username == "admin" && $scope.msg.password == "admin") {
-				$rootScope.isLogined = true;
-				var tempObj = {
-					name: $scope.msg.username,
-					date: '2011-6-6',
-					avatar: 'img/img2.jpg',
-					phone: "12345678912"
+			var url = 'http://www.wy.cn:8888/restaurent/login.php';
+			$http({
+				method: 'post',
+				url: url,
+				data: {
+					username: $scope.msg.username,
+					password: $scope.msg.password
+				},
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				transformRequest: function(obj) {
+					var str = [];
+					for (var p in obj) {
+						str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+					}
+					return str.join("&");
 				}
-				datas.setUserDatas(tempObj);
-				$state.go('tab.me');
-				$ionicViewSwitcher.nextDirection("back");
-			} else {
-				$cordovaToast
-					.show('账户、密码输入错误!', 'short', 'bottom')
-					.then(function() {
-						// alert('success');
-					}, function() {
-						// alert('fail');
-					});
-			}
+			}).success(function(data) {
+				if (data.result) {
+					$rootScope.isLogined = true;
+					var tempObj = {
+						name: $scope.msg.username,
+						date: '2011-6-6',
+						avatar: 'img/img2.jpg',
+						phone: "12345678912"
+					}
+					datas.setUserDatas(tempObj);
+					$state.go('tab.me');
+					$ionicViewSwitcher.nextDirection("back");
+				} else {
+					$cordovaToast
+						.show('账户或密码输入错误!', 'short', 'bottom')
+						.then(function() {
+							// alert('success');
+						}, function() {
+							// alert('fail');
+						});
+				}
+			});
+			// if ($scope.msg.username == "admin" && $scope.msg.password == "admin") {
+			// 	$rootScope.isLogined = true;
+			// 	var tempObj = {
+			// 		name: $scope.msg.username,
+			// 		date: '2011-6-6',
+			// 		avatar: 'img/img2.jpg',
+			// 		phone: "12345678912"
+			// 	}
+			// 	datas.setUserDatas(tempObj);
+			// 	$state.go('tab.me');
+			// 	$ionicViewSwitcher.nextDirection("back");
+			// } else {
+			// 	$cordovaToast
+			// 		.show('账户或密码输入错误!', 'short', 'bottom')
+			// 		.then(function() {
+			// 			// alert('success');
+			// 		}, function() {
+			// 			// alert('fail');
+			// 		});
+			// }
+		} else {
+			$cordovaToast
+				.show('请输入账户、密码', 'short', 'bottom')
+				.then(function() {
+					// alert('success');
+				}, function() {
+					// alert('fail');
+				});
 		}
 	};
 	$scope.psw = false;
@@ -724,7 +799,7 @@ angular.module('starter.controllers', [])
 
 
 //商家营业资质
-.controller('EnterpriseCtrl', function($scope, rootScope, $ionicHistory, $ionicViewSwitcher) {
+.controller('EnterpriseCtrl', function($scope, $rootScope, $ionicHistory, $ionicViewSwitcher) {
 	$scope.imgDatas = ['img/img1.jpg', 'img/img2.jpg'];
 })
 
@@ -734,7 +809,7 @@ angular.module('starter.controllers', [])
 })
 
 //顾客评论
-.controller('EvaluationCtrl', function($scope, rootScope, $ionicHistory, $ionicViewSwitcher) {
+.controller('EvaluationCtrl', function($scope, $rootScope, $ionicHistory, $ionicViewSwitcher) {
 	$scope.evaluationDatas = [{
 		evaluationId: 1,
 		time: '2017-01-17',
@@ -779,7 +854,7 @@ angular.module('starter.controllers', [])
 })
 
 //城市选择
-.controller('SelectCityCtrl', function($scope, rootScope, $ionicHistory, $ionicViewSwitcher) {
+.controller('SelectCityCtrl', function($scope, $rootScope, $ionicHistory, $ionicViewSwitcher) {
 	// $scope.goBack = function() {
 	// 	// $state.go('tab.me');
 	// 	$ionicHistory.goBack();
@@ -788,17 +863,19 @@ angular.module('starter.controllers', [])
 })
 
 //用户注册
-.controller('RegisterCtrl', function($scope, rootScope, $ionicHistory, $ionicViewSwitcher) {
+.controller('RegisterCtrl', function($scope, $state, $rootScope, $ionicHistory, $ionicViewSwitcher, $http, $cordovaToast) {
 	$scope.btnType1 = 'password';
 	$scope.btnType2 = 'password';
 	$scope.psw1 = false;
 	$scope.psw2 = false;
+	$scope.isResult = false;
+	$scope.isRight = false;
 	$scope.registerMsg = {
 		name: '',
 		psw1: '',
 		psw2: ''
 	};
-
+	//查看密码
 	$scope.eyeClick = function(index) {
 		if (index == '1') {
 			if ($scope.psw1) {
@@ -817,5 +894,56 @@ angular.module('starter.controllers', [])
 				$scope.psw2 = true;
 			}
 		}
+	};
+	//检查用户名是否已存在
+	$scope.checkName = function() {
+		var url = 'http://www.wy.cn:8888/restaurent/checkName.php?username=' + $scope.registerMsg.name;
+		$http.get(url).success(function(data) {
+			$scope.isResult = true;
+			if (data.result == 0) {
+				$scope.isRight = true;
+			} else {
+				$scope.isRight = false;
+			}
+		});
+	};
+	//注册
+	$scope.register = function() {
+		var url = 'http://www.wy.cn:8888/restaurent/register.php';
+		$http({
+			method: 'post',
+			url: url,
+			data: {
+				username: $scope.registerMsg.name,
+				password: $scope.registerMsg.psw1
+			},
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			transformRequest: function(obj) {
+				var str = [];
+				for (var p in obj) {
+					str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+				}
+				return str.join("&");
+			}
+		}).success(function(data) {
+			var resultText = "";
+			if (data.result) {
+				resultText = '注册成功';
+
+				$state.go('login');
+				$ionicViewSwitcher.nextDirection("back");
+			} else {
+				resultText = '服务器错误，请重新注册';
+			}
+			$cordovaToast
+				.show(resultText, 'short', 'bottom')
+				.then(function() {
+					// alert('success');
+				}, function() {
+					// alert('fail');
+				});
+		});
 	};
 });

@@ -5,6 +5,13 @@
   box-shadow: 0 0 3px 0 #909090;
 }
 
+.back-btn {
+  display: inline-block;
+  margin-top: -5px;
+  padding: 5px;
+  font-size: 18px;
+}
+
 .headerBg .bar {
   background: rgb(32, 119, 182);
   color: #fff;
@@ -252,13 +259,17 @@
   width: 60%;
 }
 
-.register-box .eyes {
+.register-box .eyes, .register-box .check-result {
   font-size: 20px;
   vertical-align: middle;
   /*color: blue;*/
 }
 
-.register-box .active {
+.register-box .name-right {
+  color: rgb(0, 122, 16);
+}
+
+.register-box .active, .register-box .name-wrong {
   color: red;
 }
 

@@ -3,7 +3,7 @@
     <div class="mh-top">
       <h3>我的</h3>
       <div>
-        <img ng-src="{{userData.avatar}}" alt="无法显示" class="user-img">
+        <img ng-src="{{userData.avatar}}" alt="无法显示" class="user-img" ng-click="settingClick()">
         <span ng-bind="userData.name"></span>
       </div>
       <svg class="me-icon" aria-hidden="true" ng-click="settingClick()">

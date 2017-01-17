@@ -11,6 +11,11 @@ angular.module('starter.services', [])
 		phone: "12345678912"
 	};
 	// var userDatas = null;
+	//可登陆的用户信息
+	var validUserData = {
+		username: '',
+		password: ''
+	}
 
 	//协议文本
 	var protocolText = ["一、总则",
@@ -36,6 +41,14 @@ angular.module('starter.services', [])
 		},
 		//修改用户信息
 		setUserDatas: function(obj) {
+			userDatas = obj;
+		},
+		//获取可登陆的用户信息
+		getValidUserData: function() {
+			return validUserData;
+		},
+		//添加可登陆的用户信息
+		setValidUserData: function(obj) {
 			userDatas = obj;
 		},
 		//获取协议文本
