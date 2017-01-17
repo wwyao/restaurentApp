@@ -91,8 +91,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 			templateUrl: 'templates/menu.html',
 			controller: 'MenuCtrl'
 		})
-		//订单
-		.state('tab.order', {
+		//已点菜单
+		.state('shoppingCar', {
+			url: '/tab/shoppingCar',
+			templateUrl: 'templates/shoppingCar.html',
+			controller: 'ShoppingCarCtrl'
+		})
+
+	//订单
+	.state('tab.order', {
 			url: '/order',
 			// abstract: true,
 			views: {

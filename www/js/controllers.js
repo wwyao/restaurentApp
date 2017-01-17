@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
 //tabs页面
-.controller('tabsCtrl', function($scope, $rootScope, datas, $state) {
+.controller('tabsCtrl', function($scope, $rootScope, datas, $state, $ionicHistory, $ionicViewSwitcher) {
 	$rootScope.isLogined = false;
 	$scope.goLogin = function() {
 		var tempUser = datas.getUserDatas();
@@ -13,6 +13,15 @@ angular.module('starter.controllers', [])
 			$state.go('tab.me');
 			$rootScope.isLogined = true;
 		}
+	};
+	//返回按钮
+	$rootScope.goBack = function(target) {
+		if (target) {
+			$state.go(target);
+		} else {
+			$ionicHistory.goBack();
+		}
+		$ionicViewSwitcher.nextDirection("back");
 	};
 })
 
@@ -102,19 +111,10 @@ angular.module('starter.controllers', [])
 		tScore: "4.0",
 		sScore: "4.0"
 	}
-	$scope.goBack = function() {
-		$state.go('tab.home');
-		$ionicViewSwitcher.nextDirection("back");
-	};
 })
 
 //搜索页面
 .controller('SearchCtrl', function($scope, $stateParams, $state, $ionicViewSwitcher, $ionicHistory) {
-	$scope.goBack = function() {
-		// $state.go('tab.home');
-		$ionicHistory.goBack();
-		$ionicViewSwitcher.nextDirection("back");
-	};
 	$scope.searchData = [];
 })
 
@@ -213,11 +213,6 @@ angular.module('starter.controllers', [])
 		username: '',
 		password: ''
 	};
-	$scope.v = '';
-	$scope.goBack = function() {
-		$state.go('tab.home');
-		$ionicViewSwitcher.nextDirection("back");
-	};
 	//登录事件
 	$scope.login = function() {
 		console.log($scope.msg);
@@ -259,7 +254,7 @@ angular.module('starter.controllers', [])
 })
 
 //设置页面
-.controller('SettingCtrl', function($scope, datas, $state, $ionicViewSwitcher, $ionicHistory, $cordovaProgress, $cordovaToast) {
+.controller('SettingCtrl', function($scope, $rootScope, datas, $state, $ionicViewSwitcher, $ionicHistory, $cordovaProgress, $cordovaToast) {
 	//缓存大小
 	$scope.cache = "1.0MB";
 	//版本号
@@ -282,11 +277,6 @@ angular.module('starter.controllers', [])
 		show: true,
 		tagText: '检查更新'
 	}];
-	$scope.goBack = function() {
-		$state.go('tab.me');
-		// $ionicHistory.goBack();
-		$ionicViewSwitcher.nextDirection("back");
-	};
 	$scope.listItem2Cilck = function(tag) {
 		//清除缓存
 		if (tag == "clearcache") {
@@ -326,71 +316,33 @@ angular.module('starter.controllers', [])
 })
 
 //小明点餐协议页面
-.controller('UserProtocolCtrl', function($scope, datas, $state, $ionicHistory, $ionicViewSwitcher) {
-	$scope.goBack = function() {
-		// $state.go('tab.me');
-		$ionicHistory.goBack();
-		$ionicViewSwitcher.nextDirection("back");
-	};
+.controller('UserProtocolCtrl', function($scope, $rootScope, datas, $state, $ionicHistory, $ionicViewSwitcher) {
 	$scope.protocolText = datas.getProtocol();
 })
 
 //关于小明点餐页面
-.controller('AboutlCtrl', function($scope, datas, $state, $ionicHistory, $ionicViewSwitcher) {
-	$scope.goBack = function() {
-		// $state.go('tab.me');
-		$ionicHistory.goBack();
-		$ionicViewSwitcher.nextDirection("back");
-	};
+.controller('AboutlCtrl', function($scope, $rootScope, datas, $state, $ionicHistory, $ionicViewSwitcher) {
 	$scope.aboutText = datas.getAboutText();
 })
 
 //意见反馈页面
-.controller('FedbackCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {
-	$scope.goBack = function() {
-		// $state.go('setting');
-		$ionicHistory.goBack();
-		$ionicViewSwitcher.nextDirection("back");
-	};
-})
+.controller('FedbackCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {})
 
 //消息页面
 .controller('MsgCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {
 	$scope.msgDatas = [];
-	$scope.goBack = function() {
-		$state.go('tab.me');
-		// $ionicHistory.goBack();
-		$ionicViewSwitcher.nextDirection("back");
-	};
 })
 
 //我的关注页面
-.controller('MyconcernCtrl', function($scope, $rootScope, $ionicViewSwitcher, $state, $ionicHistory) {
-	$scope.goBack = function() {
-		$state.go('tab.me');
-		// $ionicHistory.goBack();
-		$ionicViewSwitcher.nextDirection("back");
-	};
-})
+.controller('MyconcernCtrl', function($scope, $rootScope, $ionicViewSwitcher, $state, $ionicHistory) {})
 
 //邀请页面
-.controller('InviteCtrl', function($scope, $rootScope, $ionicViewSwitcher, $state, $ionicHistory) {
-	$scope.goBack = function() {
-		$state.go('tab.me');
-		// $ionicHistory.goBack();
-		$ionicViewSwitcher.nextDirection("back");
-	};
-})
+.controller('InviteCtrl', function($scope, $rootScope, $ionicViewSwitcher, $state, $ionicHistory) {})
 
 //预约订座页面
 .controller('BookTableCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory, $cordovaDatePicker, datas) {
 	$scope.bookDatas1 = [];
 	$scope.dateText = "请选择就餐时间";
-	$scope.goBack = function() {
-		// $state.go('tab.me');
-		$ionicHistory.goBack();
-		$ionicViewSwitcher.nextDirection("back");
-	};
 	var userData = datas.getUserDatas();
 	$rootScope.order = {
 		time: "",
@@ -489,7 +441,7 @@ angular.module('starter.controllers', [])
 })
 
 //账户页面
-.controller('AccountCtrl', function($scope, datas, $state, $cordovaImagePicker, $ionicViewSwitcher, $ionicHistory, $cordovaDatePicker) {
+.controller('AccountCtrl', function($scope, $rootScope, datas, $state, $cordovaImagePicker, $ionicViewSwitcher, $ionicHistory, $cordovaDatePicker) {
 	$scope.editText = '编辑';
 	$scope.isEditable = true;
 	//获取已登录的用户信息
@@ -513,12 +465,6 @@ angular.module('starter.controllers', [])
 	}, {
 		tag: '修改支付密码',
 	}];
-	//返回按钮
-	$scope.goBack = function() {
-		$state.go('setting');
-		// $ionicHistory.goBack();
-		$ionicViewSwitcher.nextDirection("back");
-	};
 	var options = {
 		date: new Date(),
 		mode: 'date', // or 'time'
@@ -573,13 +519,6 @@ angular.module('starter.controllers', [])
 
 //推荐餐厅页面
 .controller('RecommendRestaurentCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {
-	// $scope.msgDatas = [];
-	$scope.goBack = function() {
-		$state.go('tab.me');
-		// $ionicNavBarDelegate.back();
-		// $ionicHistory.goBack();
-		$ionicViewSwitcher.nextDirection("back");
-	};
 	$scope.itemDatas = [{
 		tag: '餐厅名称',
 		text: '请填写餐厅名称'
@@ -731,7 +670,8 @@ angular.module('starter.controllers', [])
 
 	};
 	//减菜
-	$scope.dec = function(id) {
+	$scope.dec = function(id, $event) {
+		$event.stopPropagation();
 		for (var i = 0; i < $scope.detailDatas.length; i++) {
 			if ($scope.detailDatas[i].menuId == id && $scope.detailDatas[i].num > 0) {
 				$scope.detailDatas[i].num--;
@@ -742,57 +682,113 @@ angular.module('starter.controllers', [])
 		}
 	};
 	//加菜
-	$scope.add = function(id) {
+	$scope.add = function(id, $event) {
+		$event.stopPropagation();
 		for (var i = 0; i < $scope.detailDatas.length; i++) {
 			if ($scope.detailDatas[i].menuId == id) {
 				$scope.detailDatas[i].num++;
 				$scope.totleMoney += $scope.detailDatas[i].price;
-				break;
+				// break;
 			}
 		}
 		$scope.numOfMenu++;
 	};
-	$scope.goBack = function() {
-		// $state.go('tab.me');
-		$ionicHistory.goBack();
-		$ionicViewSwitcher.nextDirection("back");
+	// //购物车
+	// $scope.shoppingCarClick = function() {
+	// 	// $scope.myOrders = [];
+	// 	// for (var i = 0; i < $scope.allMenu.length; i++) {
+	// 	// 	if ($scope.allMenu[i].num > 0) {
+	// 	// 		$scope.myOrders.push($scope.allMenu[i]);
+	// 	// 	}
+	// 	// }
+	// 	$scope.showOrderBox = !$scope.showOrderBox;
+	//
+	// };
+	//清空购物车
+	$scope.clearCar = function($event) {
+		$event.stopPropagation();
+		for (var i = 0; i < $scope.allMenu.length; i++) {
+			$scope.allMenu[i].num = 0;
+		}
+		$scope.totleMoney = 0;
+		$scope.numOfMenu = 0;
 	};
 	$scope.locationClick = function() {
 		$scope.showLocation = !$scope.showLocation;
+	};
+	$scope.goHadOrders = function() {
+		$state.go('shoppingCar');
+		$ionicViewSwitcher.nextDirection("forward");
 	};
 })
 
 
 //商家营业资质
-.controller('EnterpriseCtrl', function($scope, $ionicHistory, $ionicViewSwitcher) {
-	$scope.goBack = function() {
-		// $state.go('tab.me');
-		$ionicHistory.goBack();
-		$ionicViewSwitcher.nextDirection("back");
-	};
+.controller('EnterpriseCtrl', function($scope, rootScope, $ionicHistory, $ionicViewSwitcher) {
 	$scope.imgDatas = ['img/img1.jpg', 'img/img2.jpg'];
 })
 
+//已点菜单
+.controller('ShoppingCarCtrl', function($scope, $rootScope, $ionicHistory, $ionicViewSwitcher) {
+
+})
+
 //顾客评论
-.controller('EvaluationCtrl', function($scope, $ionicHistory, $ionicViewSwitcher) {
-	$scope.goBack = function() {
-		// $state.go('tab.me');
-		$ionicHistory.goBack();
-		$ionicViewSwitcher.nextDirection("back");
-	};
+.controller('EvaluationCtrl', function($scope, rootScope, $ionicHistory, $ionicViewSwitcher) {
+	$scope.evaluationDatas = [{
+		evaluationId: 1,
+		time: '2017-01-17',
+		name: '小明1',
+		avatar: "img/img1.jpg",
+		content: '阿萨德法师打算打算打算打算打算打算打算打算打算打算打算打打',
+		useful: 0,
+		useless: 0,
+	}, {
+		evaluationId: 2,
+		time: '2017-01-17',
+		name: '小明2',
+		avatar: "img/img1.jpg",
+		content: '阿萨德法师打算打算打算打算打算打算打算打算打算打算打算打打',
+		useful: 0,
+		useless: 0,
+	}, {
+		evaluationId: 3,
+		time: '2017-01-17',
+		name: '小明3',
+		avatar: "img/img1.jpg",
+		content: '阿萨德法师打算打算打算打算打算打算打算打算打算打算打算打打',
+		useful: 0,
+		useless: 0,
+	}, {
+		evaluationId: 4,
+		time: '2017-01-17',
+		name: '小明4',
+		avatar: "img/img1.jpg",
+		content: '阿萨德法师打算打算打算打算打算打算打算打算打算打算打算打打',
+		useful: 0,
+		useless: 0,
+	}, {
+		evaluationId: 5,
+		time: '2017-01-17',
+		name: '小明5',
+		avatar: "img/img1.jpg",
+		content: '阿萨德法师打算打算打算打算打算打算打算打算打算打算打算打打',
+		useful: 0,
+		useless: 0,
+	}];
 })
 
 //城市选择
-.controller('SelectCityCtrl', function($scope, $ionicHistory, $ionicViewSwitcher) {
-	$scope.goBack = function() {
-		// $state.go('tab.me');
-		$ionicHistory.goBack();
-		$ionicViewSwitcher.nextDirection("back");
-	};
+.controller('SelectCityCtrl', function($scope, rootScope, $ionicHistory, $ionicViewSwitcher) {
+	// $scope.goBack = function() {
+	// 	// $state.go('tab.me');
+	// 	$ionicHistory.goBack();
+	// 	$ionicViewSwitcher.nextDirection("back");
+	// };
 })
 
 //用户注册
-.controller('RegisterCtrl', function($scope, $ionicHistory, $ionicViewSwitcher) {
+.controller('RegisterCtrl', function($scope, rootScope, $ionicHistory, $ionicViewSwitcher) {
 	$scope.btnType1 = 'password';
 	$scope.btnType2 = 'password';
 	$scope.psw1 = false;
@@ -821,11 +817,5 @@ angular.module('starter.controllers', [])
 				$scope.psw2 = true;
 			}
 		}
-	};
-
-	$scope.goBack = function() {
-		// $state.go('tab.me');
-		$ionicHistory.goBack();
-		$ionicViewSwitcher.nextDirection("back");
 	};
 });

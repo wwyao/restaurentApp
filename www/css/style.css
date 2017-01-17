@@ -261,3 +261,52 @@
 .register-box .active {
   color: red;
 }
+
+
+/*顾客评论*/
+
+#evaluation .evaluation-content li {
+  margin: 15px auto;
+  width: 95%;
+  /*border: 1px solid #000;*/
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 2px 0 #000;
+}
+
+.evaluation-content li div, .evaluation-content li p {
+  padding: 5px;
+  overflow: hidden;
+}
+
+.evaluation-content li>div:first-child {
+  background: #f5f5f5;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.evaluation-content li>div:first-child img {
+  margin-right: 15px;
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.evaluation-content li>div:last-child {
+  background: #f5f5f5;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  font-size: 20px;
+  color: rgb(26, 61, 210);
+}
+
+.evaluation-content li .time {
+  font-size: 14px;
+  color: #909090;
+}
+
+.evaluation-content li>div:last-child i {
+  float: right;
+  margin: 0 5px;
+  letter-spacing: 10px;
+}

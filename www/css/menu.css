@@ -166,10 +166,24 @@
 }
 
 .my-order li {
+  position: relative;
   list-style: none;
-  font-size: 12px;
+  border-bottom: 1px solid #909090;
+  padding: 5px 0;
+}
+
+.my-order .peopleNum-sub {
+  top: 5px;
+  right: 0;
+  font-size: 14px;
 }
 
 .my-order li:first-child span {
   float: right;
+  font-size: 12px;
+  color: red;
+}
+
+.my-order li>span {
+  margin-left: 20px;
 }

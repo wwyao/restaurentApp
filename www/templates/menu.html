@@ -1,5 +1,5 @@
-<ion-view title="菜单" id="menu" class="headerBg">
-  <ion-header-bar class="bar">
+<ion-view id="menu" title="菜单" class="headerBg">
+  <ion-header-bar class="bar" align-title="center">
     <ion-nav-bar>
       <ion-nav-buttons side="left" class="backBtn">
         <img ng-src="img/back.png" ng-click="goBack()" />
@@ -27,15 +27,21 @@
         </div>
 
         <div class="peopleNum-sub">
-          <span ng-click="dec(item.menuId)">-</span>{{item.num}}<span ng-click="add(item.menuId)">+</span>
+          <span ng-click="dec(item.menuId,$event)">-</span>{{item.num}}<span ng-click="add(item.menuId,$event)">+</span>
         </div>
       </li>
     </ul>
   </ion-content>
-  <div class="my-order-box" ng-if="showOrderBox">
+  <div class="my-order-box" ng-if="showOrderBox" ng-click="showOrderBox=!showOrderBox">
     <ul class="my-order">
-      <li>购物车清单<span>清空</span></li>
-      <li ng-repeat="orderItem in myOrders"></li>
+      <li>购物车清单<span ng-click="clearCar($event)">清空</span></li>
+      <li ng-repeat="orderItem in allMenu" ng-if="orderItem.num">
+        {{orderItem.name}}
+        <span>  {{orderItem.priceText}}</span>
+        <div class="peopleNum-sub">
+          <span ng-click="dec(orderItem.menuId,$event)">-</span>{{orderItem.num}}<span ng-click="add(orderItem.menuId,$event)">+</span>
+        </div>
+      </li>
     </ul>
   </div>
 
@@ -45,6 +51,6 @@
       <i class="ion-ios-cart-outline"></i>
     </div>
     <span class="totle-money">共￥{{totleMoney}}</span>
-    <span class="menu-btn">选好了</span>
+    <span class="menu-btn" ng-click="goHadOrders()">选好了</span>
   </div>
 </ion-view>

@@ -7,7 +7,14 @@
     </ion-nav-bar>
   </ion-header-bar>
 
-  <ion-content>
-
+  <ion-content overflow-scroll="true" scrollbar-y="false">
+    <ul class="evaluation-content">
+      <li ng-repeat="item in evaluationDatas">
+        <div><img ng-src="{{item.avatar}}" alt="">{{item.name}}</div>
+        <p class="time">{{item.time}}</p>
+        <p>{{item.content}}</p>
+        <div><i class="ion-thumbsup">{{item.useful}}</i><i class="ion-thumbsdown">{{item.useless}}</i></div>
+      </li>
+    </ul>
   </ion-content>
 </ion-view>
