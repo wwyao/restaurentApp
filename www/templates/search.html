@@ -5,14 +5,25 @@
         <i class="ion-chevron-left back-btn" ng-click="goBack()"></i>
       </ion-nav-buttons>
     </ion-nav-bar>
-    <input type="searchText" placeholder="搜索商家" class="search-text">
+    <input type="text" placeholder="搜索商家" class="search-text">
   </ion-header-bar>
 
-  <ion-content scrollbar-y="false">
+  <ion-content scrollbar-y="false" overflow-scroll="true">
     <ion-list>
-      <ion-item ng-repeat="item in searchData">
-        {{item}}
+      <ion-item collection-repeat="item in searchData" href="#/tab/home/{{item.restaurentId}}" class="aitem" ng-click="forwardAnim()">
+        <img ng-src="{{item.imgSrc1}}" alt="">
+        <div>
+          <h3>{{item.title}}</h3>
+          <p>{{item.address}}</p>
+          <p>{{item.feature}}</p>
+          <p>人均消费：￥{{item.money}}</p>
+          <!-- <p><span class="light-text">9.6</span>分</p> -->
+        </div>
       </ion-item>
     </ion-list>
+    <ion-infinite-scroll on-infinite="loadMoreData()" distance="15%" immediate-check="false" ng-if="isDatas">
+    </ion-infinite-scroll>
+    <!-- </ion-scroll> -->
+    <div ng-if="!isDatas" class="nodata-tip">没有更多数据了</div>
   </ion-content>
 </ion-view>

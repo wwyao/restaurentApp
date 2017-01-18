@@ -5,9 +5,34 @@
     <img ng-src="img/swipe.png" alt="" class="swipe" ng-click="scan()">
   </ion-header-bar>
   <ul class="sort" ng-if="isItemSort">
-    <li>全部<i class="ion-ios-arrow-down"></i></li>
+    <!-- <li>全部<i class="ion-ios-arrow-down"></i></li>
     <li>所有分类<i class="ion-ios-arrow-down"></i></li>
-    <li>距离优先<i class="ion-ios-arrow-down"></i></li>
+    <li>距离优先<i class="ion-ios-arrow-down"></i></li> -->
+    <li>
+      <select>
+      <option selected>全部</option>
+      <option >海珠区</option>
+      <option>天河区</option>
+    </select>
+      <!-- <i class="ion-ios-arrow-down"></i> -->
+    </li>
+    <li><select>
+    <option selected>所有分类</option>
+    <option >火锅</option>
+    <option>海鲜</option>
+    <option>川菜</option>
+    <option>粤菜</option>
+    <option>干锅</option>
+
+  </select></li>
+    <li><select>
+    <option selected>距离优先</option>
+    <option>综合评分优先</option>
+    <option >服务优先</option>
+    <option>口味优先</option>
+    <option>环境优先</option>
+
+  </select></li>
   </ul>
 
   <ion-content overflow-scroll="true" scrollbar-y="false" class="home-list" delegate-handle="mainScroll" on-scroll="showNav($event)">
@@ -28,21 +53,21 @@
       <span>干锅</span>
     </div>
     <ion-list>
-      <ion-item collection-repeat="item in items" href="#/tab/home/{{item.id}}" class="aitem" ng-click="forwardAnim()">
-        <img src="http://img3.imgtn.bdimg.com/it/u=214931719,1608091472&fm=21&gp=0.jpg" alt="">
+      <ion-item collection-repeat="item in items" href="#/tab/home/{{item.restaurentId}}" class="aitem" ng-click="forwardAnim()">
+        <img ng-src="{{item.imgSrc1}}" alt="">
         <div>
-          <h3>{{item.id}}饭店</h3>
-          <p>天河区</p>
-          <p>中餐</p>
-          <p>人均消费：￥50</p>
+          <h3>{{item.title}}</h3>
+          <p>{{item.address}}</p>
+          <p>{{item.feature}}</p>
+          <p>人均消费：￥{{item.money}}</p>
           <!-- <p><span class="light-text">9.6</span>分</p> -->
         </div>
-
       </ion-item>
     </ion-list>
-    <ion-infinite-scroll on-infinite="loadMoreData()">
+    <ion-infinite-scroll on-infinite="loadMoreData()" distance="15%" immediate-check="false" ng-if="isDatas">
     </ion-infinite-scroll>
     <!-- </ion-scroll> -->
+    <div ng-if="!isDatas" class="nodata-tip">没有更多数据了</div>
 
   </ion-content>
   <i ng-click="top()" class="toTop ion-ios-arrow-thin-up" ng-show="isItemSort"></i>

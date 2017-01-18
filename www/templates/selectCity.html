@@ -7,7 +7,16 @@
     </ion-nav-bar>
   </ion-header-bar>
 
-  <ion-content>
-
+  <ion-content delegate-handle="cityScroll">
+    <div>当前城市：<span>广州市</span></div>
+    <ul>
+      <li ng-repeat="item in citys" ng-class="item.isHeader?'city-nav':''" id="{{item.id}}">
+        {{item.cityName}}
+      </li>
+    </ul>
   </ion-content>
+  <div class="show-alphabet" ng-if="currentAlphabet">{{currentAlphabet}}</div>
+  <ul class="alphabet" on-drag="alphabetMove($event)" on-release="currentAlphabet=0">
+    <li ng-repeat="item in alphabet">{{item}}</li>
+  </ul>
 </ion-view>

@@ -28,7 +28,9 @@ angular.module('starter.controllers', [])
 //主页页面
 .controller('HomeCtrl', function($scope, $rootScope, $http, $cordovaGeolocation, $ionicHistory, $ionicViewSwitcher, $ionicScrollDelegate, $cordovaBarcodeScanner, $timeout, $state, $location) {
 	$rootScope.currentCity = "";
-
+	$scope.start = 0;
+	$scope.count = 6;
+	$scope.isDatas = true;
 	//定位
 	//通过经纬度查询城市的地址:https://api.thinkpage.cn/v3/location/search.json?key=mqzzrlzwvkgw0762&q=39.93:116.40
 	var posOptions = {
@@ -48,31 +50,31 @@ angular.module('starter.controllers', [])
 					$rootScope.currentCity = data.results[0].name;
 
 				}).error(function(data) {
-					alert(data);
+					// alert(data);
 				});
 			}, function(err) {
-				alert(err);
+				// alert(err);
 			});
 	}, false);
 
 	$scope.isItemSort = false;
-	$scope.items = [{
-		id: 1
-	}, {
-		id: 2
-	}, {
-		id: 3
-	}, {
-		id: 4
-	}, {
-		id: 5
-	}, {
-		id: 6
-	}, {
-		id: 7
-	}, {
-		id: 8
-	}];
+	$scope.items = [];
+	//获取餐厅数据
+	function getRestaurentData(start, count) {
+		$scope.start += 6;
+		var url = 'http://www.wy.cn:8888/restaurent/allRestaurent.php?start=' + start + '&count=' + count;
+		$http.get(url).success(function(data) {
+			console.log(data.length != 0);
+			if (data.length != 0) {
+				$scope.items = $scope.items.concat(data);
+			} else {
+				$scope.isDatas = false;
+				console.log('没有更多数据了');
+			}
+			$scope.$broadcast('scroll.infiniteScrollComplete');
+		});
+	}
+	getRestaurentData($scope.start, $scope.count);
 	$scope.itemIndex = 8;
 	$scope.forwardAnim = function() {
 		$ionicViewSwitcher.nextDirection("forward");
@@ -93,18 +95,12 @@ angular.module('starter.controllers', [])
 	$scope.ist = true;
 	//下拉加载更多的数据
 	$scope.loadMoreData = function() {
-		var tempArr = [];
-		for (var i = 0; i < 4; i++) {
-			$scope.itemIndex++;
-			var obj = {
-				id: $scope.itemIndex
-			}
-			tempArr.push(obj);
-		}
 		$timeout(function() {
-			$scope.items = $scope.items.concat(tempArr);
-			$scope.$broadcast('scroll.infiniteScrollComplete');
+			getRestaurentData($scope.start, $scope.count);
+			// $scope.$broadcast('scroll.infiniteScrollComplete');
 		}, 1400);
+		// getRestaurentData($scope.start, $scope.count);
+		// $scope.$broadcast('scroll.infiniteScrollComplete');
 
 	};
 	//扫二维码
@@ -124,20 +120,14 @@ angular.module('starter.controllers', [])
 })
 
 //餐厅详细页页面
-.controller('DetailCtrl', function($scope, $rootScope, $stateParams, $state, $ionicViewSwitcher) {
-	$scope.id = $stateParams.id;
-	$rootScope.restaurentData = {
-		id: $stateParams.id,
-		title: "小明餐厅",
-		img: "",
-		address: "天河区 正阳二路199号",
-		time: "10:00 - 22:00",
-		phone: "020-1234567",
-		describe: "餐厅描述餐厅描述餐厅描述餐厅描述餐厅描述餐厅描述餐厅描述餐厅描述餐厅描述餐厅描述餐厅描述",
-		eScore: "4.0",
-		tScore: "4.0",
-		sScore: "4.0"
-	}
+.controller('DetailCtrl', function($scope, $rootScope, $stateParams, $state, $ionicViewSwitcher, $http) {
+	// $scope.id = $stateParams.id;
+	$scope.restaurentData = {};
+	var url = 'http://www.wy.cn:8888/restaurent/detail.php?restaurentId=' + $stateParams.id;
+	$http.get(url).success(function(data) {
+		$scope.restaurentData = data;
+	});
+	$scope.isMore = false;
 })
 
 //搜索页面
@@ -415,8 +405,9 @@ angular.module('starter.controllers', [])
 .controller('InviteCtrl', function($scope, $rootScope, $ionicViewSwitcher, $state, $ionicHistory) {})
 
 //预约订座页面
-.controller('BookTableCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory, $cordovaDatePicker, datas) {
+.controller('BookTableCtrl', function($scope, $rootScope, $stateParams, $state, $ionicViewSwitcher, $ionicHistory, $cordovaDatePicker, datas) {
 	$scope.bookDatas1 = [];
+	alert($stateParams.restaurentId);
 	$scope.dateText = "请选择就餐时间";
 	var userData = datas.getUserDatas();
 	$rootScope.order = {
@@ -611,7 +602,8 @@ angular.module('starter.controllers', [])
 })
 
 //菜单
-.controller('MenuCtrl', function($scope, $rootScope, $ionicViewSwitcher, $state, $ionicHistory) {
+.controller('MenuCtrl', function($scope, $rootScope, $stateParams, $ionicViewSwitcher, $state, $ionicHistory) {
+	alert($stateParams.restaurentId);
 	$scope.restaurentName = '小明餐厅';
 	$scope.deskNum = 10;
 	$scope.totleMoney = 0;
@@ -854,12 +846,28 @@ angular.module('starter.controllers', [])
 })
 
 //城市选择
-.controller('SelectCityCtrl', function($scope, $rootScope, $ionicHistory, $ionicViewSwitcher) {
+.controller('SelectCityCtrl', function($scope, datas, $location, $rootScope, $ionicHistory, $ionicViewSwitcher, $ionicScrollDelegate) {
 	// $scope.goBack = function() {
 	// 	// $state.go('tab.me');
 	// 	$ionicHistory.goBack();
 	// 	$ionicViewSwitcher.nextDirection("back");
 	// };
+	$scope.citys = datas.getCitys();
+	$scope.alphabet = datas.getAlphabet();
+	$scope.currentAlphabet = 0;
+	//城市列表滚动
+	$scope.alphabetMove = function(e) {
+		for (var i = 0; i < $('.alphabet li').length; i++) {
+			var top = $('.alphabet li').eq(i).position().top;
+			var height = $('.alphabet li').eq(i).height();
+			if (top < Math.abs(e.gesture.touches[0].clientY) && Math.abs(e.gesture.touches[0].clientY) < top + height) {
+				$scope.currentAlphabet = $('.alphabet li').eq(i).html();
+				$location.hash($('.alphabet li').eq(i).html().trim());
+				$ionicScrollDelegate.$getByHandle('cityScroll').anchorScroll();
+				break;
+			}
+		}
+	};
 })
 
 //用户注册

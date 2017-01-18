@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova', 'ngTouch'])
 
 .run(function($ionicPlatform, $cordovaStatusbar) {
 	$ionicPlatform.ready(function() {
@@ -87,7 +87,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 		})
 		//菜单
 		.state('menu', {
-			url: '/tab/menu',
+			url: '/tab/menu/:restaurentId',
 			templateUrl: 'templates/menu.html',
 			controller: 'MenuCtrl'
 		})
@@ -213,7 +213,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 	//预约
 	.state('bookTable', {
-		url: '/tab/bookTable',
+		url: '/tab/bookTable/:restaurentId',
 		templateUrl: 'templates/bookTable.html',
 		controller: 'BookTableCtrl'
 	})

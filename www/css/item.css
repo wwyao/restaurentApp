@@ -1,3 +1,31 @@
+#detail .more-function {
+  position: absolute;
+  z-index: 100;
+  top: 10px;
+  right: 10px;
+  font-size: 25px;
+}
+
+#detail .more-list {
+  padding: 8px;
+  position: fixed;
+  top: 63px;
+  right: 0;
+  z-index: 1000;
+  background: rgb(10, 108, 209);
+  font-size: 14px;
+  color: #fff;
+  letter-spacing: 5px;
+}
+
+#detail .more-list li {
+  padding: 5px 0;
+}
+
+#detail .more-list li:first-child {
+  border-bottom: 1px dotted rgba(255, 255, 255, .3);
+}
+
 .top {
   position: relative;
 }
@@ -26,6 +54,7 @@
 
 .content li {
   padding-bottom: 15px;
+  padding-right: 20px;
   margin: 15px 0;
   width: 100%;
   border-bottom: 1px solid #c0c0c0;
@@ -33,10 +62,12 @@
 
 .content li i {
   margin-right: 5px;
+  font-size: 14px;
 }
 
 .content li:first-child {
   position: relative;
+  font-size: 12px;
 }
 
 .content li:first-child a {
@@ -59,6 +90,11 @@
 
 .content li:last-child {
   border-bottom: 0;
+  padding-right: 0;
+}
+
+.content li:last-child p:last-child {
+  font-size: 12px;
 }
 
 .content li a {

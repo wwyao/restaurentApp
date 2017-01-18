@@ -1,23 +1,26 @@
-<ion-view title="小明餐厅{{id}}" class="headerBg" id="detail">
-
-	<ion-nav-bar class="bar bar-positive">
-		<ion-nav-buttons side="left" class="backBtn">
-			<i class="ion-chevron-left back-btn" ng-click="goBack()"></i>
-		</ion-nav-buttons>
-	</ion-nav-bar>
-
-
-
-	<ion-content scrollbar-y="false">
+<ion-view title="{{restaurentData.title}}" class="headerBg" id="detail">
+	<ion-header-bar class="bar">
+		<ion-nav-bar>
+			<ion-nav-buttons side="left" class="backBtn">
+				<i class="ion-chevron-left back-btn" ng-click="goBack()"></i>
+			</ion-nav-buttons>
+		</ion-nav-bar>
+		<i class="ion-more more-function" ng-click="isMore = !isMore;"></i>
+	</ion-header-bar>
+	<ul class="more-list" ng-if="isMore">
+		<li><i class="ion-share">分享</i></li>
+		<li><i class="ion-heart">收藏</i></li>
+	</ul>
+	<ion-content scrollbar-y="false" overflow-scroll="true">
 		<div class="top">
-			<img ng-src="img/img1.jpg" alt="" class="res-img">
+			<img ng-src="{{restaurentData.imgSrc1}}" alt="" class="res-img">
 		</div>
 		<ul class="content">
 			<li>
 				<a><i class="icon ion-navigate"></i>{{restaurentData.address}}<i class="icon ion-chevron-right iright2"></i></a>
 				<a href="tel:{{restaurentData.phone}}"><i class=" icon ion-ios-clock-outline "></i>营业时间：{{restaurentData.time}}<i class="icon ion-android-call iright2"></i></a>
 			</li>
-			<li>环境：<span>{{restaurentData.eScore}}</span>味道：<span>{{restaurentData.tScore}}</span>服务：<span>{{restaurentData.sScore}}</span></li>
+			<li>环境：<span>{{restaurentData.escore}}</span>味道：<span>{{restaurentData.tscore}}</span>服务：<span>{{restaurentData.sscore}}</span></li>
 			<li><a href="#/tab/enterprise">商家营业资质 <i class="icon ion-chevron-right iright"></i></a></li>
 			<li><a href="#/tab/evaluation">顾客评价 <i class="icon ion-chevron-right iright"></i></a></li>
 			<li>
@@ -28,7 +31,7 @@
 
 	</ion-content>
 	<div id="footer">
-		<a href="#/tab/bookTable ">预约</a>
-		<a href="#/tab/menu">点菜</a>
+		<a href="#/tab/bookTable/{{restaurentData.restaurentId}}">预约</a>
+		<a href="#/tab/menu/{{restaurentData.restaurentId}}">点菜</a>
 	</div>
 </ion-view>

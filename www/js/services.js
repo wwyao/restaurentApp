@@ -3,6 +3,200 @@ angular.module('starter.services', [])
 .factory('datas', function() {
 	// Might use a resource here that returns a JSON array
 
+	//城市
+	var citys = [{
+		id: 'A',
+		cityName: 'A',
+		isHeader: true
+	}, {
+		id: 'A1',
+		cityName: '安庆市'
+	}, {
+		id: 'A2',
+		cityName: '安庆市'
+	}, {
+		id: 'A3',
+		cityName: '安庆市'
+	}, {
+		id: 'A4',
+		cityName: '安庆市'
+	}, {
+		id: 'A5',
+		cityName: '安庆市'
+	}, {
+		id: 'A6',
+		cityName: '安庆市'
+	}, {
+		id: 'B',
+		cityName: 'B',
+		isHeader: true
+	}, {
+		id: 'B1',
+		cityName: '安庆市'
+	}, {
+		id: 'B2',
+		cityName: '安庆市'
+	}, {
+		id: 'B3',
+		cityName: '安庆市'
+	}, {
+		id: 'B4',
+		cityName: '安庆市'
+	}, {
+		id: 'B5',
+		cityName: '安庆市'
+	}, {
+		id: 'C',
+		cityName: 'C',
+		isHeader: true
+	}, {
+		id: 'C1',
+		cityName: '安庆市'
+	}, {
+		id: 'C2',
+		cityName: '安庆市'
+	}, {
+		id: 'C3',
+		cityName: '安庆市'
+	}, {
+		id: 'C4',
+		cityName: '安庆市'
+	}, {
+		id: 'D',
+		cityName: 'D',
+		isHeader: true
+	}, {
+		id: 'D1',
+		cityName: '安庆市'
+	}, {
+		id: 'D2',
+		cityName: '安庆市'
+	}, {
+		id: 'D3',
+		cityName: '安庆市'
+	}, {
+		id: 'E',
+		cityName: 'E',
+		isHeader: true
+	}, {
+		id: 'E1',
+		cityName: '安庆市'
+	}, {
+		id: 'E2',
+		cityName: '安庆市'
+	}, {
+		id: 'F',
+		cityName: 'F',
+		isHeader: true
+	}, {
+		id: 'F1',
+		cityName: '安庆市'
+	}, {
+		cid: 'F2',
+		cityName: '安庆市'
+	}, {
+		id: 'G',
+		cityName: 'G',
+		isHeader: true
+	}, {
+		id: 'G1',
+		cityName: '安庆市'
+	}, {
+		id: 'G2',
+		cityName: '安庆市'
+	}, {
+		id: 'H'.trim(),
+		cityName: 'H',
+		isHeader: true
+	}, {
+		id: 'H1',
+		cityName: '安庆市'
+	}, {
+		id: 'H2',
+		cityName: '安庆市'
+	}, {
+		id: 'I',
+		cityName: 'I',
+		isHeader: true
+	}, {
+		id: 'I1',
+		cityName: '安庆市'
+	}, {
+		id: 'I2',
+		cityName: '安庆市'
+	}, {
+		id: 'J',
+		cityName: 'J',
+		isHeader: true
+	}, {
+		id: 'J1',
+		cityName: '安庆市'
+	}, {
+		id: 'J2',
+		cityName: '安庆市'
+	}, {
+		id: 'K',
+		cityName: 'K',
+		isHeader: true
+	}, {
+		id: 'K1',
+		cityName: '安庆市'
+	}, {
+		id: 'K2',
+		cityName: '安庆市'
+	}, {
+		id: 'L',
+		cityName: 'L',
+		isHeader: true
+	}, {
+		id: 'L1',
+		cityName: '安庆市'
+	}, {
+		id: 'L2',
+		cityName: '安庆市'
+	}, {
+		id: 'M',
+		cityName: 'M',
+		isHeader: true
+	}, {
+		id: 'M1',
+		cityName: '安庆市'
+	}, {
+		id: 'M2',
+		cityName: '安庆市'
+	}, {
+		id: 'N',
+		cityName: 'N',
+		isHeader: true
+	}, {
+		id: 'N1',
+		cityName: '安庆市'
+	}, {
+		id: 'N2',
+		cityName: '安庆市'
+	}, {
+		id: 'O',
+		cityName: 'O',
+		isHeader: true
+	}, {
+		id: 'O1',
+		cityName: '安庆市'
+	}, {
+		id: 'O2',
+		cityName: '安庆市'
+	}, {
+		id: 'P',
+		cityName: 'P',
+		isHeader: true
+	}, {
+		id: 'P1',
+		cityName: '安庆市'
+	}, {
+		id: 'P2',
+		cityName: '安庆市'
+	}];
+	//字母表
+	var alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 	// 已登录的用户信息
 	var userDatas = {
 		name: 'admin',
@@ -11,11 +205,6 @@ angular.module('starter.services', [])
 		phone: "12345678912"
 	};
 	// var userDatas = null;
-	//可登陆的用户信息
-	var validUserData = {
-		username: '',
-		password: ''
-	}
 
 	//协议文本
 	var protocolText = ["一、总则",
@@ -43,14 +232,6 @@ angular.module('starter.services', [])
 		setUserDatas: function(obj) {
 			userDatas = obj;
 		},
-		//获取可登陆的用户信息
-		getValidUserData: function() {
-			return validUserData;
-		},
-		//添加可登陆的用户信息
-		setValidUserData: function(obj) {
-			userDatas = obj;
-		},
 		//获取协议文本
 		getProtocol: function() {
 			return protocolText;
@@ -58,6 +239,15 @@ angular.module('starter.services', [])
 		//获取关于小明点餐的文本
 		getAboutText: function() {
 			return aboutText;
+		},
+
+		//获取城市
+		getCitys: function() {
+			return citys;
+		},
+		//获取字母表
+		getAlphabet: function() {
+			return alphabet;
 		}
 	};
 });

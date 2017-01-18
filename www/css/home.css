@@ -22,7 +22,7 @@
 .search {
   padding-left: 10%;
   margin-left: 15px;
-  width: 65%;
+  width: 55%;
   height: 28px;
   font-size: 12px;
   background: rgba(255, 255, 255, 0.2) url(../img/search.png) no-repeat 8% center;
@@ -131,8 +131,10 @@
   width: 20%;
 }
 
-.sort li i {
-  margin-left: 3px;
+.sort li select {
+  background: rgba(32, 119, 182, 0);
+  border: none;
+  color: #fff;
 }
 
 .sort li:nth-child(2) {
@@ -195,4 +197,10 @@
   color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 3px 0 rgb(204, 143, 23);
+}
+
+.nodata-tip {
+  text-align: center;
+  color: rgb(14, 40, 217);
+  margin: 10px 0;
 }
