@@ -326,11 +326,27 @@
 /*城市选择*/
 
 #selectCity .city-nav {
-  background: #909090;
+  background: #f0f0f0;
+}
+
+#selectCity .location-city, #selectCity .hot-city {
+  margin: 10px;
+}
+
+#selectCity .location-city div, #selectCity .hot-city div {
+  margin: 10px;
+}
+
+#selectCity .location-city span, #selectCity .hot-city span {
+  margin: 15px;
+  padding: 3px 5px;
+  /*border: 1px solid #000;*/
+  border-radius: 5px;
+  box-shadow: 0 0 2px 0 #000;
 }
 
 #selectCity .alphabet {
-  padding-top: 100px;
+  padding-top: 70px;
   position: fixed;
   top: 0;
   right: 0;
@@ -339,6 +355,15 @@
   text-align: center;
   background: rgba(13, 84, 180, .7);
   color: #fff;
+}
+
+#selectCity .city li {
+  padding: 3px 10px;
+  border-bottom: 1px solid rgba(166, 166, 166, .2);
+}
+
+#selectCity .city li:first-child {
+  border-top: 1px solid rgba(166, 166, 166, .3);
 }
 
 #selectCity .show-alphabet {

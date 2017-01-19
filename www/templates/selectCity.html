@@ -7,16 +7,22 @@
     </ion-nav-bar>
   </ion-header-bar>
 
-  <ion-content delegate-handle="cityScroll">
-    <div>当前城市：<span>广州市</span></div>
-    <ul>
-      <li ng-repeat="item in citys" ng-class="item.isHeader?'city-nav':''" id="{{item.id}}">
+  <ion-content delegate-handle="cityScroll" scrollbar-y="false">
+    <div class="location-city">定位城市：
+      <div><span on-tap="citySelected(locationCity)">{{locationCity}}</span></div>
+    </div>
+    <div class="hot-city">热门城市：
+      <div>
+        <span ng-repeat="item in hotCity" on-tap="citySelected(item)">{{item}}</span></div>
+    </div>
+    <ul class="city ">
+      <li ng-repeat="item in citys " ng-class="item.isHeader? 'city-nav': '' " id="{{item.id}}" on-tap="citySelected(item.cityName)">
         {{item.cityName}}
       </li>
     </ul>
   </ion-content>
-  <div class="show-alphabet" ng-if="currentAlphabet">{{currentAlphabet}}</div>
-  <ul class="alphabet" on-drag="alphabetMove($event)" on-release="currentAlphabet=0">
-    <li ng-repeat="item in alphabet">{{item}}</li>
+  <div class="show-alphabet " ng-if="currentAlphabet ">{{currentAlphabet}}</div>
+  <ul class="alphabet " on-drag="alphabetMove($event) " on-release="currentAlphabet=0 ">
+    <li ng-repeat="item in alphabet " on-tap="alphabetClick(item)" on-release="currentAlphabet=0" >{{item}}</li>
   </ul>
 </ion-view>

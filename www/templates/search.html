@@ -5,7 +5,7 @@
         <i class="ion-chevron-left back-btn" ng-click="goBack()"></i>
       </ion-nav-buttons>
     </ion-nav-bar>
-    <input type="text" placeholder="搜索商家" class="search-text">
+    <input type="text" placeholder="搜索商家" class="search-text" ng-change="search()" ng-model="searchText">
   </ion-header-bar>
 
   <ion-content scrollbar-y="false" overflow-scroll="true">
@@ -21,9 +21,8 @@
         </div>
       </ion-item>
     </ion-list>
-    <ion-infinite-scroll on-infinite="loadMoreData()" distance="15%" immediate-check="false" ng-if="isDatas">
+    <!-- <ion-infinite-scroll on-infinite="loadMoreData()" distance="15%" immediate-check="false" ng-if="isDatas">
     </ion-infinite-scroll>
-    <!-- </ion-scroll> -->
-    <div ng-if="!isDatas" class="nodata-tip">没有更多数据了</div>
+    <div ng-if="!isDatas" class="nodata-tip">没有更多数据了</div> -->
   </ion-content>
 </ion-view>

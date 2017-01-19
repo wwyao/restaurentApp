@@ -5,198 +5,218 @@ angular.module('starter.services', [])
 
 	//城市
 	var citys = [{
-		id: 'A',
-		cityName: 'A',
-		isHeader: true
-	}, {
-		id: 'A1',
-		cityName: '安庆市'
-	}, {
-		id: 'A2',
-		cityName: '安庆市'
-	}, {
-		id: 'A3',
-		cityName: '安庆市'
-	}, {
-		id: 'A4',
-		cityName: '安庆市'
-	}, {
-		id: 'A5',
-		cityName: '安庆市'
-	}, {
-		id: 'A6',
-		cityName: '安庆市'
-	}, {
-		id: 'B',
-		cityName: 'B',
-		isHeader: true
-	}, {
-		id: 'B1',
-		cityName: '安庆市'
-	}, {
-		id: 'B2',
-		cityName: '安庆市'
-	}, {
-		id: 'B3',
-		cityName: '安庆市'
-	}, {
-		id: 'B4',
-		cityName: '安庆市'
-	}, {
-		id: 'B5',
-		cityName: '安庆市'
-	}, {
-		id: 'C',
-		cityName: 'C',
-		isHeader: true
-	}, {
-		id: 'C1',
-		cityName: '安庆市'
-	}, {
-		id: 'C2',
-		cityName: '安庆市'
-	}, {
-		id: 'C3',
-		cityName: '安庆市'
-	}, {
-		id: 'C4',
-		cityName: '安庆市'
-	}, {
-		id: 'D',
-		cityName: 'D',
-		isHeader: true
-	}, {
-		id: 'D1',
-		cityName: '安庆市'
-	}, {
-		id: 'D2',
-		cityName: '安庆市'
-	}, {
-		id: 'D3',
-		cityName: '安庆市'
-	}, {
-		id: 'E',
-		cityName: 'E',
-		isHeader: true
-	}, {
-		id: 'E1',
-		cityName: '安庆市'
-	}, {
-		id: 'E2',
-		cityName: '安庆市'
-	}, {
-		id: 'F',
-		cityName: 'F',
-		isHeader: true
-	}, {
-		id: 'F1',
-		cityName: '安庆市'
-	}, {
-		cid: 'F2',
-		cityName: '安庆市'
-	}, {
-		id: 'G',
-		cityName: 'G',
-		isHeader: true
-	}, {
-		id: 'G1',
-		cityName: '安庆市'
-	}, {
-		id: 'G2',
-		cityName: '安庆市'
-	}, {
-		id: 'H'.trim(),
-		cityName: 'H',
-		isHeader: true
-	}, {
-		id: 'H1',
-		cityName: '安庆市'
-	}, {
-		id: 'H2',
-		cityName: '安庆市'
-	}, {
-		id: 'I',
-		cityName: 'I',
-		isHeader: true
-	}, {
-		id: 'I1',
-		cityName: '安庆市'
-	}, {
-		id: 'I2',
-		cityName: '安庆市'
-	}, {
-		id: 'J',
-		cityName: 'J',
-		isHeader: true
-	}, {
-		id: 'J1',
-		cityName: '安庆市'
-	}, {
-		id: 'J2',
-		cityName: '安庆市'
-	}, {
-		id: 'K',
-		cityName: 'K',
-		isHeader: true
-	}, {
-		id: 'K1',
-		cityName: '安庆市'
-	}, {
-		id: 'K2',
-		cityName: '安庆市'
-	}, {
-		id: 'L',
-		cityName: 'L',
-		isHeader: true
-	}, {
-		id: 'L1',
-		cityName: '安庆市'
-	}, {
-		id: 'L2',
-		cityName: '安庆市'
-	}, {
-		id: 'M',
-		cityName: 'M',
-		isHeader: true
-	}, {
-		id: 'M1',
-		cityName: '安庆市'
-	}, {
-		id: 'M2',
-		cityName: '安庆市'
-	}, {
-		id: 'N',
-		cityName: 'N',
-		isHeader: true
-	}, {
-		id: 'N1',
-		cityName: '安庆市'
-	}, {
-		id: 'N2',
-		cityName: '安庆市'
-	}, {
-		id: 'O',
-		cityName: 'O',
-		isHeader: true
-	}, {
-		id: 'O1',
-		cityName: '安庆市'
-	}, {
-		id: 'O2',
-		cityName: '安庆市'
-	}, {
-		id: 'P',
-		cityName: 'P',
-		isHeader: true
-	}, {
-		id: 'P1',
-		cityName: '安庆市'
-	}, {
-		id: 'P2',
-		cityName: '安庆市'
-	}];
+			id: 'A',
+			cityName: 'A',
+			isHeader: true
+		}, {
+			cityName: '安庆市'
+		}, {
+			cityName: '安阳市'
+		}, {
+			cityName: '鞍山市'
+		}, {
+			cityName: '安康市'
+		}, {
+			cityName: '阿里地区'
+		}, {
+			cityName: '阿拉尔市'
+		}, {
+			id: 'B',
+			cityName: 'B',
+			isHeader: true
+		}, {
+			cityName: '白城市'
+		}, {
+			cityName: '北京市'
+		}, {
+			cityName: '宝鸡市'
+		}, {
+			cityName: '白山市'
+		}, {
+			cityName: '本溪市'
+		}, {
+			id: 'C',
+			cityName: 'C',
+			isHeader: true
+		}, {
+			cityName: '长春市'
+		}, {
+			cityName: '成都市'
+		}, {
+			cityName: '重庆市'
+		}, {
+			id: 'C4',
+			cityName: '长沙市'
+		}, {
+			id: 'D',
+			cityName: 'D',
+			isHeader: true
+		}, {
+			cityName: '东莞市'
+		}, {
+			cityName: '大连市'
+		}, {
+			cityName: '德州市'
+		}, {
+			id: 'E',
+			cityName: 'E',
+			isHeader: true
+		}, {
+			cityName: '鄂州市'
+		}, {
+			id: 'F',
+			cityName: 'F',
+			isHeader: true
+		}, {
+			cityName: '佛山市'
+		}, {
+			cityName: '抚顺市'
+		}, {
+			id: 'G',
+			cityName: 'G',
+			isHeader: true
+		}, {
+			cityName: '广州市'
+		}, {
+			cityName: '赣州市'
+		}, {
+			cityName: '广元市'
+		}, {
+			cityName: '桂林市'
+		}, {
+			id: 'H',
+			cityName: 'H',
+			isHeader: true
+		}, {
+			cityName: '合肥市'
+		}, {
+			cityName: '河池市'
+		}, {
+			cityName: '海口市'
+		},
+		// {
+		// 	id: 'I',
+		// 	cityName: 'I',
+		// 	isHeader: true
+		// },
+		{
+			id: 'J',
+			cityName: 'J',
+			isHeader: true
+		}, {
+			cityName: '江门市'
+		}, {
+			cityName: '嘉兴市'
+		}, {
+			cityName: '吉林市'
+		}, {
+			cityName: '九江市'
+		}, {
+			id: 'K',
+			cityName: 'K',
+			isHeader: true
+		}, {
+			cityName: '开封市'
+		}, {
+			cityName: '昆明市'
+		}, {
+			id: 'L',
+			cityName: 'L',
+			isHeader: true
+		}, {
+			cityName: '六安市'
+		}, {
+			cityName: '乐山市'
+		}, {
+			cityName: '拉萨市'
+		}, {
+			id: 'M',
+			cityName: 'M',
+			isHeader: true
+		}, {
+			cityName: '梅州市'
+		}, {
+			cityName: '眉山市'
+		}, {
+			id: 'N',
+			cityName: 'N',
+			isHeader: true
+		}, {
+			cityName: '宁波市'
+		}, {
+			cityName: '南昌市'
+		},
+		// {
+		// 	id: 'O',
+		// 	cityName: 'O',
+		// 	isHeader: true
+		// },
+		{
+			id: 'P',
+			cityName: 'P',
+			isHeader: true
+		}, {
+			cityName: '萍乡市'
+		}, {
+			cityName: '平凉市'
+		},
+		// {
+		// 	id: 'Q',
+		// 	cityName: 'Q',
+		// 	isHeader: true
+		// }, {
+		// 	id: 'R',
+		// 	cityName: 'R',
+		// 	isHeader: true
+		// }, {
+		// 	id: 'S',
+		// 	cityName: 'S',
+		// 	isHeader: true
+		// }, {
+		// 	id: 'T',
+		// 	cityName: 'T',
+		// 	isHeader: true
+		// }, {
+		// 	id: 'U',
+		// 	cityName: 'U',
+		// 	isHeader: true
+		// }, {
+		// 	id: 'V',
+		// 	cityName: 'V',
+		// 	isHeader: true
+		// }, {
+		// 	id: 'W',
+		// 	cityName: 'W',
+		// 	isHeader: true
+		// }, {
+		// 	id: 'X',
+		// 	cityName: 'X',
+		// 	isHeader: true
+		// }, {
+		// 	id: 'Y',
+		// 	cityName: 'Y',
+		// 	isHeader: true
+		// },
+		{
+			id: 'Z',
+			cityName: 'Z',
+			isHeader: true
+		}, {
+			cityName: '珠海市'
+		}, {
+			cityName: '湛江市'
+		}, {
+			cityName: '中山市'
+		}, {
+			cityName: '舟山市'
+		}
+	];
 	//字母表
 	var alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+	//定位城市
+	var locationCity = "广州市";
+
 	// 已登录的用户信息
 	var userDatas = {
 		name: 'admin',
@@ -244,6 +264,14 @@ angular.module('starter.services', [])
 		//获取城市
 		getCitys: function() {
 			return citys;
+		},
+		//获取定位城市
+		getLocationCity: function() {
+			return locationCity;
+		},
+		//修改定位城市
+		setLocationCity: function(text) {
+			locationCity = text;
 		},
 		//获取字母表
 		getAlphabet: function() {

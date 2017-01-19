@@ -58,7 +58,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 	// Each tab has its own nav history stack:
 	//首页
 	.state('tab.home', {
-			url: '/home',
+			url: '/home/:tag/:city',
 			views: {
 				'tab-home': {
 					templateUrl: 'templates/tab-home.html',
@@ -260,6 +260,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 		controller: 'AboutlCtrl'
 	});
 	// if none of the above states are matched, use this as the fallback
-	$urlRouterProvider.otherwise('/tab/home');
+	$urlRouterProvider.otherwise('/tab/home/1/city');
 
 });

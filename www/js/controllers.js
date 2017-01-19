@@ -26,7 +26,7 @@ angular.module('starter.controllers', [])
 })
 
 //主页页面
-.controller('HomeCtrl', function($scope, $rootScope, $http, $cordovaGeolocation, $ionicHistory, $ionicViewSwitcher, $ionicScrollDelegate, $cordovaBarcodeScanner, $timeout, $state, $location) {
+.controller('HomeCtrl', function($scope, $rootScope, $stateParams, $http, $cordovaGeolocation, $ionicHistory, $ionicViewSwitcher, $ionicScrollDelegate, $cordovaBarcodeScanner, $timeout, $state, $location) {
 	$rootScope.currentCity = "";
 	$scope.start = 0;
 	$scope.count = 6;
@@ -37,25 +37,30 @@ angular.module('starter.controllers', [])
 		timeout: 100000,
 		enableHighAccuracy: true
 	};
-	document.addEventListener("deviceready", function() {
-		$cordovaGeolocation
-			.getCurrentPosition(posOptions)
-			.then(function(position) {
-				var lat = position.coords.latitude
-				var long = position.coords.longitude
-					// alert(lat + ":" + long);
-				var url = 'https://api.thinkpage.cn/v3/location/search.json?key=mqzzrlzwvkgw0762&q=' + lat + ':' + long;
-				$http.get(url).success(function(data) {
-					// alert(data.results[0].name);
-					$rootScope.currentCity = data.results[0].name;
-
-				}).error(function(data) {
-					// alert(data);
+	if ($stateParams.tag == 1) {
+		document.addEventListener("deviceready", function() {
+			$cordovaGeolocation
+				.getCurrentPosition(posOptions)
+				.then(function(position) {
+					var lat = position.coords.latitude
+					var long = position.coords.longitude
+						// alert(lat + ":" + long);
+					var url = 'https://api.thinkpage.cn/v3/location/search.json?key=mqzzrlzwvkgw0762&q=' + lat + ':' + long;
+					$http.get(url).success(function(data) {
+						// alert(data.results[0].name);
+						$rootScope.currentCity = data.results[0].name;
+						datas.setLocationCity(data.results[0].name);
+					}).error(function(data) {
+						// alert(data);
+					});
+				}, function(err) {
+					// alert(err);
 				});
-			}, function(err) {
-				// alert(err);
-			});
-	}, false);
+		}, false);
+	} else if ($stateParams.tag == 2) {
+		$rootScope.currentCity = $stateParams.city;
+	}
+
 
 	$scope.isItemSort = false;
 	$scope.items = [];
@@ -131,8 +136,22 @@ angular.module('starter.controllers', [])
 })
 
 //搜索页面
-.controller('SearchCtrl', function($scope, $stateParams, $state, $ionicViewSwitcher, $ionicHistory) {
+.controller('SearchCtrl', function($scope, $stateParams, $state, $ionicViewSwitcher, $ionicHistory, $timeout, $http) {
 	$scope.searchData = [];
+	$scope.searchText = "";
+	$scope.search = function() {
+		console.log($scope.searchText, $scope.searchText != "");
+		$timeout(function() {
+			var url = "http://www.wy.cn:8888/restaurent/search.php?text=" + $scope.searchText;
+			url = encodeURI(url);
+			if ($scope.searchText) {
+				$http.get(url).success(function(data) {
+					console.log(data);
+					$scope.searchData = data;
+				});
+			}
+		}, 1000);
+	};
 })
 
 //扫码进入的页面
@@ -846,27 +865,54 @@ angular.module('starter.controllers', [])
 })
 
 //城市选择
-.controller('SelectCityCtrl', function($scope, datas, $location, $rootScope, $ionicHistory, $ionicViewSwitcher, $ionicScrollDelegate) {
-	// $scope.goBack = function() {
-	// 	// $state.go('tab.me');
-	// 	$ionicHistory.goBack();
-	// 	$ionicViewSwitcher.nextDirection("back");
-	// };
+.controller('SelectCityCtrl', function($scope, $rootScope, $state, datas, $location, $ionicHistory, $ionicViewSwitcher, $ionicScrollDelegate) {
 	$scope.citys = datas.getCitys();
 	$scope.alphabet = datas.getAlphabet();
 	$scope.currentAlphabet = 0;
-	//城市列表滚动
+	$scope.hotCity = ['广州市', '北京市', '珠海市'];
+	$scope.locationCity = datas.getLocationCity();
+	//城市列表拖动
 	$scope.alphabetMove = function(e) {
 		for (var i = 0; i < $('.alphabet li').length; i++) {
 			var top = $('.alphabet li').eq(i).position().top;
 			var height = $('.alphabet li').eq(i).height();
 			if (top < Math.abs(e.gesture.touches[0].clientY) && Math.abs(e.gesture.touches[0].clientY) < top + height) {
 				$scope.currentAlphabet = $('.alphabet li').eq(i).html();
-				$location.hash($('.alphabet li').eq(i).html().trim());
+				for (var j = 0; j < $scope.citys.length; j++) {
+					if ($scope.citys[j].cityName.trim() == $('.alphabet li').eq(i).html().trim()) {
+						$location.hash($('.alphabet li').eq(i).html().trim());
+						$ionicScrollDelegate.$getByHandle('cityScroll').anchorScroll();
+						break;
+					}
+				}
+				// $location.hash($('.alphabet li').eq(i).html().trim());
+				// $ionicScrollDelegate.$getByHandle('cityScroll').anchorScroll();
+				break;
+			}
+		}
+	};
+	//点击切换
+	$scope.alphabetClick = function(tag) {
+		// console.log(tag);
+		$scope.currentAlphabet = tag;
+		for (var j = 0; j < $scope.citys.length; j++) {
+			if ($scope.citys[j].cityName.trim() == tag.trim()) {
+				$location.hash(tag.trim());
 				$ionicScrollDelegate.$getByHandle('cityScroll').anchorScroll();
 				break;
 			}
 		}
+	};
+	//选择城市
+	$scope.citySelected = function(text) {
+		if ($scope.alphabet.indexOf(text) == -1) {
+			$state.go('tab.home', {
+				tag: 2,
+				city: text
+			});
+			$ionicViewSwitcher.nextDirection("back");
+		}
+
 	};
 })
 

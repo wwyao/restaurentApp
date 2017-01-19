@@ -108,9 +108,10 @@
   left: 20px;
   width: 40px;
   height: 40px;
-  border: 2px solid rgb(130, 130, 130);
+  border: 2px solid rgba(214, 33, 49, .9);
   border-radius: 100%;
   font-size: 30px;
+  color: red;
   text-align: center;
   line-height: 40px;
   background: #fff;
