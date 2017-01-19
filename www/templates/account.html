@@ -11,7 +11,7 @@
   <ion-content>
     <ion-list class="account-List">
       <ion-item ng-repeat="item in accountData">
-        <span>{{item.tag}}</span>
+        <span ng-click="{{item.clickEvent}}">{{item.tag}}</span>
         <img ng-src="{{userData.avatar}}" alt="" class="account-img" ng-if="item.isAvatar" ng-click="imgPicker()">
         <input type="text" class="accountInput" ng-if="item.isShow" ng-model="userData.name" ng-disabled="isEditable">
         <div class="account-radois" ng-if="item.isSex">

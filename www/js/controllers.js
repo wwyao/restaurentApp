@@ -2,7 +2,7 @@ angular.module('starter.controllers', [])
 
 //tabs页面
 .controller('tabsCtrl', function($scope, $rootScope, datas, $state, $ionicHistory, $ionicViewSwitcher) {
-	$rootScope.isLogined = false;
+	$rootScope.isLogined = true;
 	$scope.goLogin = function() {
 		var tempUser = datas.getUserDatas();
 		console.log(!tempUser, tempUser);
@@ -230,17 +230,53 @@ angular.module('starter.controllers', [])
 
 //未消费页面
 .controller('page1', function($scope, $rootScope) {
-
+	$scope.datas = [{
+		orderId: 201711111,
+		retaurentTitle: '小明餐厅',
+		desk: '11',
+		time: '2017-01-22 17:30',
+		money: '￥20'
+	}, {
+		orderId: 201711111,
+		retaurentTitle: '小明餐厅',
+		desk: '11',
+		time: '2017-01-22 17:30',
+		money: '￥20'
+	}];
 })
 
 //就餐中页面
 .controller('page2', function($scope, $rootScope) {
-
+	$scope.datas = [{
+		orderId: 201711111,
+		retaurentTitle: '小明餐厅',
+		desk: '11',
+		time: '2017-01-22 17:30',
+		money: '￥20'
+	}, {
+		orderId: 201711111,
+		retaurentTitle: '小明餐厅',
+		desk: '11',
+		time: '2017-01-22 17:30',
+		money: '￥20'
+	}];
 })
 
 //已消费页面
 .controller('page3', function($scope, $rootScope) {
-
+	$scope.datas = [{
+		orderId: 201711111,
+		retaurentTitle: '小明餐厅',
+		desk: '11',
+		time: '2017-01-22 17:30',
+		money: '￥20'
+	}, {
+		orderId: 201711111,
+		retaurentTitle: '小明餐厅',
+		desk: '11',
+		time: '2017-01-22 17:30',
+		money: '￥20'
+	}];
 })
 
 //登录页面
@@ -526,7 +562,7 @@ angular.module('starter.controllers', [])
 })
 
 //账户页面
-.controller('AccountCtrl', function($scope, $rootScope, datas, $state, $cordovaImagePicker, $ionicViewSwitcher, $ionicHistory, $cordovaDatePicker) {
+.controller('AccountCtrl', function($scope, $rootScope, $cordovaDialogs, datas, $state, $cordovaImagePicker, $ionicViewSwitcher, $ionicHistory, $cordovaDatePicker) {
 	$scope.editText = '编辑';
 	$scope.isEditable = true;
 	//获取已登录的用户信息
@@ -542,14 +578,21 @@ angular.module('starter.controllers', [])
 		isSex: true
 	}, {
 		tag: '生日',
-		clickEvent: 'openPicker()',
+		// clickEvent: 'openPicker()',
 		isDate: true,
 	}, {
 		tag: '修改登录密码',
-
-	}, {
-		tag: '修改支付密码',
+		clickEvent: 'editPsw()',
 	}];
+	$scope.editPsw = function() {
+		$cordovaDialogs.prompt('msg', 'title', ['cancal', 'ok'], 'default text')
+			.then(function(result) {
+				var input = result.input1;
+				// no button = 0, 'OK' = 1, 'Cancel' = 2
+				var btnIndex = result.buttonIndex;
+			});
+
+	};
 	var options = {
 		date: new Date(),
 		mode: 'date', // or 'time'

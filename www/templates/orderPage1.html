@@ -1,8 +1,20 @@
-<ion-view id="order-page1" class="order-pages">
+<!-- <ion-view id="order-page1" class="order-pages"> -->
+<ion-content overflow-scroll="true" id="order-page1" scrollbar-y="false">
   <div ng-if="!isLogined" class="unlogined">
-    <img ng-src="img/robot.gif" alt="" class="robot"> <span>你还没登录哦!</span>
+    <!-- <img ng-src="img/robot.gif" alt="" class="robot">  -->
+    <span>你还没登录哦!</span>
   </div>
-  <ion-content>
-
-  </ion-content>
-</ion-view>
+  <ul>
+    <li ng-repeat="item in datas" class="page-item">
+      <p>订单号：{{item.orderId}}</p>
+      <p>餐厅：{{item.retaurentTitle}}</p>
+      <p>桌子：{{item.desk}}号桌</p>
+      <p>时间：{{item.time}}</p>
+      <p>定金：<span class="redColor">{{item.money}}</span></p>
+      <div>
+        <span>取消订单</span><span>付款</span>
+      </div>
+    </li>
+  </ul>
+</ion-content>
+<!-- </ion-view> -->
