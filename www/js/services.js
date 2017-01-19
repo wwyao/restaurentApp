@@ -3,6 +3,14 @@ angular.module('starter.services', [])
 .factory('datas', function() {
 	// Might use a resource here that returns a JSON array
 
+	//订单信息
+	var orderMsg = {
+		orderId: '',
+		restaurentId: '',
+		userId: '',
+
+	};
+
 	//城市
 	var citys = [{
 			id: 'A',

@@ -150,12 +150,17 @@
   background: #fff;
 }
 
-#menu .my-order-box {
+#menu .my-order-box, #menu .detail-box {
   position: absolute;
   z-index: 2;
   background: rgba(0, 0, 0, .3);
   width: 100%;
   height: 100%;
+}
+
+#menu .detail-box {
+  background: rgba(0, 0, 0, .6);
+  z-index: 1000000;
 }
 
 #menu .my-order {

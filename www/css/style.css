@@ -381,3 +381,14 @@
   text-align: center;
   line-height: 50px;
 }
+
+
+/*已点菜单*/
+
+#shoppingCar .car-trash {
+  position: absolute;
+  z-index: 100;
+  top: 13px;
+  right: 15px;
+  font-size: 20px;
+}

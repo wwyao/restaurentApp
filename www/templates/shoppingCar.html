@@ -5,8 +5,19 @@
         <i class="ion-chevron-left back-btn" ng-click="goBack()"></i>
       </ion-nav-buttons>
     </ion-nav-bar>
+    <i class="ion-trash-a car-trash"></i>
   </ion-header-bar>
 
-  <ion-content>
+  <ion-content overflow-scroll="true" scrollbar-y="false">
+    <ul class="my-order">
+      <li>购物车清单<span ng-click="clearCar($event)">清空</span></li>
+      <li ng-repeat="orderItem in allMenu">
+        {{orderItem.name}}
+        <span>  {{orderItem.priceText}}</span>
+        <div class="peopleNum-sub">
+          <span ng-click="dec(orderItem.menuId,$event)">-</span>{{orderItem.num}}<span ng-click="add(orderItem.menuId,$event)">+</span>
+        </div>
+      </li>
+    </ul>
   </ion-content>
 </ion-view>

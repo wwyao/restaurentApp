@@ -622,7 +622,7 @@ angular.module('starter.controllers', [])
 
 //菜单
 .controller('MenuCtrl', function($scope, $rootScope, $stateParams, $ionicViewSwitcher, $state, $ionicHistory) {
-	alert($stateParams.restaurentId);
+	// alert($stateParams.restaurentId);
 	$scope.restaurentName = '小明餐厅';
 	$scope.deskNum = 10;
 	$scope.totleMoney = 0;

@@ -5,9 +5,6 @@
     <img ng-src="img/swipe.png" alt="" class="swipe" ng-click="scan()">
   </ion-header-bar>
   <ul class="sort" ng-if="isItemSort">
-    <!-- <li>全部<i class="ion-ios-arrow-down"></i></li>
-    <li>所有分类<i class="ion-ios-arrow-down"></i></li>
-    <li>距离优先<i class="ion-ios-arrow-down"></i></li> -->
     <li>
       <select>
       <option selected>全部</option>
@@ -38,9 +35,9 @@
   <ion-content overflow-scroll="true" scrollbar-y="false" class="home-list" delegate-handle="mainScroll" on-scroll="showNav($event)">
     <!-- <ion-scroll zooming="true" direction="y" class="bigScroll" delegate-handle="mainScroll" on-scroll="showNav($event)"> -->
     <ion-slide-box class="slideshow" does-continue="true" slide-interval="3000" auto-play="true">
-      <ion-slide><img ng-src="img/img1.jpg" alt=""></ion-slide>
-      <ion-slide><img ng-src="img/img2.jpg" alt=""></ion-slide>
-      <ion-slide><img ng-src="img/img3.jpg" alt=""></ion-slide>
+      <ion-slide><img ng-src="{{items[0].imgSrc1}}" alt=""></ion-slide>
+      <ion-slide><img ng-src="{{items[2].imgSrc1}}" alt=""></ion-slide>
+      <ion-slide><img ng-src="{{items[4].imgSrc1}}" alt=""></ion-slide>
     </ion-slide-box>
     <div class="kinds">
       <span>火锅</span>
