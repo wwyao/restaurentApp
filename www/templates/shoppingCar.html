@@ -1,4 +1,4 @@
-<ion-view title="已点菜单" id="shoppingCar" class="headerBg">
+<ion-view title="订单信息" id="shoppingCar" class="headerBg">
   <ion-header-bar class="bar">
     <ion-nav-bar>
       <ion-nav-buttons side="left" class="backBtn">
@@ -8,16 +8,25 @@
     <i class="ion-trash-a car-trash"></i>
   </ion-header-bar>
 
-  <ion-content overflow-scroll="true" scrollbar-y="false">
-    <ul class="my-order">
-      <li>购物车清单<span ng-click="clearCar($event)">清空</span></li>
+  <ion-content overflow-scroll="true" scrollbar-y="false" class="orderMsg">
+    <div>订单号：<span>{{orderMsg.orderId}}</span></div>
+    <div>餐厅名：<span>{{orderMsg.restaurentId}}</span></div>
+    <div>位置：<span>{{orderMsg.desk}}</span></div>
+    <div>时间：<span>{{orderMsg.time}}</span></div>
+    <div>人数：<span>{{orderMsg.numOfPeople}}</span></div>
+    <div>联系人：<span>{{orderMsg.contacter}}</span></div>
+    <div>联系电话：<span>{{orderMsg.phone}}</span></div>
+    <div>你的菜单：</div>
+    <ul class="shoppingCar-order">
+    <li class="classify"><span>菜品</span><span>价格</span><span>数量</span></li>
       <li ng-repeat="orderItem in allMenu">
-        {{orderItem.name}}
-        <span>  {{orderItem.priceText}}</span>
-        <div class="peopleNum-sub">
-          <span ng-click="dec(orderItem.menuId,$event)">-</span>{{orderItem.num}}<span ng-click="add(orderItem.menuId,$event)">+</span>
-        </div>
+        <span>{{orderItem.menuName}}</span>
+        <span>{{orderItem.priceText}}</span>
+        <span>{{orderItem.num}}</span>
       </li>
     </ul>
   </ion-content>
+  <div class="footer">
+    确定下单
+  </div>
 </ion-view>

@@ -12,9 +12,10 @@
   font-size: 18px;
 }
 
-.headerBg .bar {
+.headerBg .bar, .bar {
   background: rgb(32, 119, 182);
   color: #fff;
+  border-bottom: none;
 }
 
 #userProtocol .scroll-content, #about .scroll-content {
@@ -182,6 +183,35 @@
   color: #000;
 }
 
+#book-table .desk-box {
+  display: none;
+  width: 100%;
+  height: 130px;
+}
+
+#book-table .desk-box .scroll {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+}
+
+#book-table .desk {
+  padding-top: 40px;
+  margin-top: 5px !important;
+  display: inline-block;
+  width: 22%;
+  /*height: 60px;*/
+  background: url('../img/desk.png') no-repeat center top;
+  background-size: 40px 40px;
+  text-align: center;
+}
+
+#book-table .desk-active {
+  background: url('../img/desk2.png') no-repeat center top;
+}
+
 #qrcode_welcome .welcome-text p {
   margin-top: 50px;
   text-align: center;
@@ -276,6 +306,10 @@
 
 /*顾客评论*/
 
+.evaluation-content, #evaluation ion-content {
+  overflow: hidden;
+}
+
 #evaluation .evaluation-content li {
   margin: 15px auto;
   width: 95%;
@@ -346,7 +380,7 @@
 }
 
 #selectCity .alphabet {
-  padding-top: 70px;
+  padding-top: 45px;
   position: fixed;
   top: 0;
   right: 0;
@@ -391,4 +425,209 @@
   top: 13px;
   right: 15px;
   font-size: 20px;
+}
+
+#shoppingCar .classify {
+  color: #F35800;
+  border-top: 1px solid #CACACA;
+}
+
+#shoppingCar .shoppingCar-order li {
+  padding: 5px 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid #CACACA;
+  font-size: 12px;
+}
+
+#shoppingCar .shoppingCar-order li span, #shoppingCar .classify span {
+  width: 30%;
+  text-align: center;
+}
+
+#shoppingCar .footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 40px;
+  background: #EF2F2F;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+  letter-spacing: 15px;
+}
+
+#shoppingCar .orderMsg div {
+  margin: 15px 5px;
+}
+
+#shoppingCar .orderMsg div>span {
+  color: #0D05C7;
+}
+
+
+/*我的关注*/
+
+#concern .item-top {
+  /*position: absolute;*/
+  padding-bottom: 10px;
+  width: 100%;
+  /*background: red;*/
+}
+
+#concern .item-top span:first-child {
+  padding: 3px 8px;
+  border: 1px solid #2065E8;
+  border-radius: 100%;
+}
+
+#concern .item-top span:last-child {
+  float: right;
+  background: #B6B2B2;
+  font-size: 12px;
+  padding: 0px 8px;
+  border: 1px solid #2065E8;
+  border-radius: 2px;
+}
+
+#concern .aitem div {
+  margin-left: 0;
+}
+
+#concern .aitem .item-con {
+  margin-left: 120px;
+}
+
+
+/*写评论*/
+
+.write-content div {
+  margin: 25px 5px;
+}
+
+.write-content div span, .write-content div input {
+  vertical-align: middle;
+}
+
+.write-content div input {
+  margin: 0 20px;
+}
+
+.write-content div span:last-child {
+  padding: 2px;
+  border: 1px solid #0D3EC7;
+  border-radius: 5px;
+  color: red;
+}
+
+.write-content div textarea {
+  /*background: #D5D5D5;*/
+  padding: 5px;
+  width: 96%;
+  /*margin-right: 5px;*/
+  border: 1px solid #F27C04;
+}
+
+.write-content div i {
+  color: #0731C5;
+}
+
+#writeComment #footer {
+  height: 45px;
+  text-align: center;
+  line-height: 45px;
+  background: #DA0000;
+  color: #fff;
+  font-size: 18px;
+  letter-spacing: 5px;
+}
+
+
+/*推荐餐厅*/
+
+#commendRestaurent h4 {
+  margin: 50px 0 15px;
+  text-align: center;
+}
+
+#commendRestaurent select {
+  display: block;
+  margin: 0 auto;
+  width: 95%;
+  height: 40px;
+  font-size: 20px;
+  border: 1px solid rgb(37, 59, 201);
+}
+
+#commendRestaurent textarea {
+  margin: 0 auto;
+  padding: 5px;
+  width: 95%;
+  border: 1px solid rgb(37, 59, 201);
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+#commendRestaurent #footer {
+  height: 45px;
+  line-height: 45px;
+  background: red;
+  color: #fff;
+  font-size: 25px;
+  letter-spacing: 5px;
+  text-align: center;
+}
+
+
+/*账户*/
+
+#account #passwordBox {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  background: rgba(0, 0, 0, .7);
+  width: 100%;
+  height: 100%;
+}
+
+#passwordBox>div {
+  padding-top: 40px;
+  margin: 50% auto;
+  width: 70%;
+  background: #fff;
+  border-radius: 5px;
+}
+
+#passwordBox>div div {
+  text-align: center;
+}
+
+#passwordBox input {
+  padding: 0 5px;
+  width: 100%;
+  height: 50px;
+  border: 1px solid rgba(185, 185, 185, 0.84);
+}
+
+#passwordBox input:first-child {
+  border-bottom: none;
+}
+
+#passwordBox span {
+  margin: 20px 15px;
+  padding: 5px 30px;
+  display: inline-block;
+  height: 40px;
+  line-height: 30px;
+  text-align: center;
+  background: red;
+  color: #fff;
+  border-radius: 10px;
+}
+
+#passwordBox span:last-child {
+  background: rgb(18, 13, 238);
 }

@@ -7,8 +7,15 @@
     </ion-nav-bar>
     <div class="account-edit" ng-bind="editText" ng-click="editClick()"></div>
   </ion-header-bar>
-
+  <div id="passwordBox">
+    <div>
+      <input type="password" ng-model="pswMsg.psw1" placeholder="请输入新密码">
+      <input type="password" ng-model="pswMsg.psw2" placeholder="再次输入新密码">
+      <div><span ng-click="cancelOpart()">取消</span><span ng-click="changPsw()">确定</span></div>
+    </div>
+  </div>
   <ion-content>
+
     <ion-list class="account-List">
       <ion-item ng-repeat="item in accountData">
         <span ng-click="{{item.clickEvent}}">{{item.tag}}</span>
@@ -20,6 +27,7 @@
         </div>
         <span ng-click="openPicker()" ng-if="item.isDate" class="birthdate">{{userData.date}}</span>
       </ion-item>
+      <input type="file" accept="image/*" id="file" ng-show="false">
     </ion-list>
   </ion-content>
 </ion-view>

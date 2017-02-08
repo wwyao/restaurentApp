@@ -4,12 +4,10 @@ angular.module('starter.services', [])
 	// Might use a resource here that returns a JSON array
 
 	//订单信息
-	var orderMsg = {
-		orderId: '',
-		restaurentId: '',
-		userId: '',
+	var currentOrder = {};
 
-	};
+	// 菜单信息
+	var menuMsg = [];
 
 	//城市
 	var citys = [{
@@ -227,6 +225,7 @@ angular.module('starter.services', [])
 
 	// 已登录的用户信息
 	var userDatas = {
+		userId:2,
 		name: 'admin',
 		date: '2011-6-6',
 		avatar: 'img/img2.jpg',
@@ -284,6 +283,27 @@ angular.module('starter.services', [])
 		//获取字母表
 		getAlphabet: function() {
 			return alphabet;
-		}
+		},
+		//生成订单号
+		getOrderNumber:function(){
+			var random = new Date().getTime()+''+Math.round(Math.random()*10000);
+			return random;
+		},
+		//获取订单信息
+		getCurrentOrder:function(){
+			return currentOrder;
+		},
+		//保存订单信息
+		setCurrentOrder:function(obj){
+			currentOrder = obj;
+		},
+		// 获取菜单信息
+		getMenuMsg:function(){
+			return menuMsg;
+		},
+		// 保存菜单信息
+		setMenuMsg:function(obj){
+			menuMsg = obj;
+		},
 	};
 });

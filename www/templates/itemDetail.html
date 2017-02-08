@@ -8,12 +8,12 @@
 		<i class="ion-more more-function" ng-click="isMore = !isMore;"></i>
 	</ion-header-bar>
 	<ul class="more-list" ng-if="isMore">
-		<li><i class="ion-share">分享</i></li>
-		<li><i class="ion-heart">收藏</i></li>
+		<li><i class="ion-share" on-tap="shareClick()">分享</i></li>
+		<li><i class="ion-heart" on-tap="concernClick()">关注</i></li>
 	</ul>
 	<ion-content scrollbar-y="false" overflow-scroll="true">
 		<div class="top">
-			<img ng-src="{{restaurentData.imgSrc1}}" alt="" class="res-img">
+			<img src="{{restaurentData.imgSrc1}}" alt="" class="res-img">
 		</div>
 		<ul class="content">
 			<li>
@@ -22,7 +22,7 @@
 			</li>
 			<li>环境：<span>{{restaurentData.escore}}</span>味道：<span>{{restaurentData.tscore}}</span>服务：<span>{{restaurentData.sscore}}</span></li>
 			<li><a href="#/tab/enterprise">商家营业资质 <i class="icon ion-chevron-right iright"></i></a></li>
-			<li><a href="#/tab/evaluation">顾客评价 <i class="icon ion-chevron-right iright"></i></a></li>
+			<li><a href="#/tab/evaluation/{{restaurentId}}">顾客评价 <i class="icon ion-chevron-right iright"></i></a></li>
 			<li>
 				<p>餐厅描述:</p>
 				<p>{{restaurentData.describe}}</p>
@@ -33,5 +33,11 @@
 	<div id="footer">
 		<a href="#/tab/bookTable/{{restaurentData.restaurentId}}">预约</a>
 		<a href="#/tab/menu/{{restaurentData.restaurentId}}">点菜</a>
+	</div>
+
+	//分享页面
+	<div class="share" ng-if="isShare" ng-click="hideShare()">
+		<img src="img/wx.png" alt="" ng-click="wxClick($event)">
+		<img src="img/qq.png" alt=""  ng-click="wxClick($event)">
 	</div>
 </ion-view>

@@ -27,7 +27,7 @@
   font-size: 12px;
   background: rgba(255, 255, 255, 0.2) url(../img/search.png) no-repeat 8% center;
   background-size: 15px 15px;
-  color: #909090;
+  color: #B9B9B9;
   line-height: 28px;
   border: 1px solid #C5D2DC;
   /*box-shadow: 0 0 1px 0 #fff;*/
@@ -37,8 +37,8 @@
 
 .swipe {
   position: absolute;
-  bottom: 10px;
-  right: 8px;
+  bottom: 7px;
+  right: 5px;
   width: 22px;
   height: 22px;
 }

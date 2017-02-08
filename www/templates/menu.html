@@ -20,9 +20,9 @@
   <ion-content overflow-scroll="true" id="scroll2" scrollbar-y="false">
     <ul class="menu-list-detail">
       <li ng-repeat="item in detailDatas">
-        <img ng-src="{{item.img}}" alt="">
+        <img ng-src="{{item.imgsrc}}" alt="">
         <div class="msg-box">
-          <h5>{{item.name}}</h5>
+          <h5>{{item.menuName}}</h5>
           <p>{{item.priceText}}</p>
         </div>
 
@@ -35,8 +35,8 @@
   <div class="my-order-box" ng-if="showOrderBox" ng-click="showOrderBox=!showOrderBox">
     <ul class="my-order">
       <li>购物车清单<span ng-click="clearCar($event)">清空</span></li>
-      <li ng-repeat="orderItem in allMenu" ng-if="orderItem.num">
-        {{orderItem.name}}
+      <li ng-repeat="orderItem in allMenu" ng-if="orderItem.num!=0">
+        {{orderItem.menuName}}
         <span>  {{orderItem.priceText}}</span>
         <div class="peopleNum-sub">
           <span ng-click="dec(orderItem.menuId,$event)">-</span>{{orderItem.num}}<span ng-click="add(orderItem.menuId,$event)">+</span>
@@ -44,9 +44,16 @@
       </li>
     </ul>
   </div>
-  <!-- <div class="detail-box">
-
-  </div> -->
+  <div class="detail-box">
+    <i class="ion-close-round detail-cancel" ng-click="hideDetail()"></i>
+    <ul>
+      <li><img ng-src="{{detailMenuData.img}}" alt=""></li>
+      <li>
+        <h4>{{detailMenuData.name}}</h4>
+      </li>
+      <li>{{detailMenuData.descript}}</li>
+    </ul>
+  </div>
 
   <div id="menuFooter">
     <div class="shoppingCar" ng-click="showOrderBox=!showOrderBox">

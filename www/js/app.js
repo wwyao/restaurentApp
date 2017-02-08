@@ -66,12 +66,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 				}
 			}
 		})
+
 		//搜索
 		.state('search', {
 			url: '/tab/search',
 			templateUrl: 'templates/search.html',
 			controller: 'SearchCtrl'
 		})
+
 		//扫码跳转的页面
 		.state('qrcodewelcome', {
 			cache: false,
@@ -79,6 +81,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 			templateUrl: 'templates/qrcode_welcome.html',
 			controller: 'QrcodewelcomeCtrl'
 		})
+
 		//餐厅详细页
 		.state('detail', {
 			url: '/tab/home/:id',
@@ -86,14 +89,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 			controller: 'DetailCtrl'
 		})
 		//菜单
+
 		.state('menu', {
 			url: '/tab/menu/:restaurentId',
 			templateUrl: 'templates/menu.html',
 			controller: 'MenuCtrl'
 		})
+
 		//已点菜单
 		.state('shoppingCar', {
-			url: '/tab/shoppingCar',
+			url: '/tab/shoppingCar/:orderId',
 			templateUrl: 'templates/shoppingCar.html',
 			controller: 'ShoppingCarCtrl'
 		})
@@ -130,6 +135,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 				controller: 'page2'
 			}
 		}
+	})
+
+	//写评论
+	.state('writeComment', {
+		url: '/writeComment/:orderId',
+		templateUrl: 'templates/writeComment.html',
+		controller: 'writeCommentCtrl'
 	})
 
 	//已消费
@@ -186,6 +198,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 	//我的关注
 	.state('myconcern', {
 		url: '/tab/myconcern',
+		cache:false,
 		templateUrl: 'templates/myConcern.html',
 		controller: 'MyconcernCtrl'
 	})
@@ -227,7 +240,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 	//顾客评价
 	.state('evaluation', {
-		url: '/tab/evaluation',
+		url: '/tab/evaluation/:restaurentId',
 		templateUrl: 'templates/evaluation.html',
 		controller: 'EvaluationCtrl'
 	})

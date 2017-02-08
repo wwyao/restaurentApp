@@ -6,30 +6,22 @@
   </ion-header-bar>
   <ul class="sort" ng-if="isItemSort">
     <li>
-      <select>
-      <option selected>全部</option>
-      <option >海珠区</option>
-      <option>天河区</option>
-    </select>
+      <select ng-model="values.placeValue" ng-change="placeChange()">
+        <option ng-repeat="item in placeName" value="{{item}}">{{item}}</option>
+      </select>
       <!-- <i class="ion-ios-arrow-down"></i> -->
     </li>
-    <li><select>
-    <option selected>所有分类</option>
-    <option >火锅</option>
-    <option>海鲜</option>
-    <option>川菜</option>
-    <option>粤菜</option>
-    <option>干锅</option>
-
-  </select></li>
-    <li><select>
-    <option selected>距离优先</option>
-    <option>综合评分优先</option>
-    <option >服务优先</option>
-    <option>口味优先</option>
-    <option>环境优先</option>
-
-  </select></li>
+    <li>
+      <select ng-model="values.classifyValue" ng-change="classifyChange()">
+        <option value="所有分类">所有分类</option>
+        <option ng-repeat="item in classifyName"  value="{{item}}">{{item}}</option>
+      </select>
+    </li>
+    <li>
+      <select ng-model="values.rankValue" ng-change="rankChange()">
+        <option ng-repeat="item in rankName"  value="{{item}}">{{item}}</option>
+      </select>
+    </li>
   </ul>
 
   <ion-content overflow-scroll="true" scrollbar-y="false" class="home-list" delegate-handle="mainScroll" on-scroll="showNav($event)">
@@ -40,14 +32,7 @@
       <ion-slide><img ng-src="{{items[4].imgSrc1}}" alt=""></ion-slide>
     </ion-slide-box>
     <div class="kinds">
-      <span>火锅</span>
-      <span>川菜</span>
-      <span>海鲜</span>
-      <span>烧烤</span>
-      <span>西餐</span>
-      <span>粤菜</span>
-      <span>快餐</span>
-      <span>干锅</span>
+      <span ng-repeat="item in classifyName" ng-click="kindClick(item)">{{item}}</span>
     </div>
     <ion-list>
       <ion-item collection-repeat="item in items" href="#/tab/home/{{item.restaurentId}}" class="aitem" ng-click="forwardAnim()">

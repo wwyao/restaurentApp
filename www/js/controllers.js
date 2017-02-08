@@ -26,11 +26,22 @@ angular.module('starter.controllers', [])
 })
 
 //主页页面
-.controller('HomeCtrl', function($scope, $rootScope, $stateParams, $http, $cordovaGeolocation, $ionicHistory, $ionicViewSwitcher, $ionicScrollDelegate, $cordovaBarcodeScanner, $timeout, $state, $location) {
+.controller('HomeCtrl', function($scope, datas, $rootScope, $stateParams, $http, $cordovaGeolocation, $ionicHistory, $ionicViewSwitcher, $ionicScrollDelegate, $cordovaBarcodeScanner, $timeout, $state, $location) {
 	$rootScope.currentCity = "";
 	$scope.start = 0;
 	$scope.count = 6;
 	$scope.isDatas = true;
+	$scope.values = {
+		classifyValue: '所有分类',
+		rankValue: '综合评分优先',
+		placeValue: '全部'
+	};
+	// $scope.classifyValue = '所有分类';
+	// $scope.rankValue = '综合评分优先';
+	// $scope.placeValue = '全部';
+	$scope.classifyName = ['火锅', '川菜', '海鲜', '烧烤', '西餐', '粤菜', '快餐', '干锅'];
+	$scope.rankName = ['综合评分优先', '服务优先', '口味优先', '环境优先'];
+	$scope.placeName = ['全部', '海珠区', '天河区'];
 	//定位
 	//通过经纬度查询城市的地址:https://api.thinkpage.cn/v3/location/search.json?key=mqzzrlzwvkgw0762&q=39.93:116.40
 	var posOptions = {
@@ -67,7 +78,7 @@ angular.module('starter.controllers', [])
 	//获取餐厅数据
 	function getRestaurentData(start, count) {
 		$scope.start += 6;
-		var url = 'http://www.wy.cn:8888/restaurent/allRestaurent.php?start=' + start + '&count=' + count;
+		var url = 'http://localhost/restaurent/allRestaurent.php?start=' + start + '&count=' + count;
 		$http.get(url).success(function(data) {
 			console.log(data.length != 0);
 			if (data.length != 0) {
@@ -120,19 +131,57 @@ angular.module('starter.controllers', [])
 			});
 
 	};
-
+	//选择分类
+	$scope.kindClick = function(value) {
+		$ionicScrollDelegate.scrollTo(0, 229, true);
+		$scope.values.classifyValue = value;
+	};
+	//选择地区
+	$scope.placeChange = function() {
+		alert($scope.values.placeValue);
+	};
+	//分类改变
+	$scope.classifyChange = function() {
+		alert($scope.values.classifyValue);
+	};
+	//排序改变
+	$scope.rankChange = function() {
+		alert($scope.values.rankValue);
+	};
 	// document.querySelector('.bigScroll').style.height = window.screen.height + 'px';
 })
 
 //餐厅详细页页面
-.controller('DetailCtrl', function($scope, $rootScope, $stateParams, $state, $ionicViewSwitcher, $http) {
+.controller('DetailCtrl', function($scope, $rootScope, $stateParams, $state, $ionicViewSwitcher, $http, datas) {
 	// $scope.id = $stateParams.id;
 	$scope.restaurentData = {};
-	var url = 'http://www.wy.cn:8888/restaurent/detail.php?restaurentId=' + $stateParams.id;
+	$scope.userData = datas.getUserDatas();
+	$scope.restaurentId = $stateParams.id;
+	var url = 'http://localhost/restaurent/detail.php?restaurentId=' + $scope.restaurentId;
 	$http.get(url).success(function(data) {
 		$scope.restaurentData = data;
 	});
 	$scope.isMore = false;
+	$scope.isShare = false;
+	$scope.shareClick = function() {
+		$scope.isShare = !$scope.isShare;
+		$scope.isMore = !$scope.isMore;
+	};
+	$scope.hideShare = function() {
+		$scope.isShare = !$scope.isShare;
+	};
+	$scope.wxClick = function(e) {
+		e.stopPropagation();
+	};
+	$scope.concernClick = function() {
+		$scope.isMore = !$scope.isMore;
+		var concernUrl = 'http://localhost/restaurent/concern.php?restaurentId=' + $scope.restaurentId + '&userId=' + $scope.userData.userId;
+		$http.get(concernUrl).success(function(data) {
+			if (data.result) {
+				alert('关注成功');
+			}
+		});
+	};
 })
 
 //搜索页面
@@ -142,7 +191,7 @@ angular.module('starter.controllers', [])
 	$scope.search = function() {
 		console.log($scope.searchText, $scope.searchText != "");
 		$timeout(function() {
-			var url = "http://www.wy.cn:8888/restaurent/search.php?text=" + $scope.searchText;
+			var url = "http://localhost/restaurent/search.php?text=" + $scope.searchText;
 			url = encodeURI(url);
 			if ($scope.searchText) {
 				$http.get(url).success(function(data) {
@@ -229,54 +278,62 @@ angular.module('starter.controllers', [])
 })
 
 //未消费页面
-.controller('page1', function($scope, $rootScope) {
-	$scope.datas = [{
-		orderId: 201711111,
-		retaurentTitle: '小明餐厅',
-		desk: '11',
-		time: '2017-01-22 17:30',
-		money: '￥20'
-	}, {
-		orderId: 201711111,
-		retaurentTitle: '小明餐厅',
-		desk: '11',
-		time: '2017-01-22 17:30',
-		money: '￥20'
-	}];
+.controller('page1', function($scope, $rootScope, $http, $cordovaDialogs) {
+	$scope.datas = [];
+	var start = 0;
+	var statu = '未付款';
+	var url = 'http://localhost/restaurent/getOrders.php?start=' + start + '&count=6&statu=' + statu;
+	$http.get(url).success(function(data) {
+		console.log(data);
+		$scope.datas = data;
+	});
+	var i = 0;
+	$scope.cancel = function(e, orderId) {
+		// e.stopPropagation();
+		// console.log(i++,'cancel');
+
+		var isCancel = $cordovaDialogs.confirm('确定取消订单？', '');
+		// alert(orderId+':'+isCancel);
+		if (isCancel == 1) {
+			$http.get('http://localhost/restaurent/cancelOrder.php?orderId=' + orderId).success(function(data) {
+				console.log(data);
+				if (data.result) {
+					$http.get(url).success(function(data) {
+						// console.log(data);
+						$scope.datas = data;
+					});
+				}
+			});
+		}
+	};
 })
 
 //就餐中页面
-.controller('page2', function($scope, $rootScope) {
-	$scope.datas = [{
-		orderId: 201711111,
-		retaurentTitle: '小明餐厅',
-		desk: '11',
-		time: '2017-01-22 17:30',
-		money: '￥20'
-	}, {
-		orderId: 201711111,
-		retaurentTitle: '小明餐厅',
-		desk: '11',
-		time: '2017-01-22 17:30',
-		money: '￥20'
-	}];
+.controller('page2', function($scope, $rootScope, $http) {
+	$scope.datas = [];
+	var start = 0;
+	var statu = '就餐中';
+	var url = 'http://localhost/restaurent/getOrders.php?start=' + start + '&count=6&statu=' + statu;
+	$http.get(url).success(function(data) {
+		$scope.datas = data;
+	});
 })
 
 //已消费页面
-.controller('page3', function($scope, $rootScope) {
-	$scope.datas = [{
-		orderId: 201711111,
-		retaurentTitle: '小明餐厅',
-		desk: '11',
-		time: '2017-01-22 17:30',
-		money: '￥20'
-	}, {
-		orderId: 201711111,
-		retaurentTitle: '小明餐厅',
-		desk: '11',
-		time: '2017-01-22 17:30',
-		money: '￥20'
-	}];
+.controller('page3', function($scope, $rootScope, $http, $location, $ionicViewSwitcher) {
+	$scope.datas = [];
+	var start = 0;
+	var statu = '已消费';
+	var url = 'http://localhost/restaurent/getOrders.php?start=' + start + '&count=6&statu=' + statu;
+	$http.get(url).success(function(data) {
+		$scope.datas = data;
+	});
+	$scope.toWrite = function(orderId) {
+		// alert(orderId);
+		var writeUrl = '/writeComment/' + orderId;
+		$location.path(writeUrl);
+		$ionicViewSwitcher.nextDirection("forward");
+	};
 })
 
 //登录页面
@@ -289,7 +346,7 @@ angular.module('starter.controllers', [])
 	$scope.login = function() {
 		console.log($scope.msg);
 		if ($scope.msg.username !== '' && $scope.msg.password !== '') {
-			var url = 'http://www.wy.cn:8888/restaurent/login.php';
+			var url = 'http://localhost/restaurent/login.php';
 			$http({
 				method: 'post',
 				url: url,
@@ -376,7 +433,7 @@ angular.module('starter.controllers', [])
 //设置页面
 .controller('SettingCtrl', function($scope, $rootScope, datas, $state, $ionicViewSwitcher, $ionicHistory, $cordovaProgress, $cordovaToast) {
 	//缓存大小
-	$scope.cache = "1.0MB";
+	$scope.cache = (Math.random()).toFixed(2) + 'MB';
 	//版本号
 	$scope.version = "v1.0.0";
 	$scope.slItem1 = [{
@@ -454,24 +511,71 @@ angular.module('starter.controllers', [])
 })
 
 //我的关注页面
-.controller('MyconcernCtrl', function($scope, $rootScope, $ionicViewSwitcher, $state, $ionicHistory) {})
+.controller('MyconcernCtrl', function($scope, $rootScope, $ionicViewSwitcher, $state, $ionicHistory, datas, $http, $location) {
+	$scope.userData = datas.getUserDatas();
+	$scope.items = [];
+	var start = 0;
+	var count = 6;
+	var url = 'http://localhost/restaurent/getConcern.php?userId=' + $scope.userData.userId + '&start=' + start + '&count=' + count;
+	$http.get(url).success(function(data) {
+		$scope.items = data;
+	});
+	$scope.cancel = function(e, restaurentId) {
+		e.stopPropagation();
+		var isCancel = confirm('确定取消关注？');
+		if (isCancel) {
+			var delUrl = 'http://localhost/restaurent/delConcern.php?userId=' + $scope.userData.userId + '&restaurentId=' + restaurentId;
+			$http.get(delUrl).success(function(data) {
+				if (data.result) {
+					$http.get(url).success(function(data) {
+						$scope.items = data;
+					});
+				}
+			});
+		}
+		// return false;
+	};
+	$scope.forwardClick = function(restaurentId) {
+		var itemUrl = '/tab/home/' + restaurentId;
+		$location.path(itemUrl);
+		$ionicViewSwitcher.nextDirection("forward");
+	};
+})
 
 //邀请页面
 .controller('InviteCtrl', function($scope, $rootScope, $ionicViewSwitcher, $state, $ionicHistory) {})
 
 //预约订座页面
-.controller('BookTableCtrl', function($scope, $rootScope, $stateParams, $state, $ionicViewSwitcher, $ionicHistory, $cordovaDatePicker, datas) {
-	$scope.bookDatas1 = [];
-	alert($stateParams.restaurentId);
+.controller('BookTableCtrl', function($scope, $rootScope, $stateParams, $state, $ionicViewSwitcher, $ionicHistory, $cordovaDatePicker, datas, $location) {
+	// $scope.bookDatas1 = [];
+	$scope.deskData = [{
+		deskId: 1,
+		deskNum: 1
+	}, {
+		deskId: 2,
+		deskNum: 2
+	}, {
+		deskId: 3,
+		deskNum: 3
+	}, {
+		deskId: 4,
+		deskNum: 4
+	}, {
+		deskId: 5,
+		deskNum: 5
+	}];
 	$scope.dateText = "请选择就餐时间";
 	var userData = datas.getUserDatas();
 	$rootScope.order = {
+		userId: userData.userId,
+		restaurentId: $stateParams.restaurentId,
+		orderId: datas.getOrderNumber(),
 		time: "",
 		numOfPeople: 1,
 		isRoom: false,
 		contacter: userData.name,
 		phone: userData.phone,
-		remark: ""
+		remark: "",
 	}
 	$scope.bookDatas1 = [{
 		title: "就餐日期",
@@ -483,6 +587,10 @@ angular.module('starter.controllers', [])
 	}, {
 		title: "是否需要包房",
 		isCheckbox: true
+	}, {
+		title: "餐桌位置随机",
+		isDesk: true,
+		chooseDesk: true
 	}];
 	$scope.bookDatas2 = [{
 		title: "联系人",
@@ -497,6 +605,16 @@ angular.module('starter.controllers', [])
 		hadInput: true,
 		value: ""
 	}];
+	//显示桌子
+	$scope.showDesk = function(e) {
+		// alert(e.target.checked);
+		// if (!e.target.checked) {
+		// 	$('#book-table .desk-box').slideDown();
+		// }else{
+		//
+		// }
+		$('#book-table .desk-box').slideToggle();
+	};
 	//选择就餐时间
 	$scope.selectTime = function() {
 		var options = {
@@ -543,6 +661,11 @@ angular.module('starter.controllers', [])
 			$rootScope.order.numOfPeople--;
 		}
 	};
+	//选择桌子
+	$('.desk').on('click', function(e) {
+		console.log(e.target.id);
+		// this.addClass('desk-active');
+	});
 	//添加就餐人数
 	$scope.addPeople = function() {
 		$rootScope.order.numOfPeople++;
@@ -555,7 +678,9 @@ angular.module('starter.controllers', [])
 		// for (var key in $scope.order) {
 		// 	alert($scope.order[key]);
 		// }
-		$state.go('menu');
+		datas.setCurrentOrder($rootScope.order);
+		// $state.go('menu');
+		$location.path('/tab/menu/' + $stateParams.restaurentId);
 		// $ionicHistory.goBack();
 		$ionicViewSwitcher.nextDirection("forward");
 	};
@@ -565,7 +690,12 @@ angular.module('starter.controllers', [])
 .controller('AccountCtrl', function($scope, $rootScope, $cordovaDialogs, datas, $state, $cordovaImagePicker, $ionicViewSwitcher, $ionicHistory, $cordovaDatePicker) {
 	$scope.editText = '编辑';
 	$scope.isEditable = true;
-	//获取已登录的用户信息
+	$scope.isPasswordBox = false;
+	$scope.pswMsg = {
+			psw1: '',
+			psw2: ''
+		}
+		//获取已登录的用户信息
 	$scope.userData = datas.getUserDatas();
 	$scope.accountData = [{
 		tag: '修改头像',
@@ -584,14 +714,25 @@ angular.module('starter.controllers', [])
 		tag: '修改登录密码',
 		clickEvent: 'editPsw()',
 	}];
+	// 修改密码
+	$scope.changPsw = function() {
+		console.log($scope.pswMsg.psw1, $scope.pswMsg.psw2);
+		$('#passwordBox').fadeOut();
+		if ($scope.pswMsg.psw1 == '' || $scope.pswMsg.psw2 == '') {
+			alert('密码不能为空！');
+		} else {
+			if ($scope.pswMsg.psw1 != $scope.pswMsg.psw2) {
+				alert('密码不一致！');
+			} else {
+				//提交到服务器，修改数据
+			}
+		}
+	};
+	$scope.cancelOpart = function() {
+		$('#passwordBox').fadeOut();
+	};
 	$scope.editPsw = function() {
-		$cordovaDialogs.prompt('msg', 'title', ['cancal', 'ok'], 'default text')
-			.then(function(result) {
-				var input = result.input1;
-				// no button = 0, 'OK' = 1, 'Cancel' = 2
-				var btnIndex = result.buttonIndex;
-			});
-
+		$('#passwordBox').fadeIn();
 	};
 	var options = {
 		date: new Date(),
@@ -622,16 +763,39 @@ angular.module('starter.controllers', [])
 	//打开相册
 	$scope.imgPicker = function() {
 		if (!$scope.isEditable) {
-			$cordovaImagePicker.getPictures(imgoptions)
-				.then(function(results) {
-					$scope.userData.avatar = results[0];
-					//*******************
-					datas.setUserDatas($scope.userData);
-				}, function(error) {
-					// error getting photos
-				});
+			// $cordovaImagePicker.getPictures(imgoptions)
+			// 	.then(function(results) {
+			// 		$cordovaFile.readAsText(cordova.file.dataDirectory, $scope.readFile)
+			// 			.then(function(success) {
+			// 				// success
+			// 			}, function(error) {
+			// 				// error
+			// 			});
+			// 		alert(results)
+			// 		$scope.userData.avatar = results[0];
+			// 		//*******************
+			// 		datas.setUserDatas($scope.userData);
+			// 	}, function(error) {
+			// 		// error getting photos
+			// 	});
+			$('#file').trigger('click');
+			// $scope.userData.avatar = $('#file').files[0];
+
 		}
 	};
+
+	$('#file').on('change', function(e) {
+		var file = e.target.files || e.dataTransfer.files;
+		console.log(file);
+		// var reader = new FileReader();
+		// reader.onload = function() {
+		// 	$scope.userData.avatar = $('#file')[0].files['0'];
+		// 	$scope.$apply();
+		// }
+		// reader.readAsDataURL(file);
+
+	});
+
 	//编辑按钮
 	$scope.editClick = function() {
 		if ($scope.isEditable) {
@@ -639,6 +803,7 @@ angular.module('starter.controllers', [])
 			$scope.isEditable = false;
 		} else {
 			datas.setUserDatas($scope.userData);
+
 			$scope.editText = '编辑';
 			$scope.isEditable = true;
 		}
@@ -648,29 +813,32 @@ angular.module('starter.controllers', [])
 //推荐餐厅页面
 .controller('RecommendRestaurentCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {
 	$scope.itemDatas = [{
-		tag: '餐厅名称',
-		text: '请填写餐厅名称'
+		name: '11'
 	}, {
-		tag: '餐厅类型',
-		text: '请填写餐厅类型'
+		name: '22'
 	}, {
-		tag: '餐厅地址',
-		text: '请填写餐厅地址'
+		name: '33'
 	}, {
-		tag: '餐厅电话',
-		text: '请填写餐厅电话'
+		name: '44'
 	}];
 
 })
 
 //菜单
-.controller('MenuCtrl', function($scope, $rootScope, $stateParams, $ionicViewSwitcher, $state, $ionicHistory) {
+.controller('MenuCtrl', function(datas, $scope, $rootScope, $stateParams, $ionicViewSwitcher, $state, $ionicHistory, $http, $location) {
 	// alert($stateParams.restaurentId);
 	$scope.restaurentName = '小明餐厅';
 	$scope.deskNum = 10;
 	$scope.totleMoney = 0;
 	$scope.numOfMenu = 0;
 	$scope.activeClass = "item-selected";
+	$scope.restaurentId = $stateParams.restaurentId;
+	$scope.detailMenuData = {
+		id: 2,
+		img: 'img/img1.jpg',
+		name: '大烫阿萨德',
+		descript: '大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德'
+	};
 	$rootScope.orderMenus = [];
 	$scope.showOrderBox = false;
 	//是否显示当前的位置
@@ -706,80 +874,18 @@ angular.module('starter.controllers', [])
 		isFocus: false
 	}];
 	$scope.detailDatas = [];
-	$scope.allMenu = [{
-		menuId: 1,
-		name: '江团',
-		priceText: '￥20/份',
-		price: 20,
-		num: 0,
-		img: 'img/img2.jpg',
-		tag: '特色菜'
-	}, {
-		menuId: 2,
-		name: '江团2',
-		priceText: '￥21/份',
-		price: 21,
-		num: 0,
-		img: 'img/img2.jpg',
-		tag: '蒸菜'
-	}, {
-		menuId: 3,
-		name: '江团3',
-		priceText: '￥23/份',
-		price: 23,
-		num: 0,
-		img: 'img/img2.jpg',
-		tag: '特色菜'
-	}, {
-		menuId: 4,
-		name: '江团4',
-		priceText: '￥24/份',
-		price: 24,
-		num: 0,
-		img: 'img/img2.jpg',
-		tag: '特色菜'
-	}, {
-		menuId: 5,
-		name: '江团5',
-		priceText: '￥25/份',
-		price: 25,
-		num: 0,
-		img: 'img/img2.jpg',
-		tag: '蒸菜'
-	}, {
-		menuId: 6,
-		name: '江团6',
-		priceText: '￥26/份',
-		price: 26,
-		num: 0,
-		img: 'img/img2.jpg',
-		tag: '蒸菜'
-	}, {
-		menuId: 7,
-		name: '江团7',
-		priceText: '￥27/份',
-		price: 27,
-		num: 0,
-		img: 'img/img2.jpg',
-		tag: '蒸菜'
-	}, {
-		menuId: 8,
-		name: '江团8',
-		priceText: '￥28/份',
-		price: 28,
-		num: 0,
-		img: 'img/img2.jpg',
-		tag: '蒸菜'
-	}, {
-		menuId: 9,
-		name: '江团9',
-		priceText: '￥29/份',
-		price: 29,
-		num: 0,
-		img: 'img/img2.jpg',
-		tag: '蒸菜'
-	}];
-	$scope.detailDatas = $scope.allMenu;
+	$scope.allMenu = [];
+	// $scope.detailDatas = $scope.allMenu;
+	//获取菜单
+	// getMenu();
+	// function getMenu(){
+	$http.get('http://localhost/restaurent/getMenu.php?restaurentId=' + $scope.restaurentId).success(function(data) {
+		console.log(data);
+		$scope.allMenu = data;
+		$scope.detailDatas = data;
+	});
+	// }
+	// alert($scope.restaurentId);
 	$scope.listClick = function(index, tag) {
 		for (var i = 0; i < $scope.listDatas.length; i++) {
 			$scope.listDatas[i].isFocus = false;
@@ -790,13 +896,17 @@ angular.module('starter.controllers', [])
 		} else {
 			var tempArr = [];
 			for (var i = 0; i < $scope.allMenu.length; i++) {
-				if ($scope.allMenu[i].tag == tag) {
+				if ($scope.allMenu[i].classify.indexOf(tag) != -1) {
 					tempArr.push($scope.allMenu[i]);
 				}
 			}
 			$scope.detailDatas = tempArr;
 		}
 
+	};
+	// 隐藏菜式详细页
+	$scope.hideDetail = function() {
+		$('.detail-box').fadeOut();
 	};
 	//减菜
 	$scope.dec = function(id, $event) {
@@ -805,7 +915,7 @@ angular.module('starter.controllers', [])
 			if ($scope.detailDatas[i].menuId == id && $scope.detailDatas[i].num > 0) {
 				$scope.detailDatas[i].num--;
 				$scope.numOfMenu--;
-				$scope.totleMoney -= $scope.detailDatas[i].price;
+				$scope.totleMoney -= parseInt($scope.detailDatas[i].price);
 				break;
 			}
 		}
@@ -816,7 +926,7 @@ angular.module('starter.controllers', [])
 		for (var i = 0; i < $scope.detailDatas.length; i++) {
 			if ($scope.detailDatas[i].menuId == id) {
 				$scope.detailDatas[i].num++;
-				$scope.totleMoney += $scope.detailDatas[i].price;
+				$scope.totleMoney += parseInt($scope.detailDatas[i].price);
 				// break;
 			}
 		}
@@ -845,8 +955,17 @@ angular.module('starter.controllers', [])
 	$scope.locationClick = function() {
 		$scope.showLocation = !$scope.showLocation;
 	};
+	// 选好了
 	$scope.goHadOrders = function() {
+		var tempMenu = [];
+		for (var i = 0; i < $scope.allMenu.length; i++) {
+			if ($scope.allMenu[i].num != 0) {
+				tempMenu.push($scope.allMenu[i]);
+			}
+		}
+		datas.setMenuMsg(tempMenu);
 		$state.go('shoppingCar');
+		// $location.path('/tab/shoppingCar/'+);
 		$ionicViewSwitcher.nextDirection("forward");
 	};
 })
@@ -858,53 +977,39 @@ angular.module('starter.controllers', [])
 })
 
 //已点菜单
-.controller('ShoppingCarCtrl', function($scope, $rootScope, $ionicHistory, $ionicViewSwitcher) {
+.controller('ShoppingCarCtrl', function(datas, $scope, $rootScope, $ionicHistory, $ionicViewSwitcher) {
+	console.log(datas.getCurrentOrder(), datas.getMenuMsg());
+	$scope.orderMsg = datas.getCurrentOrder();
+	$scope.allMenu = datas.getMenuMsg();
+})
 
+//写评论
+.controller('writeCommentCtrl', function($scope, $rootScope, $ionicHistory, $ionicViewSwitcher, $stateParams) {
+	$scope.sscore = 5;
+	$scope.tscore = 5;
+	$scope.escore = 5;
+	$scope.orderId = $stateParams.orderId;
 })
 
 //顾客评论
-.controller('EvaluationCtrl', function($scope, $rootScope, $ionicHistory, $ionicViewSwitcher) {
-	$scope.evaluationDatas = [{
-		evaluationId: 1,
-		time: '2017-01-17',
-		name: '小明1',
-		avatar: "img/img1.jpg",
-		content: '阿萨德法师打算打算打算打算打算打算打算打算打算打算打算打打',
-		useful: 0,
-		useless: 0,
-	}, {
-		evaluationId: 2,
-		time: '2017-01-17',
-		name: '小明2',
-		avatar: "img/img1.jpg",
-		content: '阿萨德法师打算打算打算打算打算打算打算打算打算打算打算打打',
-		useful: 0,
-		useless: 0,
-	}, {
-		evaluationId: 3,
-		time: '2017-01-17',
-		name: '小明3',
-		avatar: "img/img1.jpg",
-		content: '阿萨德法师打算打算打算打算打算打算打算打算打算打算打算打打',
-		useful: 0,
-		useless: 0,
-	}, {
-		evaluationId: 4,
-		time: '2017-01-17',
-		name: '小明4',
-		avatar: "img/img1.jpg",
-		content: '阿萨德法师打算打算打算打算打算打算打算打算打算打算打算打打',
-		useful: 0,
-		useless: 0,
-	}, {
-		evaluationId: 5,
-		time: '2017-01-17',
-		name: '小明5',
-		avatar: "img/img1.jpg",
-		content: '阿萨德法师打算打算打算打算打算打算打算打算打算打算打算打打',
-		useful: 0,
-		useless: 0,
-	}];
+.controller('EvaluationCtrl', function($scope, $rootScope, $stateParams, $ionicHistory, $ionicViewSwitcher, $http) {
+	$scope.restaurentId = $stateParams.restaurentId;
+	$scope.evaluationDatas = [
+		// {
+		// 	evaluationId: 1,
+		// 	time: '2017-01-17',
+		// 	name: '小明1',
+		// 	avatar: "img/img1.jpg",
+		// 	content: '阿萨德法师打算打算打算打算打算打算打算打算打算打算打算打打',
+		// 	useful: 0,
+		// 	useless: 0,
+		// }
+	];
+	var start = 0;
+	var url = 'http://localhost/restaurent/commet.php?start=' + start + '&count=10&restaurentId=' + $scope.restaurentId;
+	$http.get(url).success(function(data) {
+		$scope.evaluationDatas = data;
+	});
 })
 
 //城市选择

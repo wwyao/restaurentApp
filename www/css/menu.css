@@ -159,8 +159,42 @@
 }
 
 #menu .detail-box {
-  background: rgba(0, 0, 0, .6);
+  /*display: none;*/
+  background: rgba(0, 0, 0, .8);
   z-index: 1000000;
+  color: #fff;
+}
+
+#menu .detail-box h4 {
+  color: #fff;
+}
+
+#menu .detail-box .detail-cancel {
+  margin: 10px;
+  font-size: 20px;
+  float: right;
+}
+
+.detail-box ul {
+  margin: 30% auto;
+  width: 83%;
+}
+
+.detail-box ul li {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.detail-box ul li:last-child {
+  margin-top: 30px;
+  text-align: left;
+  font-size: 16px;
+  letter-spacing: 3px;
+}
+
+.detail-box img {
+  max-width: 90%;
+  border-radius: 10px;
 }
 
 #menu .my-order {
