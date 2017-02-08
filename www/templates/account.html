@@ -9,25 +9,26 @@
   </ion-header-bar>
   <div id="passwordBox">
     <div>
-      <input type="password" ng-model="pswMsg.psw1" placeholder="请输入新密码">
+      <input type="password" ng-model="pswMsg.psw1" placeholder="请输入新密码(至少6位)">
       <input type="password" ng-model="pswMsg.psw2" placeholder="再次输入新密码">
       <div><span ng-click="cancelOpart()">取消</span><span ng-click="changPsw()">确定</span></div>
     </div>
   </div>
   <ion-content>
-
-    <ion-list class="account-List">
-      <ion-item ng-repeat="item in accountData">
-        <span ng-click="{{item.clickEvent}}">{{item.tag}}</span>
-        <img ng-src="{{userData.avatar}}" alt="" class="account-img" ng-if="item.isAvatar" ng-click="imgPicker()">
-        <input type="text" class="accountInput" ng-if="item.isShow" ng-model="userData.name" ng-disabled="isEditable">
-        <div class="account-radois" ng-if="item.isSex">
-          <input type="radio" name="sex" checked ng-disabled="isEditable">男
-          <input type="radio" name="sex" ng-disabled="isEditable">女
-        </div>
-        <span ng-click="openPicker()" ng-if="item.isDate" class="birthdate">{{userData.date}}</span>
-      </ion-item>
-      <input type="file" accept="image/*" id="file" ng-show="false">
-    </ion-list>
+    <form method="post" enctype="multipart/form-data" ng-submit="updateUserData()">
+      <ion-list class="account-List">
+        <ion-item ng-repeat="item in accountData">
+          <span ng-click="{{item.clickEvent}}">{{item.tag}}</span>
+          <img ng-src="{{userData.avatar}}" alt="" class="account-img" ng-if="item.isAvatar" ng-click="imgPicker()">
+          <input type="text" class="accountInput" ng-if="item.isShow" ng-model="userData.name" ng-disabled="isEditable">
+          <div class="account-radois" ng-if="item.isSex">
+            <input type="radio" name="sex" checked ng-disabled="isEditable">男
+            <input type="radio" name="sex" ng-disabled="isEditable">女
+          </div>
+          <span ng-click="openPicker()" ng-if="item.isDate" class="birthdate">{{userData.date}}</span>
+        </ion-item>
+        <input type="file" accept="image/*" id="file" ng-show="false">
+      </ion-list>
+    </form>
   </ion-content>
 </ion-view>

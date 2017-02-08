@@ -8,8 +8,8 @@
 		<i class="ion-more more-function" ng-click="isMore = !isMore;"></i>
 	</ion-header-bar>
 	<ul class="more-list" ng-if="isMore">
-		<li><i class="ion-share" on-tap="shareClick()">分享</i></li>
-		<li><i class="ion-heart" on-tap="concernClick()">关注</i></li>
+		<li><i class="ion-share" ng-click="shareClick()">分享</i></li>
+		<li><i class="ion-heart" ng-click="concernClick()">关注</i></li>
 	</ul>
 	<ion-content scrollbar-y="false" overflow-scroll="true">
 		<div class="top">
@@ -36,8 +36,8 @@
 	</div>
 
 	//分享页面
-	<div class="share" ng-if="isShare" ng-click="hideShare()">
+	<div class="share" ng-click="hideShare()">
 		<img src="img/wx.png" alt="" ng-click="wxClick($event)">
-		<img src="img/qq.png" alt=""  ng-click="wxClick($event)">
+		<img src="img/qq.png" alt="" ng-click="wxClick($event)">
 	</div>
 </ion-view>

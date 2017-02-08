@@ -1,6 +1,7 @@
-#detail ion-content{
+#detail ion-content {
   /*overflow: hidden;*/
 }
+
 #detail .more-function {
   position: absolute;
   z-index: 100;
@@ -150,20 +151,23 @@
   text-decoration: none;
 }
 
-.share{
+.share {
+  display: none;
   position: absolute;
   top: 0;
   z-index: 1000;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
 }
-.share img{
+
+.share img {
   margin: 0 auto;
   width: 40%;
   display: block;
 }
-.share img:first-child{
+
+.share img:first-child {
   margin-top: 50%;
-  border-bottom: 1px solid rgba(255,255,255,0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }

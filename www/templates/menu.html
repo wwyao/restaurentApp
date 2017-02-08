@@ -7,7 +7,7 @@
     </ion-nav-bar>
     <i class="ion-information-circled current-location" ng-click="locationClick()"></i>
   </ion-header-bar>
-  <div class="location-box" ng-if="showLocation">
+  <div class="location-box">
     您的位置为：{{restaurentName}} {{deskNum}}号桌
   </div>
   <ion-content overflow-scroll="true" id="scroll1" scrollbar-y="false">
@@ -19,7 +19,7 @@
   </ion-content>
   <ion-content overflow-scroll="true" id="scroll2" scrollbar-y="false">
     <ul class="menu-list-detail">
-      <li ng-repeat="item in detailDatas">
+      <li ng-repeat="item in detailDatas" ng-click="detailMenuClick(item.menuId)">
         <img ng-src="{{item.imgsrc}}" alt="">
         <div class="msg-box">
           <h5>{{item.menuName}}</h5>
@@ -47,11 +47,11 @@
   <div class="detail-box">
     <i class="ion-close-round detail-cancel" ng-click="hideDetail()"></i>
     <ul>
-      <li><img ng-src="{{detailMenuData.img}}" alt=""></li>
+      <li><img ng-src="{{detailMenuData.imgsrc}}" alt=""></li>
       <li>
-        <h4>{{detailMenuData.name}}</h4>
+        <h4>{{detailMenuData.menuName}}</h4>
       </li>
-      <li>{{detailMenuData.descript}}</li>
+      <li>{{detailMenuData.descrip}}</li>
     </ul>
   </div>
 

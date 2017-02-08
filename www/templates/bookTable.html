@@ -31,7 +31,7 @@
       </ion-item>
     </ion-list>
     <ion-scroll scrollbar-y="false" class="desk-box">
-      <div ng-repeat="item in deskData" class="desk" id="{{item.deskId}}" ng-click="deskClick(item.deskId)">
+      <div ng-repeat="item in deskData track by $index" class="desk" id="{{item.deskId}}" ng-click="deskClick(item.deskId,$index)">
         {{item.deskNum}}
       </div>
     </ion-scroll>

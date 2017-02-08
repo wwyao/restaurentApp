@@ -20,6 +20,7 @@
 }
 
 #menu .location-box {
+  display: none;
   position: absolute;
   padding: 5px 0;
   z-index: 100000;
@@ -159,7 +160,7 @@
 }
 
 #menu .detail-box {
-  /*display: none;*/
+  display: none;
   background: rgba(0, 0, 0, .8);
   z-index: 1000000;
   color: #fff;

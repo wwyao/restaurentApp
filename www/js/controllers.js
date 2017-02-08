@@ -164,11 +164,11 @@ angular.module('starter.controllers', [])
 	$scope.isMore = false;
 	$scope.isShare = false;
 	$scope.shareClick = function() {
-		$scope.isShare = !$scope.isShare;
+		$('.share').fadeToggle();
 		$scope.isMore = !$scope.isMore;
 	};
 	$scope.hideShare = function() {
-		$scope.isShare = !$scope.isShare;
+		$('.share').fadeToggle();
 	};
 	$scope.wxClick = function(e) {
 		e.stopPropagation();
@@ -576,6 +576,7 @@ angular.module('starter.controllers', [])
 		contacter: userData.name,
 		phone: userData.phone,
 		remark: "",
+		desk: '',
 	}
 	$scope.bookDatas1 = [{
 		title: "就餐日期",
@@ -607,12 +608,6 @@ angular.module('starter.controllers', [])
 	}];
 	//显示桌子
 	$scope.showDesk = function(e) {
-		// alert(e.target.checked);
-		// if (!e.target.checked) {
-		// 	$('#book-table .desk-box').slideDown();
-		// }else{
-		//
-		// }
 		$('#book-table .desk-box').slideToggle();
 	};
 	//选择就餐时间
@@ -662,10 +657,13 @@ angular.module('starter.controllers', [])
 		}
 	};
 	//选择桌子
-	$('.desk').on('click', function(e) {
-		console.log(e.target.id);
-		// this.addClass('desk-active');
-	});
+	$scope.deskClick = function(deskId, index) {
+		for (var i = 0; i < $('.desk').length; i++) {
+			$('.desk').eq(i).removeClass('desk-active');
+		}
+		$('.desk').eq(index).addClass('desk-active');
+		$rootScope.order.desk = deskId;
+	};
 	//添加就餐人数
 	$scope.addPeople = function() {
 		$rootScope.order.numOfPeople++;
@@ -714,10 +712,13 @@ angular.module('starter.controllers', [])
 		tag: '修改登录密码',
 		clickEvent: 'editPsw()',
 	}];
+	//提交用户信息
+	$scope.updateUserData = function() {
+		alert('submit');
+	};
 	// 修改密码
 	$scope.changPsw = function() {
 		console.log($scope.pswMsg.psw1, $scope.pswMsg.psw2);
-		$('#passwordBox').fadeOut();
 		if ($scope.pswMsg.psw1 == '' || $scope.pswMsg.psw2 == '') {
 			alert('密码不能为空！');
 		} else {
@@ -725,6 +726,20 @@ angular.module('starter.controllers', [])
 				alert('密码不一致！');
 			} else {
 				//提交到服务器，修改数据
+				$.ajax({
+					type: 'POST',
+					url: 'http://localhost/restaurent/updatePassword.php',
+					dataType: 'json',
+					data: {
+						userId: $scope.userData.userId,
+						password: $scope.pswMsg.psw1
+					},
+					success: function(data) {
+						if (data.result) {
+							$('#passwordBox').fadeOut();
+						}
+					},
+				});
 			}
 		}
 	};
@@ -834,15 +849,13 @@ angular.module('starter.controllers', [])
 	$scope.activeClass = "item-selected";
 	$scope.restaurentId = $stateParams.restaurentId;
 	$scope.detailMenuData = {
-		id: 2,
-		img: 'img/img1.jpg',
-		name: '大烫阿萨德',
-		descript: '大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德'
+		// id: 2,
+		// img: 'img/img1.jpg',
+		// name: '大烫阿萨德',
+		// descript: '大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德大烫阿萨德'
 	};
 	$rootScope.orderMenus = [];
 	$scope.showOrderBox = false;
-	//是否显示当前的位置
-	$scope.showLocation = false;
 	//已点的菜单
 	$scope.myOrders = [];
 	$scope.listDatas = [{
@@ -920,6 +933,13 @@ angular.module('starter.controllers', [])
 			}
 		}
 	};
+	//查看菜式详情
+	$scope.detailMenuClick = function(menuId) {
+		$http.get('http://localhost/restaurent/detailMenu.php?menuId=' + menuId).success(function(data) {
+			$scope.detailMenuData = data;
+		});
+		$('.detail-box').fadeIn();
+	};
 	//加菜
 	$scope.add = function(id, $event) {
 		$event.stopPropagation();
@@ -953,7 +973,7 @@ angular.module('starter.controllers', [])
 		$scope.numOfMenu = 0;
 	};
 	$scope.locationClick = function() {
-		$scope.showLocation = !$scope.showLocation;
+		$('.location-box').slideToggle();
 	};
 	// 选好了
 	$scope.goHadOrders = function() {
@@ -1010,6 +1030,31 @@ angular.module('starter.controllers', [])
 	$http.get(url).success(function(data) {
 		$scope.evaluationDatas = data;
 	});
+	$scope.usefulClick = function(id) {
+		$http.get('http://localhost/restaurent/addUseful.php?commetId=' + id).success(function(data) {
+			if (data.result) {
+				for (var i = 0; i < $scope.evaluationDatas.length; i++) {
+					if ($scope.evaluationDatas[i].commetId == id) {
+						$scope.evaluationDatas[i].useful = parseInt($scope.evaluationDatas[i].useful) + 1;
+						break;
+					}
+				}
+			}
+		});
+
+	};
+	$scope.uselessClick = function(id) {
+		$http.get('http://localhost/restaurent/useless.php?commetId=' + id).success(function(data) {
+			if (data.result) {
+				for (var i = 0; i < $scope.evaluationDatas.length; i++) {
+					if ($scope.evaluationDatas[i].commetId == id) {
+						$scope.evaluationDatas[i].useless = parseInt($scope.evaluationDatas[i].useless) + 1;
+						break;
+					}
+				}
+			}
+		});
+	};
 })
 
 //城市选择

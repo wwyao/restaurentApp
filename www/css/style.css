@@ -210,6 +210,8 @@
 
 #book-table .desk-active {
   background: url('../img/desk2.png') no-repeat center top;
+  background-size: 40px 40px;
+  color: red;
 }
 
 #qrcode_welcome .welcome-text p {

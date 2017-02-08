@@ -13,7 +13,7 @@
         <div><img ng-src="{{item.avatar}}" alt="">{{item.name}}</div>
         <p class="time">{{item.time}}</p>
         <p>{{item.content}}</p>
-        <div><i class="ion-thumbsup">{{item.useful}}</i><i class="ion-thumbsdown">{{item.useless}}</i></div>
+        <div><i class="ion-thumbsup" ng-click="usefulClick(item.commetId)">{{item.useful}}</i><i class="ion-thumbsdown" ng-click="uselessClick(item.commetId)">{{item.useless}}</i></div>
       </li>
     </ul>
   </ion-content>
