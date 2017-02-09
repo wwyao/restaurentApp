@@ -225,7 +225,7 @@ angular.module('starter.services', [])
 
 	// 已登录的用户信息
 	var userDatas = {
-		userId:2,
+		userId: 2,
 		name: 'admin',
 		date: '2011-6-6',
 		avatar: 'img/img2.jpg',
@@ -285,25 +285,33 @@ angular.module('starter.services', [])
 			return alphabet;
 		},
 		//生成订单号
-		getOrderNumber:function(){
-			var random = new Date().getTime()+''+Math.round(Math.random()*10000);
+		getOrderNumber: function() {
+			var random = new Date().getTime() + '' + Math.round(Math.random() * 10000);
 			return random;
 		},
 		//获取订单信息
-		getCurrentOrder:function(){
+		getCurrentOrder: function() {
 			return currentOrder;
 		},
 		//保存订单信息
-		setCurrentOrder:function(obj){
+		setCurrentOrder: function(obj) {
 			currentOrder = obj;
 		},
 		// 获取菜单信息
-		getMenuMsg:function(){
+		getMenuMsg: function() {
 			return menuMsg;
 		},
 		// 保存菜单信息
-		setMenuMsg:function(obj){
+		setMenuMsg: function(obj) {
 			menuMsg = obj;
 		},
+		//汉字转16进制
+		toUnicode: function(s) {
+			var str = "";
+			for (var i = 0; i < s.length; i++) {
+				str += "\\u" + s.charCodeAt(i).toString(16) + "\t";
+			}
+			return str;
+		}
 	};
 });

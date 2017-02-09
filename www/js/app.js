@@ -58,50 +58,50 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 	// Each tab has its own nav history stack:
 	//首页
 	.state('tab.home', {
-			url: '/home/:tag/:city',
-			views: {
-				'tab-home': {
-					templateUrl: 'templates/tab-home.html',
-					controller: 'HomeCtrl'
-				}
+		url: '/home/:tag/:city',
+		views: {
+			'tab-home': {
+				templateUrl: 'templates/tab-home.html',
+				controller: 'HomeCtrl'
 			}
-		})
+		}
+	})
 
-		//搜索
-		.state('search', {
-			url: '/tab/search',
-			templateUrl: 'templates/search.html',
-			controller: 'SearchCtrl'
-		})
+	//搜索
+	.state('search', {
+		url: '/tab/search',
+		templateUrl: 'templates/search.html',
+		controller: 'SearchCtrl'
+	})
 
-		//扫码跳转的页面
-		.state('qrcodewelcome', {
-			cache: false,
-			url: '/tab/qrcodewelcome/:name/:deskId',
-			templateUrl: 'templates/qrcode_welcome.html',
-			controller: 'QrcodewelcomeCtrl'
-		})
+	//扫码跳转的页面
+	.state('qrcodewelcome', {
+		cache: false,
+		url: '/tab/qrcodewelcome/:name/:deskId',
+		templateUrl: 'templates/qrcode_welcome.html',
+		controller: 'QrcodewelcomeCtrl'
+	})
 
-		//餐厅详细页
-		.state('detail', {
-			url: '/tab/home/:id',
-			templateUrl: 'templates/itemDetail.html',
-			controller: 'DetailCtrl'
-		})
-		//菜单
+	//餐厅详细页
+	.state('detail', {
+		url: '/tab/home/:id',
+		templateUrl: 'templates/itemDetail.html',
+		controller: 'DetailCtrl'
+	})
 
-		.state('menu', {
-			url: '/tab/menu/:restaurentId',
-			templateUrl: 'templates/menu.html',
-			controller: 'MenuCtrl'
-		})
+	//菜单
+	.state('menu', {
+		url: '/tab/menu/:restaurentId',
+		templateUrl: 'templates/menu.html',
+		controller: 'MenuCtrl'
+	})
 
-		//已点菜单
-		.state('shoppingCar', {
-			url: '/tab/shoppingCar/:orderId',
-			templateUrl: 'templates/shoppingCar.html',
-			controller: 'ShoppingCarCtrl'
-		})
+	//已点菜单
+	.state('shoppingCar', {
+		url: '/tab/shoppingCar/:orderId',
+		templateUrl: 'templates/shoppingCar.html',
+		controller: 'ShoppingCarCtrl'
+	})
 
 	//订单
 	.state('tab.order', {
@@ -198,7 +198,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 	//我的关注
 	.state('myconcern', {
 		url: '/tab/myconcern',
-		cache:false,
+		cache: false,
 		templateUrl: 'templates/myConcern.html',
 		controller: 'MyconcernCtrl'
 	})
@@ -261,10 +261,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 	//小明点餐用户协议
 	.state('userprotocol', {
-		url: '/tab/userprotocol',
-		templateUrl: 'templates/userProtocol.html',
-		controller: 'UserProtocolCtrl'
-	})
+			url: '/tab/userprotocol',
+			templateUrl: 'templates/userProtocol.html',
+			controller: 'UserProtocolCtrl'
+		})
+		//支付
+		.state('pay', {
+			url: '/tab/pay',
+			templateUrl: 'templates/pay.html',
+			controller: 'PayCtrl'
+		})
 
 	//关于
 	.state('about', {

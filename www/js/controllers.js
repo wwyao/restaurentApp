@@ -142,7 +142,10 @@ angular.module('starter.controllers', [])
 	};
 	//分类改变
 	$scope.classifyChange = function() {
-		alert($scope.values.classifyValue);
+		$http.get('http://localhost/restaurent/particularResData.php?text=' + datas.toUnicode($scope.values.classifyValue)).success(function(data) {
+			$scope.items = data;
+		});
+		// alert($scope.values.classifyValue);
 	};
 	//排序改变
 	$scope.rankChange = function() {
@@ -283,10 +286,14 @@ angular.module('starter.controllers', [])
 	var start = 0;
 	var statu = '未付款';
 	var url = 'http://localhost/restaurent/getOrders.php?start=' + start + '&count=6&statu=' + statu;
-	$http.get(url).success(function(data) {
-		console.log(data);
-		$scope.datas = data;
-	});
+	getOrderData(url);
+
+	function getOrderData(url) {
+		$http.get(url).success(function(data) {
+			console.log(data);
+			$scope.datas = data;
+		});
+	}
 	var i = 0;
 	$scope.cancel = function(e, orderId) {
 		// e.stopPropagation();
@@ -315,6 +322,7 @@ angular.module('starter.controllers', [])
 	var statu = '就餐中';
 	var url = 'http://localhost/restaurent/getOrders.php?start=' + start + '&count=6&statu=' + statu;
 	$http.get(url).success(function(data) {
+		console.log(data);
 		$scope.datas = data;
 	});
 })
@@ -953,16 +961,10 @@ angular.module('starter.controllers', [])
 		$scope.numOfMenu++;
 	};
 	// //购物车
-	// $scope.shoppingCarClick = function() {
-	// 	// $scope.myOrders = [];
-	// 	// for (var i = 0; i < $scope.allMenu.length; i++) {
-	// 	// 	if ($scope.allMenu[i].num > 0) {
-	// 	// 		$scope.myOrders.push($scope.allMenu[i]);
-	// 	// 	}
-	// 	// }
-	// 	$scope.showOrderBox = !$scope.showOrderBox;
-	//
-	// };
+	$scope.shoppingCar = function() {
+		$scope.showOrderBox = !$scope.showOrderBox;
+		// $('.my-order').slideToggle();
+	};
 	//清空购物车
 	$scope.clearCar = function($event) {
 		$event.stopPropagation();
@@ -997,10 +999,15 @@ angular.module('starter.controllers', [])
 })
 
 //已点菜单
-.controller('ShoppingCarCtrl', function(datas, $scope, $rootScope, $ionicHistory, $ionicViewSwitcher) {
+.controller('ShoppingCarCtrl', function(datas, $scope, $rootScope, $ionicHistory, $state, $ionicViewSwitcher) {
 	console.log(datas.getCurrentOrder(), datas.getMenuMsg());
 	$scope.orderMsg = datas.getCurrentOrder();
 	$scope.allMenu = datas.getMenuMsg();
+	$scope.makeOrder = function() {
+		console.log(datas.getCurrentOrder(), datas.getMenuMsg());
+		// $state.go('pay');
+		// $ionicViewSwitcher.nextDirection("forward");
+	};
 })
 
 //写评论
@@ -1009,6 +1016,28 @@ angular.module('starter.controllers', [])
 	$scope.tscore = 5;
 	$scope.escore = 5;
 	$scope.orderId = $stateParams.orderId;
+})
+
+//支付
+.controller('PayCtrl', function($scope, $rootScope, $ionicHistory, $ionicViewSwitcher, $stateParams) {
+	$scope.orderData = {
+		money: '￥30',
+		name: '小明餐厅',
+		orderId: '12312312312'
+	};
+	$scope.payData = [{
+		imgsrc: 'img/zhifubao.png',
+		title: '支付宝支付',
+		value: '支付宝'
+	}, {
+		imgsrc: 'img/wxpay.png',
+		title: '微信支付',
+		value: '微信'
+	}, {
+		imgsrc: 'img/yinlian.png',
+		title: '银联支付',
+		value: '银联'
+	}];
 })
 
 //顾客评论
