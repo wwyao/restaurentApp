@@ -305,13 +305,6 @@ angular.module('starter.services', [])
 		setMenuMsg: function(obj) {
 			menuMsg = obj;
 		},
-		//汉字转16进制
-		toUnicode: function(s) {
-			var str = "";
-			for (var i = 0; i < s.length; i++) {
-				str += "\\u" + s.charCodeAt(i).toString(16) + "\t";
-			}
-			return str;
-		}
+
 	};
 });

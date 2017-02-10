@@ -35,7 +35,7 @@
       <span ng-repeat="item in classifyName" ng-click="kindClick(item)">{{item}}</span>
     </div>
     <ion-list>
-      <ion-item collection-repeat="item in items" href="#/tab/home/{{item.restaurentId}}" class="aitem" ng-click="forwardAnim()">
+      <ion-item collection-repeat="item in items track by $index" href="#/tab/home/{{item.restaurentId}}" class="aitem" ng-click="forwardAnim()">
         <img ng-src="{{item.imgSrc1}}" alt="">
         <div>
           <h3>{{item.title}}</h3>

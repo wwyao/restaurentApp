@@ -11,7 +11,7 @@
       <p>时间：{{item.time}}</p>
       <p>定金：<span class="redColor">{{item.bookMoney}}</span></p>
       <div>
-        <span>付款</span><span>加菜</span>
+        <a href="#/tab/pay/{{item.orderId}}" nav-direction="forward">付款</a><a href="#/tab/menu/{{item.restaurentId}}" nav-direction="forward">加菜</a>
       </div>
     </li>
   </ul>

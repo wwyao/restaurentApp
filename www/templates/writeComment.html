@@ -8,12 +8,13 @@
   </ion-header-bar>
 
   <ion-content scrollbar-y='false' class="write-content">
-    <div>订单号：<i>{{orderId}}</i></div>
-    <div>餐厅名：<i>{{}}</i></div>
-    <div><span>服务：</span><input type="range" ng-model="sscore" min="1" max="5" /><span>{{sscore}}分</span></div>
-    <div><span>口味：</span><input type="range" ng-model="tscore" min="1" max="5" /><span>{{tscore}}分</span></div>
-    <div><span>环境：</span><input type="range" ng-model="escore" min="1" max="5" /><span>{{escore}}分</span></div>
-    <div><h5>评论：</h5><textarea name="" id="" cols="30" rows="10"></textarea></div>
+    <div>订单号：<i>{{commentData.orderId}}</i></div>
+    <div>餐厅名：<i>{{title}}</i></div>
+    <div><span>服务：</span><input type="range" ng-model="commentData.sscore" min="1" max="10" /><span>{{commentData.sscore}}分</span></div>
+    <div><span>口味：</span><input type="range" ng-model="commentData.tscore" min="1" max="10" /><span>{{commentData.tscore}}分</span></div>
+    <div><span>环境：</span><input type="range" ng-model="commentData.escore" min="1" max="10" /><span>{{commentData.escore}}分</span></div>
+    <div>
+      <h5>评论：</h5><textarea name="" id="" cols="30" rows="10" ng-model="commentData.text"></textarea></div>
   </ion-content>
-  <div id="footer">提交</div>
+  <div id="footer" ng-click="addComment()">提交</div>
 </ion-view>

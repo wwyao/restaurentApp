@@ -12,7 +12,7 @@
       <p>时间：{{item.time}}</p>
       <p>定金：<span class="redColor">{{item.bookMoney}}</span></p>
       <div>
-        <span on-tap="cancel($event,{{item.orderId}})">取消订单</span><span>付款</span>
+        <span ng-click="cancel($event,{{item.orderId}})">取消订单</span><a href="#/tab/pay/{{item.orderId}}" nav-direction="forward">付款</a>
       </div>
     </li>
   </ul>

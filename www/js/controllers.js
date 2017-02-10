@@ -33,14 +33,14 @@ angular.module('starter.controllers', [])
 	$scope.isDatas = true;
 	$scope.values = {
 		classifyValue: '所有分类',
-		rankValue: '综合评分优先',
+		rankValue: '默认',
 		placeValue: '全部'
 	};
 	// $scope.classifyValue = '所有分类';
 	// $scope.rankValue = '综合评分优先';
 	// $scope.placeValue = '全部';
 	$scope.classifyName = ['火锅', '川菜', '海鲜', '烧烤', '西餐', '粤菜', '快餐', '干锅'];
-	$scope.rankName = ['综合评分优先', '服务优先', '口味优先', '环境优先'];
+	$scope.rankName = ['默认', '服务优先', '口味优先', '环境优先'];
 	$scope.placeName = ['全部', '海珠区', '天河区'];
 	//定位
 	//通过经纬度查询城市的地址:https://api.thinkpage.cn/v3/location/search.json?key=mqzzrlzwvkgw0762&q=39.93:116.40
@@ -76,18 +76,43 @@ angular.module('starter.controllers', [])
 	$scope.isItemSort = false;
 	$scope.items = [];
 	//获取餐厅数据
+	// function getRestaurentData(start, count) {
+	// 	$scope.start += 6;
+	// 	var url = 'http://localhost/restaurent/allRestaurent.php?start=' + start + '&count=' + count;
+	// 	$http.get(url).success(function(data) {
+	// 		console.log(data.length != 0);
+	// 		if (data.length != 0) {
+	// 			$scope.items = $scope.items.concat(data);
+	// 		} else {
+	// 			$scope.isDatas = false;
+	// 			// console.log('没有更多数据了');
+	// 		}
+	// 		$scope.$broadcast('scroll.infiniteScrollComplete');
+	// 	});
+	// }
 	function getRestaurentData(start, count) {
-		$scope.start += 6;
-		var url = 'http://localhost/restaurent/allRestaurent.php?start=' + start + '&count=' + count;
-		$http.get(url).success(function(data) {
-			console.log(data.length != 0);
+		$http({
+			method: 'GET',
+			url: 'http://localhost/restaurent/allRestaurent.php',
+			params: {
+				start: start,
+				count: count,
+				classifyValue: $scope.values.classifyValue,
+				rankValue: $scope.values.rankValue,
+				placeValue: $scope.values.placeValue
+			}
+		}).success(function(data, header, config, status) {
+			//响应成功
 			if (data.length != 0) {
 				$scope.items = $scope.items.concat(data);
 			} else {
 				$scope.isDatas = false;
-				console.log('没有更多数据了');
+				// console.log('没有更多数据了');
 			}
 			$scope.$broadcast('scroll.infiniteScrollComplete');
+			$scope.start += 6;
+		}).error(function(data, header, config, status) {
+			//处理响应失败
 		});
 	}
 	getRestaurentData($scope.start, $scope.count);
@@ -142,8 +167,21 @@ angular.module('starter.controllers', [])
 	};
 	//分类改变
 	$scope.classifyChange = function() {
-		$http.get('http://localhost/restaurent/particularResData.php?text=' + datas.toUnicode($scope.values.classifyValue)).success(function(data) {
+		$scope.start = 0;
+		$http({
+			method: 'GET',
+			url: 'http://localhost/restaurent/particularResData.php',
+			params: {
+				text: $scope.values.classifyValue,
+				start: $scope.start
+			}
+		}).success(function(data, header, config, status) {
+			//响应成功
+			// console.log(data);
 			$scope.items = data;
+			$scope.start += 6;
+		}).error(function(data, header, config, status) {
+			//处理响应失败
 		});
 		// alert($scope.values.classifyValue);
 	};
@@ -283,16 +321,26 @@ angular.module('starter.controllers', [])
 //未消费页面
 .controller('page1', function($scope, $rootScope, $http, $cordovaDialogs) {
 	$scope.datas = [];
-	var start = 0;
-	var statu = '未付款';
-	var url = 'http://localhost/restaurent/getOrders.php?start=' + start + '&count=6&statu=' + statu;
-	getOrderData(url);
+	$scope.start = 0;
+	getOrderData();
 
-	function getOrderData(url) {
-		$http.get(url).success(function(data) {
+	function getOrderData() {
+		$http({
+			method: 'GET',
+			url: 'http://localhost/restaurent/getOrders.php',
+			params: {
+				start: $scope.start,
+				count: 6,
+				statu: '未付款'
+			}
+		}).success(function(data, header, config, status) {
+			//响应成功
 			console.log(data);
 			$scope.datas = data;
+		}).error(function(data, header, config, status) {
+			//处理响应失败
 		});
+
 	}
 	var i = 0;
 	$scope.cancel = function(e, orderId) {
@@ -318,27 +366,46 @@ angular.module('starter.controllers', [])
 //就餐中页面
 .controller('page2', function($scope, $rootScope, $http) {
 	$scope.datas = [];
-	var start = 0;
-	var statu = '就餐中';
-	var url = 'http://localhost/restaurent/getOrders.php?start=' + start + '&count=6&statu=' + statu;
-	$http.get(url).success(function(data) {
+	$scope.start = 0;
+	$http({
+		method: 'GET',
+		url: 'http://localhost/restaurent/getOrders.php',
+		params: {
+			start: $scope.start,
+			count: 6,
+			statu: '就餐中'
+		}
+	}).success(function(data, header, config, status) {
+		//响应成功
 		console.log(data);
 		$scope.datas = data;
+	}).error(function(data, header, config, status) {
+		//处理响应失败
 	});
 })
 
 //已消费页面
 .controller('page3', function($scope, $rootScope, $http, $location, $ionicViewSwitcher) {
 	$scope.datas = [];
-	var start = 0;
-	var statu = '已消费';
-	var url = 'http://localhost/restaurent/getOrders.php?start=' + start + '&count=6&statu=' + statu;
-	$http.get(url).success(function(data) {
+	$scope.start = 0;
+	$http({
+		method: 'GET',
+		url: 'http://localhost/restaurent/getOrders.php',
+		params: {
+			start: $scope.start,
+			count: 6,
+			statu: '已消费'
+		}
+	}).success(function(data, header, config, status) {
+		//响应成功
+		console.log(data);
 		$scope.datas = data;
+	}).error(function(data, header, config, status) {
+		//处理响应失败
 	});
-	$scope.toWrite = function(orderId) {
+	$scope.toWrite = function(orderId, restaurentId, title) {
 		// alert(orderId);
-		var writeUrl = '/writeComment/' + orderId;
+		var writeUrl = '/writeComment/' + orderId + '/' + restaurentId + '/' + title;
 		$location.path(writeUrl);
 		$ionicViewSwitcher.nextDirection("forward");
 	};
@@ -1011,11 +1078,38 @@ angular.module('starter.controllers', [])
 })
 
 //写评论
-.controller('writeCommentCtrl', function($scope, $rootScope, $ionicHistory, $ionicViewSwitcher, $stateParams) {
-	$scope.sscore = 5;
-	$scope.tscore = 5;
-	$scope.escore = 5;
-	$scope.orderId = $stateParams.orderId;
+.controller('writeCommentCtrl', function($scope, datas, $rootScope, $ionicHistory, $ionicViewSwitcher, $stateParams) {
+	$scope.commentData = {
+		orderId: $stateParams.orderId,
+		restaurentId: $stateParams.restaurentId,
+		userId: datas.getUserDatas.userId,
+		sscore: 10,
+		tscore: 10,
+		escore: 10,
+		text: '',
+		time: ''
+	}
+	$scope.title = $stateParams.title;
+	$scope.addComment = function() {
+		if ($scope.commentData.text == "") {
+			alert("评论不能为空");
+		} else {
+			var date = new Date();
+			$scope.commentData.time = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+			$.ajax({
+				type: 'POST',
+				url: 'http://localhost/restaurent/addComment.php',
+				dataType: 'json',
+				data: $scope.commentData,
+				success: function(data) {
+					console.log(data);
+					if (data.result) {
+						alert('success');
+					}
+				},
+			});
+		}
+	};
 })
 
 //支付

@@ -11,7 +11,7 @@
       <p>时间：{{item.time}}</p>
       <p>定金：<span class="redColor">{{item.bookMoney}}</span></p>
       <div>
-        <span ng-click='toWrite(item.orderId)'>去评价</span>
+        <input class="write-btn" type="button" value="去评价" ng-click='toWrite(item.orderId,item.restaurentId,item.title)' />
       </div>
     </li>
   </ul>

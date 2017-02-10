@@ -16,6 +16,7 @@
   top: 42px;
   background: #f5f5f5;
 }
+
 .page-item {
   /*padding: 3px 5px;*/
   margin-bottom: 20px;
@@ -43,7 +44,7 @@
   /*border-top: 1px solid rgba(0, 0, 120, .2);*/
 }
 
-.page-item div span {
+.page-item div a, .page-item div span {
   float: right;
   padding: 3px 5px;
   margin-left: 20px;
@@ -52,13 +53,12 @@
   color: #fff;
 }
 
-.page-item div span:first-child {
+.page-item div span {
   background: rgba(128, 128, 128, 0.79);
 }
 
-.page-item div span:last-child {
+.page-item div a {
   padding: 3px 13px;
-  /*box-shadow: 0 0 1px 0 rgb(226, 109, 25);*/
   background: rgb(226, 109, 25);
 }
 
@@ -66,12 +66,26 @@
   color: red;
 }
 
-#order-page2 .page-item div span {
+#order-page2 .page-item div a {
   padding: 3px 13px;
 }
 
-#order-page2 .page-item div span:first-child {
+#order-page2 .page-item div a:first-child {
   background: rgb(195, 20, 6);
+}
+
+#order-page2 .page-item div a:last-child {
+  background: rgb(226, 109, 25);
+}
+
+#order-page3 .write-btn {
+  float: right;
+  padding: 3px 13px;
+  border-radius: 5px;
+  color: #fff;
+  background: rgb(226, 109, 25);
+  border: none;
+  outline: none;
 }
 
 

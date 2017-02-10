@@ -139,7 +139,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 	//写评论
 	.state('writeComment', {
-		url: '/writeComment/:orderId',
+		url: '/writeComment/:orderId/:restaurentId/:title',
 		templateUrl: 'templates/writeComment.html',
 		controller: 'writeCommentCtrl'
 	})
@@ -261,16 +261,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 	//小明点餐用户协议
 	.state('userprotocol', {
-			url: '/tab/userprotocol',
-			templateUrl: 'templates/userProtocol.html',
-			controller: 'UserProtocolCtrl'
-		})
-		//支付
-		.state('pay', {
-			url: '/tab/pay',
-			templateUrl: 'templates/pay.html',
-			controller: 'PayCtrl'
-		})
+		url: '/tab/userprotocol',
+		templateUrl: 'templates/userProtocol.html',
+		controller: 'UserProtocolCtrl'
+	})
+
+	//支付
+	.state('pay', {
+		url: '/tab/pay/:orderId',
+		templateUrl: 'templates/pay.html',
+		controller: 'PayCtrl'
+	})
 
 	//关于
 	.state('about', {
