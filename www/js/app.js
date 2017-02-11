@@ -118,6 +118,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 	//未付款
 	.state('tab.order.page1', {
 		url: '/page1',
+		cache: false,
 		views: {
 			'page1': {
 				templateUrl: 'templates/orderPage1.html',
@@ -129,6 +130,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 	//就餐中
 	.state('tab.order.page2', {
 		url: '/page2',
+		cache: false,
 		views: {
 			'page2': {
 				templateUrl: 'templates/orderPage2.html',
@@ -147,6 +149,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 	//已消费
 	.state('tab.order.page3', {
 		url: '/page3',
+		cache: false,
 		views: {
 			'page3': {
 				templateUrl: 'templates/orderPage3.html',
@@ -268,7 +271,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 	//支付
 	.state('pay', {
-		url: '/tab/pay/:orderId',
+		url: '/tab/pay/:orderId/:backTarget',
 		templateUrl: 'templates/pay.html',
 		controller: 'PayCtrl'
 	})

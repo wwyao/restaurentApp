@@ -40,7 +40,7 @@ angular.module('starter.controllers', [])
 	// $scope.rankValue = '综合评分优先';
 	// $scope.placeValue = '全部';
 	$scope.classifyName = ['火锅', '川菜', '海鲜', '烧烤', '西餐', '粤菜', '快餐', '干锅'];
-	$scope.rankName = ['默认', '服务优先', '口味优先', '环境优先'];
+	$scope.rankName = ['默认', '环境优先', '服务优先', '味道优先'];                                                                                                                                                                                                                                                                                                                                                              
 	$scope.placeName = ['全部', '海珠区', '天河区'];
 	//定位
 	//通过经纬度查询城市的地址:https://api.thinkpage.cn/v3/location/search.json?key=mqzzrlzwvkgw0762&q=39.93:116.40
@@ -150,6 +150,7 @@ angular.module('starter.controllers', [])
 			.scan()
 			.then(function(barcodeData) {
 				var url = barcodeData.text;
+				alert(barcodeData.text);
 				$location.path(url);
 			}, function(error) {
 				// An error occurred
@@ -319,43 +320,68 @@ angular.module('starter.controllers', [])
 })
 
 //未消费页面
-.controller('page1', function($scope, $rootScope, $http, $cordovaDialogs) {
+.controller('page1', function(datas, $scope, $rootScope, $http, $cordovaDialogs) {
 	$scope.datas = [];
 	$scope.start = 0;
-	getOrderData();
 
-	function getOrderData() {
+	$scope.isBottom = true;
+	$scope.loadMore = function() {
 		$http({
 			method: 'GET',
 			url: 'http://localhost/restaurent/getOrders.php',
 			params: {
 				start: $scope.start,
-				count: 6,
-				statu: '未付款'
+				count: 4,
+				statu: '未付款',
+				userId: datas.getUserDatas().userId
 			}
 		}).success(function(data, header, config, status) {
 			//响应成功
-			console.log(data);
-			$scope.datas = data;
+			// console.log(data);
+			$scope.datas = $scope.datas.concat(data);
+			$scope.start += data.length;
+			if (data.length < 4) {
+				$scope.isBottom = false;
+			}
+			$scope.$broadcast('scroll.infiniteScrollComplete');
 		}).error(function(data, header, config, status) {
 			//处理响应失败
 		});
-
-	}
+	};
 	var i = 0;
 	$scope.cancel = function(e, orderId) {
-		// e.stopPropagation();
+		e.stopPropagation();
 		// console.log(i++,'cancel');
 
-		var isCancel = $cordovaDialogs.confirm('确定取消订单？', '');
+		// var isCancel = $cordovaDialogs.confirm('确定取消订单？', '');
+		var isCancel = confirm('确定取消订单？', '');
 		// alert(orderId+':'+isCancel);
-		if (isCancel == 1) {
+		console.log(isCancel);
+		if (isCancel) {
 			$http.get('http://localhost/restaurent/cancelOrder.php?orderId=' + orderId).success(function(data) {
 				console.log(data);
 				if (data.result) {
-					$http.get(url).success(function(data) {
+					$http({
+						method: 'GET',
+						url: 'http://localhost/restaurent/getOrders.php',
+						params: {
+							start: 0,
+							count: 4,
+							statu: '未付款',
+							userId: datas.getUserDatas().userId
+						}
+					}).success(function(data, header, config, status) {
+						//响应成功
 						// console.log(data);
 						$scope.datas = data;
+						// $scope.$apply();
+						$scope.start += data.length;
+						if (data.length < 4) {
+							$scope.isBottom = false;
+						}
+						$scope.$broadcast('scroll.infiniteScrollComplete');
+					}).error(function(data, header, config, status) {
+						//处理响应失败
 					});
 				}
 			});
@@ -364,45 +390,63 @@ angular.module('starter.controllers', [])
 })
 
 //就餐中页面
-.controller('page2', function($scope, $rootScope, $http) {
+.controller('page2', function(datas, $scope, $rootScope, $http) {
 	$scope.datas = [];
 	$scope.start = 0;
-	$http({
-		method: 'GET',
-		url: 'http://localhost/restaurent/getOrders.php',
-		params: {
-			start: $scope.start,
-			count: 6,
-			statu: '就餐中'
-		}
-	}).success(function(data, header, config, status) {
-		//响应成功
-		console.log(data);
-		$scope.datas = data;
-	}).error(function(data, header, config, status) {
-		//处理响应失败
-	});
+	$scope.isBottom = true;
+	$scope.loadMore = function() {
+		$http({
+			method: 'GET',
+			url: 'http://localhost/restaurent/getOrders.php',
+			params: {
+				start: $scope.start,
+				count: 4,
+				statu: '就餐中',
+				userId: datas.getUserDatas().userId
+			}
+		}).success(function(data, header, config, status) {
+			//响应成功
+			// console.log(data);
+			$scope.datas = $scope.datas.concat(data);
+			$scope.start += data.length;
+			if (data.length < 4) {
+				$scope.isBottom = false;
+			}
+			$scope.$broadcast('scroll.infiniteScrollComplete');
+		}).error(function(data, header, config, status) {
+			//处理响应失败
+		});
+	};
 })
 
 //已消费页面
-.controller('page3', function($scope, $rootScope, $http, $location, $ionicViewSwitcher) {
+.controller('page3', function($scope, datas, $rootScope, $http, $location, $ionicViewSwitcher) {
 	$scope.datas = [];
 	$scope.start = 0;
-	$http({
-		method: 'GET',
-		url: 'http://localhost/restaurent/getOrders.php',
-		params: {
-			start: $scope.start,
-			count: 6,
-			statu: '已消费'
-		}
-	}).success(function(data, header, config, status) {
-		//响应成功
-		console.log(data);
-		$scope.datas = data;
-	}).error(function(data, header, config, status) {
-		//处理响应失败
-	});
+	$scope.isBottom = true;
+	$scope.loadMore = function() {
+		$http({
+			method: 'GET',
+			url: 'http://localhost/restaurent/getOrders.php',
+			params: {
+				start: $scope.start,
+				count: 4,
+				statu: '已消费',
+				userId: datas.getUserDatas().userId
+			}
+		}).success(function(data, header, config, status) {
+			//响应成功
+			// console.log(data);
+			$scope.datas = $scope.datas.concat(data);
+			$scope.start += data.length;
+			if (data.length < 4) {
+				$scope.isBottom = false;
+			}
+			$scope.$broadcast('scroll.infiniteScrollComplete');
+		}).error(function(data, header, config, status) {
+			//处理响应失败
+		});
+	};
 	$scope.toWrite = function(orderId, restaurentId, title) {
 		// alert(orderId);
 		var writeUrl = '/writeComment/' + orderId + '/' + restaurentId + '/' + title;
@@ -751,6 +795,7 @@ angular.module('starter.controllers', [])
 		// for (var key in $scope.order) {
 		// 	alert($scope.order[key]);
 		// }
+		console.log($rootScope.order);
 		datas.setCurrentOrder($rootScope.order);
 		// $state.go('menu');
 		$location.path('/tab/menu/' + $stateParams.restaurentId);
@@ -1052,6 +1097,7 @@ angular.module('starter.controllers', [])
 				tempMenu.push($scope.allMenu[i]);
 			}
 		}
+		console.log(tempMenu);
 		datas.setMenuMsg(tempMenu);
 		$state.go('shoppingCar');
 		// $location.path('/tab/shoppingCar/'+);
@@ -1065,15 +1111,40 @@ angular.module('starter.controllers', [])
 	$scope.imgDatas = ['img/img1.jpg', 'img/img2.jpg'];
 })
 
-//已点菜单
-.controller('ShoppingCarCtrl', function(datas, $scope, $rootScope, $ionicHistory, $state, $ionicViewSwitcher) {
+//订单信息
+.controller('ShoppingCarCtrl', function(datas, $scope, $rootScope, $ionicHistory, $state, $ionicViewSwitcher, $location) {
 	console.log(datas.getCurrentOrder(), datas.getMenuMsg());
 	$scope.orderMsg = datas.getCurrentOrder();
+	$scope.orderMsg.money = '￥' + Math.ceil(Math.random() * 40 + 10);
+	$scope.orderMsg.statu = '未付款';
+	$scope.orderMsg.orderMenuId = $scope.orderMsg.orderId;
 	$scope.allMenu = datas.getMenuMsg();
+	//确定下单
 	$scope.makeOrder = function() {
-		console.log(datas.getCurrentOrder(), datas.getMenuMsg());
-		// $state.go('pay');
-		// $ionicViewSwitcher.nextDirection("forward");
+		// console.log(datas.getCurrentOrder(), datas.getMenuMsg());
+		$.ajax({
+			method: 'post',
+			url: 'http://localhost/restaurent/addOrders.php',
+			data: $scope.orderMsg,
+			dataType: 'json',
+			success: function(data) {
+				console.log(data);
+				if (data.result) {
+					$location.path('/tab/pay/' + $scope.orderMsg.orderId + '/tab.home');
+					$ionicViewSwitcher.nextDirection("forward");
+				}
+			},
+			error: function(data) {
+				console.log(data);
+			}
+		});
+	};
+	//删除订单
+	$scope.delOrder = function() {
+		datas.setCurrentOrder('');
+		datas.setMenuMsg('');
+		$location.path('/tab/home/' + $scope.orderMsg.restaurentId);
+		$ionicViewSwitcher.nextDirection("back");
 	};
 })
 
@@ -1113,7 +1184,7 @@ angular.module('starter.controllers', [])
 })
 
 //支付
-.controller('PayCtrl', function($scope, $rootScope, $ionicHistory, $ionicViewSwitcher, $stateParams) {
+.controller('PayCtrl', function($scope, $rootScope, $ionicHistory, $ionicViewSwitcher, $stateParams, $location, $state) {
 	$scope.orderData = {
 		money: '￥30',
 		name: '小明餐厅',
@@ -1132,6 +1203,15 @@ angular.module('starter.controllers', [])
 		title: '银联支付',
 		value: '银联'
 	}];
+	$scope.goBack = function() {
+		if ($stateParams.backTarget == 'null') {
+			$state.go();
+		} else {
+			$location.path('/tab/home/2');
+		}
+		$ionicViewSwitcher.nextDirection("back");
+
+	};
 })
 
 //顾客评论
