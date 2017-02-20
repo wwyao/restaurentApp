@@ -91,14 +91,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 	//菜单
 	.state('menu', {
-		url: '/tab/menu/:restaurentId',
+		url: '/tab/menu',
+		params: {
+			restaurentId: null,
+			from: ''
+		},
 		templateUrl: 'templates/menu.html',
 		controller: 'MenuCtrl'
 	})
 
 	//已点菜单
 	.state('shoppingCar', {
-		url: '/tab/shoppingCar/:orderId',
+		url: '/tab/shoppingCar',
+		params: {
+			orderId: null
+		},
 		templateUrl: 'templates/shoppingCar.html',
 		controller: 'ShoppingCarCtrl'
 	})
@@ -229,7 +236,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 	//预约
 	.state('bookTable', {
-		url: '/tab/bookTable/:restaurentId',
+		url: '/tab/bookTable',
+		params: {
+			restaurentId: null,
+			from: ''
+		},
 		templateUrl: 'templates/bookTable.html',
 		controller: 'BookTableCtrl'
 	})
@@ -271,7 +282,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 	//支付
 	.state('pay', {
-		url: '/tab/pay/:orderId/:backTarget',
+		url: '/tab/pay',
+		params: {
+			orderId: null
+		},
 		templateUrl: 'templates/pay.html',
 		controller: 'PayCtrl'
 	})

@@ -19,7 +19,7 @@ angular.module('starter.controllers', [])
 		if (target) {
 			$state.go(target);
 		} else {
-			$ionicHistory.goBack();
+			$ionicHistory.goBack(-1);
 		}
 		$ionicViewSwitcher.nextDirection("back");
 	};
@@ -193,7 +193,7 @@ angular.module('starter.controllers', [])
 	// document.querySelector('.bigScroll').style.height = window.screen.height + 'px';
 })
 
-//餐厅详细页页面
+//餐厅详细页面
 .controller('DetailCtrl', function($scope, $rootScope, $stateParams, $state, $ionicViewSwitcher, $http, datas) {
 	// $scope.id = $stateParams.id;
 	$scope.restaurentData = {};
@@ -222,6 +222,20 @@ angular.module('starter.controllers', [])
 			if (data.result) {
 				alert('关注成功');
 			}
+		});
+	};
+	// 点菜
+	$scope.toMenu = function() {
+		$state.go('menu', {
+			restaurentId: $scope.restaurentId,
+			from: 'detail'
+		});
+	};
+	// 预约
+	$scope.book = function() {
+		$state.go('bookTable', {
+			restaurentId: $scope.restaurentId,
+			from: 'detail'
 		});
 	};
 })
@@ -792,14 +806,18 @@ angular.module('starter.controllers', [])
 		$rootScope.order.contacter = $scope.bookDatas2[0].value;
 		$rootScope.order.phone = $scope.bookDatas2[1].value;
 		$rootScope.order.remark = $scope.bookDatas2[2].value;
-		// for (var key in $scope.order) {
-		// 	alert($scope.order[key]);
-		// }
 		console.log($rootScope.order);
 		datas.setCurrentOrder($rootScope.order);
-		// $state.go('menu');
-		$location.path('/tab/menu/' + $stateParams.restaurentId);
-		// $ionicHistory.goBack();
+		if ($stateParams.from == 'detail') {
+			$state.go('menu', {
+				restaurentId: $stateParams.restaurentId,
+				from: 'booktable'
+			});
+		} else if ($stateParams.from == 'menu') {
+			$state.go('shoppingCar', {
+				orderId: $rootScope.order.orderId
+			});
+		}
 		$ionicViewSwitcher.nextDirection("forward");
 	};
 })
@@ -1099,7 +1117,17 @@ angular.module('starter.controllers', [])
 		}
 		console.log(tempMenu);
 		datas.setMenuMsg(tempMenu);
-		$state.go('shoppingCar');
+		if ($stateParams.from == 'booktable') {
+			$state.go('shoppingCar', {
+				orderId: datas.getCurrentOrder().orderId
+			});
+		} else if ($stateParams.from == 'detail') {
+			$state.go('bookTable', {
+				restaurentId: $scope.restaurentId,
+				from: 'menu'
+			});
+		}
+
 		// $location.path('/tab/shoppingCar/'+);
 		$ionicViewSwitcher.nextDirection("forward");
 	};
@@ -1130,7 +1158,9 @@ angular.module('starter.controllers', [])
 			success: function(data) {
 				console.log(data);
 				if (data.result) {
-					$location.path('/tab/pay/' + $scope.orderMsg.orderId + '/tab.home');
+					$state.go('pay', {
+						orderId: $scope.orderMsg.orderId
+					});
 					$ionicViewSwitcher.nextDirection("forward");
 				}
 			},
@@ -1203,14 +1233,8 @@ angular.module('starter.controllers', [])
 		title: '银联支付',
 		value: '银联'
 	}];
-	$scope.goBack = function() {
-		if ($stateParams.backTarget == 'null') {
-			$state.go();
-		} else {
-			$location.path('/tab/home/2');
-		}
-		$ionicViewSwitcher.nextDirection("back");
-
+	$scope.stopPay = function() {
+		$ionicHistory.goBack(-4);
 	};
 })
 

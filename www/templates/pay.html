@@ -1,9 +1,9 @@
 <ion-view title="支付" id="pay" class="headerBg">
-  <ion-header-bar class="bar">
+  <ion-header-bar class="bar" title="支付">
     <ion-nav-bar>
-      <ion-nav-buttons side="left" class="backBtn">
+      <!-- <ion-nav-buttons side="left" class="backBtn">
         <i class="ion-chevron-left back-btn" ng-click="goBack()"></i>
-      </ion-nav-buttons>
+      </ion-nav-buttons> -->
     </ion-nav-bar>
   </ion-header-bar>
 
@@ -21,6 +21,6 @@
     </ul>
 
     <button type="button" class="paybtn">确定支付</button>
-    <div class="stop-pay">暂不支付</div>
+    <div class="stop-pay" ng-click="stopPay()">暂不支付</div>
   </ion-content>
 </ion-view>
