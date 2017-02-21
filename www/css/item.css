@@ -1,29 +1,31 @@
 #detail ion-content {
   /*overflow: hidden;*/
+  font-size: .14rem;
 }
 
 #detail .more-function {
   position: absolute;
   z-index: 100;
-  top: 10px;
-  right: 10px;
-  font-size: 25px;
+  top: .1rem;
+  right: .1rem;
+  font-size: .25rem;
 }
 
 #detail .more-list {
-  padding: 8px;
+  display: none;
+  padding: .08rem;
   position: fixed;
-  top: 44px;
+  top: .44rem;
   right: 0;
   z-index: 1000;
   background: rgb(10, 108, 209);
-  font-size: 14px;
   color: #fff;
-  letter-spacing: 5px;
+  letter-spacing: .05rem;
+  font-size: .16rem;
 }
 
 #detail .more-list li {
-  padding: 5px 0;
+  padding: .05rem 0;
 }
 
 #detail .more-list li:first-child {
@@ -37,58 +39,58 @@
 .top .res-img {
   position: static;
   width: 100%;
-  height: 180px;
+  height: 1.8rem;
 }
 
 .top img {
   position: absolute;
-  right: 5px;
-  bottom: 10px;
-  width: 25px;
-  height: 25px;
+  right: .05rem;
+  bottom: .1rem;
+  width: .25rem;
+  height: .25rem;
 }
 
 .top img:nth-child(2) {
-  bottom: 40px;
+  bottom: .4rem;
 }
 
 .content {
-  padding: 0 10px;
+  padding: 0 .1rem;
+  margin-bottom: .5rem;
 }
 
 .content li {
-  padding-bottom: 15px;
-  padding-right: 20px;
-  margin: 15px 0;
+  padding-bottom: .15rem;
+  padding-right: .2rem;
+  margin: .15rem 0;
   width: 100%;
-  border-bottom: 1px solid #c0c0c0;
+  border-bottom: .01rem solid #c0c0c0;
 }
 
 .content li i {
-  margin-right: 5px;
-  font-size: 14px;
+  margin-right: .05rem;
 }
 
 .content li:first-child {
   position: relative;
-  font-size: 12px;
+  font-size: .12rem;
 }
 
 .content li:first-child a {
-  margin-bottom: 5px;
+  margin-bottom: .05rem;
   display: block;
   width: 100%;
 }
 
 #detail .rightIon {
   position: absolute;
-  right: 0px;
-  width: 20px;
-  height: 20px;
+  right: 0;
+  width: .2rem;
+  height: .2rem;
 }
 
 .content li:nth-child(2) span {
-  margin-right: 25px;
+  margin-right: .25rem;
   color: #D91E27;
 }
 
@@ -98,7 +100,7 @@
 }
 
 .content li:last-child p:last-child {
-  font-size: 12px;
+  font-size: .12rem;
 }
 
 .content li a {
@@ -116,19 +118,19 @@
 }
 
 .left-buttons img {
-  width: 15px;
-  height: 15px;
+  width: .15rem;
+  height: .15rem;
 }
 
 .left-buttons {
-  padding-left: 5px;
-  padding-top: 9px;
+  padding-left: .05rem;
+  padding-top: .09rem;
 }
 
 #detail .iright2 {
   position: absolute;
-  right: 5px;
-  font-size: 15px;
+  right: .05rem;
+  font-size: .15rem;
 }
 
 #footer {
@@ -147,7 +149,7 @@
   height: 100%;
   text-align: center;
   color: #000;
-  line-height: 40px;
+  line-height: .4rem;
   text-decoration: none;
 }
 
@@ -170,4 +172,10 @@
 .share img:first-child {
   margin-top: 50%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#detail #footer {
+  line-height: .5rem;
+  font-size: .16rem;
+  box-shadow: 0 0 2px 0 #505050;
 }

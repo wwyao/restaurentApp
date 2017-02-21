@@ -1,55 +1,52 @@
 .orderTitle {
-  font-size: 20px;
-  color: #fff;
+  font-size: .2rem;
+}
+
+#orders {
+  font-size: .14rem;
 }
 
 #orders .tabs {
   padding-top: 0 !important;
-  top: 43px;
-  height: 40px;
-  line-height: 40px;
-  /*border-bottom: 1px solid rgba(43, 45, 39, 0.44);*/
+  top: .43rem;
+  height: .4rem;
+  line-height: .4rem;
 }
 
 #order-page1, #order-page2, #order-page3 {
-  margin-bottom: 42px;
-  top: 42px;
+  margin-bottom: .42rem;
+  top: .42rem;
   background: #f5f5f5;
 }
 
 .page-item {
-  /*padding: 3px 5px;*/
-  margin-bottom: 20px;
+  margin-bottom: .2rem;
   background: #fff;
-  /*border-top: 1px solid #b0b0b0;*/
   border-bottom: 1px solid #ffcc66;
-  /*box-shadow: 0 0 2px 0 #f5f5f5;*/
 }
 
 .page-item p:first-child {
   margin: 0;
-  padding: 5px 0;
-  padding-left: 5px;
+  padding: .05rem 0;
+  padding-left: .05rem;
   background: rgb(250, 123, 20);
   border-bottom: 1px solid rgba(0, 0, 120, .2);
 }
 
 .page-item p {
-  margin: 2px 10px;
+  margin: .02rem .1rem;
 }
 
 .page-item div {
   overflow: hidden;
-  padding: 5px 5px 3px;
-  /*border-top: 1px solid rgba(0, 0, 120, .2);*/
+  padding: .05rem .05rem .03rem;
 }
 
 .page-item div a, .page-item div span {
   float: right;
-  padding: 3px 5px;
-  margin-left: 20px;
-  border-radius: 5px;
-  /*border: 1px solid rgba(0, 0, 0, .6);*/
+  padding: .03rem .05rem;
+  margin-left: .2rem;
+  border-radius: .05rem;
   color: #fff;
 }
 
@@ -58,7 +55,7 @@
 }
 
 .page-item div a {
-  padding: 3px 13px;
+  padding: .03rem .13rem;
   background: rgb(226, 109, 25);
 }
 
@@ -67,7 +64,7 @@
 }
 
 #order-page2 .page-item div a {
-  padding: 3px 13px;
+  padding: .03rem .13rem;
 }
 
 #order-page2 .page-item div a:first-child {
@@ -80,25 +77,10 @@
 
 #order-page3 .write-btn {
   float: right;
-  padding: 3px 13px;
-  border-radius: 5px;
+  padding: .03rem .13rem;
+  border-radius: .05rem;
   color: #fff;
   background: rgb(226, 109, 25);
   border: none;
   outline: none;
 }
-
-
-/*#orders .order-pages {
-  margin-top: 40px;
-}*/
-
-
-/*.order-pages .unlogined {
-  color: red;
-  text-align: center;
-}
-
-.order-pages .robot {
-  margin-left: -90px;
-}*/

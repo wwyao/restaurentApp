@@ -6,7 +6,6 @@
       </ion-nav-buttons> -->
     </ion-nav-bar>
   </ion-header-bar>
-
   <ion-content>
     <ul class="pay-order">
       <li>订金：<span>{{orderData.money}}</span></li>
@@ -16,10 +15,9 @@
     <ul class="pay-payselector">
       <li ng-repeat="item in payData">
         <img src="{{item.imgsrc}}" alt=""> {{item.title}}
-        <input type="radio" name="pay" value="{{item.value}}">
+        <input type="radio" name="pay" value="{{item.value}}" ng-model="item.value">
       </li>
     </ul>
-
     <button type="button" class="paybtn">确定支付</button>
     <div class="stop-pay" ng-click="stopPay()">暂不支付</div>
   </ion-content>

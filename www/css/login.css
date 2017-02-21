@@ -1,5 +1,6 @@
 #login {
   background: #f5f5f5;
+  font-size: .16rem;
 }
 
 #login .bar {
@@ -10,7 +11,7 @@
 .username, .password {
   background: #fff;
   width: 100%;
-  height: 50px;
+  height: .5rem;
   border-bottom: 1px solid rgb(203, 208, 196);
 }
 
@@ -19,28 +20,28 @@
   padding-left: 2%;
   width: 20%;
   height: 100%;
-  line-height: 50px;
+  line-height: .5rem;
 }
 
 .username input, .password input {
   display: inline-block;
   padding-left: 5%;
   width: 63%;
-  height: 40px;
+  height: .4rem;
   vertical-align: middle;
 }
 
 .password .eyes {
-  margin-left: 15px;
-  font-size: 18px;
+  margin-left: .15rem;
+  font-size: .18rem;
   vertical-align: middle;
 }
 
 .loginbtn {
   display: block;
-  margin: 30px auto 0;
+  margin: .3rem auto 0;
   width: 90%;
-  height: 35px;
+  height: .35rem;
   background: rgb(190, 110, 45);
   color: #fff;
   border-radius: 5px;
@@ -49,15 +50,15 @@
 }
 
 .forget {
-  margin: 5px 5%;
+  margin: .05rem 5%;
   float: right;
 }
 
 .register {
   display: block;
-  margin: 40px auto;
-  padding: 5px;
-  width: 100px;
+  margin: .4rem auto;
+  padding: .05rem;
+  width: 1rem;
   border: 1px solid rgb(190, 110, 45);
   border-radius: 5px;
   text-align: center;

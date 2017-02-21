@@ -25,7 +25,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 	});
 })
 
+.directive('payBox', function() {
+	return {
+		restrict: 'EACM',
+		scope: true,
+		templateUrl: '../templates/common/payBox.html'
+	}
+})
+
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+	// 设置字体大小
+	let winWidth = $(window).width();
+	let size = (winWidth / 320) * 100;　
+	document.documentElement.style.fontSize = (size < 100 ? size : 100) + 'px';
+
 	$ionicConfigProvider.platform.ios.tabs.style('standard');
 	$ionicConfigProvider.platform.ios.tabs.position('bottom');
 	$ionicConfigProvider.platform.android.tabs.style('standard');
@@ -168,6 +181,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 	//我的
 	.state('tab.me', {
 		url: '/me',
+		cache: false,
 		views: {
 			'tab-me': {
 				templateUrl: 'templates/tab-me.html',
@@ -284,10 +298,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 	.state('pay', {
 		url: '/tab/pay',
 		params: {
-			orderId: null
+			orderId: null,
+			from: ''
 		},
 		templateUrl: 'templates/pay.html',
 		controller: 'PayCtrl'
+	})
+
+	// 扫二维码自动支付
+	.state('qrcode_pay', {
+		url: '/tab/qrcodepay',
+		templateUrl: 'templates/me_qrcode_pay.html',
+		controller: 'QrcodepayCtrl'
 	})
 
 	//关于

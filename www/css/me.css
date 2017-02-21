@@ -1,20 +1,20 @@
 #me {
   background: #f5f5f5;
+  font-size: .14rem;
 }
 
 .me-icon {
   position: absolute;
-  top: 10px;
-  right: 5px;
-  width: 1.3em;
-  height: 1.3em;
+  top: .15rem;
+  right: .05rem;
+  width: .2rem;
+  height: .2rem;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
 }
 
 .me-header {
-
   position: relative;
   color: #fff;
 }
@@ -26,13 +26,13 @@
 }
 
 .mh-top h3 {
-  padding-top: 10px;
-  font-size: 20px;
+  padding-top: .1rem;
+  font-size: .2rem;
   color: #fff;
 }
 
 .mh-top div {
-  padding: 15px 0 25px 10px;
+  padding: .15rem 0 .25rem .1rem;
   text-align: left;
 }
 
@@ -41,26 +41,25 @@
 }
 
 .mh-top div img {
-  margin-right: 10px;
-  width: 55px;
-  height: 55px;
-  border-radius: 50px;
+  margin-right: .1rem;
+  width: .55rem;
+  height: .55rem;
+  border-radius: .5rem;
   border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
 .mh-bottom {
-  padding: 5px 0;
+  padding: .05rem 0;
   display: flex;
   justify-content: space-around;
   color: #000;
   list-style: none;
-  /*border-bottom: 1px solid #909090;*/
   box-shadow: 0 1px 1px 0 #c0c0c0;
 }
 
 .mh-bottom li a {
   display: inline-block;
-  padding-top: 20px;
+  padding-top: .2rem;
   width: 100%;
   height: 100%;
   text-decoration: none;
@@ -69,45 +68,45 @@
 
 .mh-bottom li:nth-child(1) {
   background: url(../img/yaoqing.png) no-repeat center top;
-  background-size: 20px 20px;
+  background-size: .2rem .2rem;
 }
 
 .mh-bottom li:nth-child(2) {
   background: url(../img/cash.png) no-repeat center top;
-  background-size: 20px 20px;
+  background-size: .2rem .2rem;
 }
 
 .mh-bottom li:nth-child(3) {
   background: url(../img/card.png) no-repeat center top;
-  background-size: 20px 20px;
+  background-size: .2rem .2rem;
 }
 
 .mh-bottom li:nth-child(4) {
   background: url(../img/msg.png) no-repeat center top;
-  background-size: 20px 20px;
+  background-size: .2rem .2rem;
 }
 
 #me .scroll-content {
   overflow: hidden;
-  top: 200px;
+  top: 2rem;
   /*border-top: 1px solid #e0e0e0;*/
 }
 
 .list .item {
-  font-size: 14px;
+  font-size: .14rem;
   border: 1px solid #e0e0e0;
 }
 
 .iright {
   position: absolute;
-  right: 16px;
+  right: .16rem;
 }
 
 .me-item-othermsg {
-  float: right;
-  margin-right: 25px;
+  position: absolute;
+  right: .25rem;
 }
 
 .divDiving {
-  margin: 10px 0;
+  margin: .1rem 0;
 }

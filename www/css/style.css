@@ -1,8 +1,12 @@
 /* Empty. Add your own CSS if you like */
 
+html, body {
+  /*font-size: 100px;*/
+}
+
 .tabs {
   background: #fff !important;
-  box-shadow: 0 0 3px 0 #909090;
+  box-shadow: 0 0 .03rem 0 #909090;
 }
 
 a {
@@ -12,9 +16,9 @@ a {
 
 .back-btn {
   display: inline-block;
-  margin-top: -5px;
-  padding: 5px;
-  font-size: 18px;
+  margin-top: -.05rem;
+  padding: .05rem;
+  font-size: .18rem;
 }
 
 .headerBg .bar, .bar {
@@ -24,8 +28,8 @@ a {
 }
 
 #userProtocol .scroll-content, #about .scroll-content {
-  padding: 10px 15px;
-  font-size: 12px;
+  padding: .1rem .15rem;
+  font-size: .12rem;
 }
 
 #fedback {
@@ -34,20 +38,20 @@ a {
 }
 
 #fedback .fedbackText {
-  padding: 5px;
+  padding: .05rem;
   width: 100%;
-  font-size: 14px;
+  font-size: .14rem;
   word-break: break-all;
 }
 
 #fedback .btn {
-  margin-top: 50px;
-  width: 150px;
-  height: 30px;
+  margin-top: .5rem;
+  width: 1.5rem;
+  height: .3rem;
   background: rgb(107, 219, 47);
   border: none;
   outline: none;
-  box-shadow: 1px 1px 2px 0 #909090;
+  box-shadow: .01rem .01rem .02rem 0 #909090;
 }
 
 #search .headerBg {
@@ -55,16 +59,16 @@ a {
 }
 
 #search .search-text {
-  padding: 5px 10px;
+  padding: .05rem .1rem;
   position: absolute;
   z-index: 100000;
-  top: 5px;
+  top: .05rem;
   left: 15%;
   background: rgb(32, 119, 182);
   width: 80%;
   border: none;
   outline: none;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: .01rem solid #f0f0f0;
   color: #fff;
 }
 
@@ -78,52 +82,54 @@ a {
 }
 
 .commendRestaurentBtn {
-  margin: 20px auto;
+  margin: .2rem auto;
   display: block;
   width: 80%;
-  height: 30px;
+  height: .3rem;
   color: #fff;
   background: rgb(235, 80, 80);
   border: none;
-  border-radius: 5px;
-  box-shadow: 0 0 3px 0 #909090;
+  border-radius: .05rem;
+  box-shadow: 0 0 .03rem 0 #909090;
 }
 
 .account-edit {
   position: absolute;
-  top: 13px;
-  right: 10px;
+  top: .13rem;
+  right: .1rem;
   z-index: 1000;
+  font-size: .16rem;
 }
 
 .account-List .accountInput {
   display: inline-block;
-  float: right;
+  position: absolute;
+  top: 15%;
+  right: .15rem;
   text-align: right;
-  margin-right: 10px;
-  font-size: 16px;
+  font-size: .16rem;
   width: 70%;
   background: #fff;
 }
 
 .account-radois {
   display: inline-block;
-  margin-right: 15px;
-  float: right;
+  position: absolute;
+  right: .15rem;
 }
 
 #account .birthdate {
-  margin-right: 10px;
-  float: right;
+  position: absolute;
+  right: .15rem;
 }
 
 #account .account-img {
   display: inline-block;
-  float: right;
-  margin-right: 10px;
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
+  position: absolute;
+  right: .15rem;
+  width: .3rem;
+  height: .3rem;
+  border-radius: .1rem;
 }
 
 
@@ -131,26 +137,27 @@ a {
 
 #book-table {
   background: #f5f5f5;
+  font-size: .16rem;
 }
 
 #book-table input {
   display: inline-block;
   position: absolute;
-  top: 10px;
-  right: 0px;
-  padding-right: 15px;
+  top: .1rem;
+  right: 0;
+  padding-right: .15rem;
   text-align: right;
   width: 70%;
   background: #fff;
 }
 
 #book-table .list-bottom {
-  margin-top: 10px;
+  margin-top: .1rem;
 }
 
 #book-table .go-btn {
   display: block;
-  margin: 30px auto;
+  margin: .3rem auto;
   width: 70%;
 }
 
@@ -160,38 +167,38 @@ a {
 
 #book-table .checkbtn {
   position: absolute;
-  right: 15px;
-  top: 11px;
+  right: .15rem;
+  top: .11rem;
 }
 
 .peopleNum-sub {
   position: absolute;
-  right: 15px;
-  top: 15px;
-  font-size: 18px;
+  right: .15rem;
+  top: .15rem;
+  font-size: .18rem;
 }
 
 .peopleNum-sub span {
   display: inline-block;
-  margin: 0 7px;
-  width: 20px;
-  height: 20px;
-  border: 1px solid #909090;
+  margin: 0 .07rem;
+  width: .2rem;
+  height: .2rem;
+  border: .01rem solid #909090;
   text-align: center;
-  line-height: 16px;
+  line-height: .16rem;
 }
 
 #book-table .time {
   position: absolute;
-  right: 15px;
-  top: 15px;
+  right: .15rem;
+  top: .15rem;
   color: #000;
 }
 
 #book-table .desk-box {
   display: none;
   width: 100%;
-  height: 130px;
+  height: 1.3rem;
 }
 
 #book-table .desk-box .scroll {
@@ -203,26 +210,25 @@ a {
 }
 
 #book-table .desk {
-  padding-top: 40px;
-  margin-top: 5px !important;
+  padding-top: .4rem;
+  margin-top: .05rem !important;
   display: inline-block;
   width: 22%;
-  /*height: 60px;*/
   background: url('../img/desk.png') no-repeat center top;
-  background-size: 40px 40px;
+  background-size: .4rem .4rem;
   text-align: center;
 }
 
 #book-table .desk-active {
   background: url('../img/desk2.png') no-repeat center top;
-  background-size: 40px 40px;
+  background-size: .4rem .4rem;
   color: red;
 }
 
 #qrcode_welcome .welcome-text p {
-  margin-top: 50px;
+  margin-top: .5rem;
   text-align: center;
-  font-size: 16px;
+  font-size: .16rem;
 }
 
 #qrcode_welcome .welcome-text p span {
@@ -262,12 +268,11 @@ a {
 }
 
 .register-box div {
-  margin: 5px auto;
-  padding: 5px 0;
+  margin: .05rem auto;
+  padding: .05rem 0;
   width: 90%;
-  border: 1px solid #909090;
-  border-radius: 10px;
-  /*background: #fff;*/
+  border: .01rem solid #909090;
+  border-radius: .1rem;
 }
 
 .register-box div:first-child {
@@ -278,12 +283,10 @@ a {
   display: inline-block;
   width: 55%;
   vertical-align: middle;
-  /*background: red;*/
-  /*border-bottom: 1px solid rgb(11, 108, 222);*/
 }
 
 .register-box div span {
-  padding-right: 10px;
+  padding-right: .1rem;
   display: inline-block;
   width: 30%;
   text-align: right;
@@ -291,15 +294,14 @@ a {
 }
 
 .register-box .button {
-  padding: 0px;
-  margin-top: 50px;
+  padding: 0;
+  margin-top: .5rem;
   width: 60%;
 }
 
 .register-box .eyes, .register-box .check-result {
-  font-size: 20px;
+  font-size: .2rem;
   vertical-align: middle;
-  /*color: blue;*/
 }
 
 .register-box .name-right {
@@ -318,80 +320,82 @@ a {
 }
 
 #evaluation .evaluation-content li {
-  margin: 15px auto;
+  margin: .15rem auto;
   width: 95%;
-  /*border: 1px solid #000;*/
-  border-radius: 10px;
+  border-radius: .1rem;
   overflow: hidden;
-  box-shadow: 0 0 2px 0 #000;
+  box-shadow: 0 0 .02rem 0 #000;
 }
 
 .evaluation-content li div, .evaluation-content li p {
-  padding: 5px;
+  padding: .05rem;
   overflow: hidden;
 }
 
 .evaluation-content li>div:first-child {
   background: #f5f5f5;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
+  border-top-right-radius: .1rem;
+  border-top-left-radius: .1rem;
 }
 
 .evaluation-content li>div:first-child img {
-  margin-right: 15px;
-  width: 25px;
-  height: 25px;
+  margin-right: .15rem;
+  width: .25rem;
+  height: .25rem;
   vertical-align: middle;
 }
 
 .evaluation-content li>div:last-child {
   background: #f5f5f5;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  font-size: 20px;
+  border-bottom-right-radius: .1rem;
+  border-bottom-left-radius: .1rem;
+  font-size: .2rem;
   color: rgb(26, 61, 210);
 }
 
 .evaluation-content li .time {
-  font-size: 14px;
+  font-size: .14rem;
   color: #909090;
 }
 
 .evaluation-content li>div:last-child i {
   float: right;
-  margin: 0 5px;
-  letter-spacing: 10px;
+  margin: 0 .05rem;
+  letter-spacing: .1rem;
 }
 
 
 /*城市选择*/
+
+#selectCity {
+  font-size: .14rem;
+}
 
 #selectCity .city-nav {
   background: #f0f0f0;
 }
 
 #selectCity .location-city, #selectCity .hot-city {
-  margin: 10px;
+  margin: .1rem;
 }
 
 #selectCity .location-city div, #selectCity .hot-city div {
-  margin: 10px;
+  margin: .1rem;
 }
 
 #selectCity .location-city span, #selectCity .hot-city span {
-  margin: 15px;
-  padding: 3px 5px;
-  /*border: 1px solid #000;*/
-  border-radius: 5px;
-  box-shadow: 0 0 2px 0 #000;
+  margin: .15rem;
+  padding: .03rem .05rem;
+  border-radius: .05rem;
+  box-shadow: 0 0 .02rem 0 #000;
 }
 
 #selectCity .alphabet {
-  padding-top: 45px;
+  padding-top: .6rem;
   position: fixed;
   top: 0;
   right: 0;
-  width: 20px;
+  width: .2rem;
   height: 100%;
   text-align: center;
   background: rgba(13, 84, 180, .7);
@@ -399,54 +403,58 @@ a {
 }
 
 #selectCity .city li {
-  padding: 3px 10px;
-  border-bottom: 1px solid rgba(166, 166, 166, .2);
+  padding: .03rem .1rem;
+  border-bottom: .01rem solid rgba(166, 166, 166, .2);
 }
 
 #selectCity .city li:first-child {
-  border-top: 1px solid rgba(166, 166, 166, .3);
+  border-top: .01rem solid rgba(166, 166, 166, .3);
 }
 
 #selectCity .show-alphabet {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 50px;
-  height: 50px;
-  margin-left: -25px;
-  margin-top: -25px;
+  width: .5rem;
+  height: .5rem;
+  margin-left: -.25rem;
+  margin-top: -.25rem;
   background: rgba(15, 97, 221, .8);
   color: #fff;
-  font-size: 25px;
-  border-radius: 10px;
+  font-size: .25rem;
+  border-radius: .1rem;
   text-align: center;
-  line-height: 50px;
+  line-height: .5rem;
 }
 
 
 /*已点菜单*/
 
+#shoppingCar {
+  font-size: .14rem;
+}
+
 #shoppingCar .car-trash {
   position: absolute;
   z-index: 100;
-  top: 13px;
-  right: 15px;
-  font-size: 20px;
+  top: .13rem;
+  right: .15rem;
+  font-size: .2rem;
 }
 
 #shoppingCar .classify {
   color: #F35800;
-  border-top: 1px solid #CACACA;
+  border-top: .01rem solid #CACACA;
 }
 
 #shoppingCar .shoppingCar-order li {
-  padding: 5px 0;
+  padding: .05rem 0;
   position: relative;
   overflow: hidden;
   display: flex;
   justify-content: space-around;
-  border-bottom: 1px solid #CACACA;
-  font-size: 12px;
+  border-bottom: .01rem solid #CACACA;
+  font-size: .12rem;
 }
 
 #shoppingCar .shoppingCar-order li span, #shoppingCar .classify span {
@@ -456,19 +464,24 @@ a {
 
 #shoppingCar .footer {
   position: fixed;
-  bottom: 0px;
+  bottom: 0;
   width: 100%;
-  height: 40px;
+  height: .4rem;
   background: #EF2F2F;
-  font-size: 20px;
+  font-size: .2rem;
   color: #fff;
   text-align: center;
-  line-height: 40px;
-  letter-spacing: 15px;
+  line-height: .4rem;
+  letter-spacing: .15rem;
 }
 
 #shoppingCar .orderMsg div {
-  margin: 15px 5px;
+  margin: .07rem 0;
+  padding-left: .05rem;
+}
+
+#shoppingCar .orderMsg div:last-child {
+  padding-left: 0;
 }
 
 #shoppingCar .orderMsg div>span {
@@ -485,25 +498,25 @@ a {
 /*我的关注*/
 
 #concern .item-top {
-  /*position: absolute;*/
-  padding-bottom: 10px;
+  position: relative;
+  padding-bottom: .1rem;
   width: 100%;
-  /*background: red;*/
 }
 
 #concern .item-top span:first-child {
-  padding: 3px 8px;
-  border: 1px solid #2065E8;
+  padding: .03rem .08rem;
+  border: .01rem solid #2065E8;
   border-radius: 100%;
 }
 
 #concern .item-top span:last-child {
-  float: right;
+  position: absolute;
+  right: 0;
   background: #B6B2B2;
-  font-size: 12px;
-  padding: 0px 8px;
-  border: 1px solid #2065E8;
-  border-radius: 2px;
+  font-size: .12rem;
+  padding: 0 .08rem;
+  border: .01rem solid #2065E8;
+  border-radius: .02rem;
 }
 
 #concern .aitem div {
@@ -511,14 +524,18 @@ a {
 }
 
 #concern .aitem .item-con {
-  margin-left: 120px;
+  margin-left: 1.2rem;
 }
 
 
 /*写评论*/
 
+.write-content {
+  font-size: .16rem;
+}
+
 .write-content div {
-  margin: 25px 5px;
+  margin: .25rem .05rem;
 }
 
 .write-content div span, .write-content div input {
@@ -526,22 +543,20 @@ a {
 }
 
 .write-content div input {
-  margin: 0 20px;
+  margin: 0 .2rem;
 }
 
 .write-content div span:last-child {
-  padding: 2px;
-  border: 1px solid #0D3EC7;
-  border-radius: 5px;
+  padding: .02rem;
+  border: .01rem solid #0D3EC7;
+  border-radius: .05rem;
   color: red;
 }
 
 .write-content div textarea {
-  /*background: #D5D5D5;*/
-  padding: 5px;
+  padding: .05rem;
   width: 96%;
-  /*margin-right: 5px;*/
-  border: 1px solid #F27C04;
+  border: .01rem solid #F27C04;
 }
 
 .write-content div i {
@@ -549,20 +564,20 @@ a {
 }
 
 #writeComment #footer {
-  height: 45px;
+  height: .45rem;
   text-align: center;
-  line-height: 45px;
+  line-height: .45rem;
   background: #DA0000;
   color: #fff;
-  font-size: 18px;
-  letter-spacing: 5px;
+  font-size: .18rem;
+  letter-spacing: .05rem;
 }
 
 
 /*推荐餐厅*/
 
 #commendRestaurent h4 {
-  margin: 50px 0 15px;
+  margin: .5rem 0 .15rem;
   text-align: center;
 }
 
@@ -570,27 +585,26 @@ a {
   display: block;
   margin: 0 auto;
   width: 95%;
-  height: 40px;
-  font-size: 20px;
-  border: 1px solid rgb(37, 59, 201);
+  height: .4rem;
+  font-size: .16rem;
+  border: 1px solid rgb(230, 152, 20);
 }
 
 #commendRestaurent textarea {
   margin: 0 auto;
-  padding: 5px;
+  padding: .05rem;
   width: 95%;
-  border: 1px solid rgb(37, 59, 201);
-  border-radius: 5px;
-  font-size: 18px;
+  border: 1px solid rgb(230, 152, 20);
+  border-radius: .05rem;
+  font-size: .16rem;
 }
 
 #commendRestaurent #footer {
-  height: 45px;
-  line-height: 45px;
-  background: red;
+  line-height: .45rem;
+  background: rgb(194, 113, 29);
   color: #fff;
-  font-size: 25px;
-  letter-spacing: 5px;
+  font-size: .18rem;
+  letter-spacing: .05rem;
   text-align: center;
 }
 
@@ -601,48 +615,50 @@ a {
   display: none;
   position: fixed;
   z-index: 100;
-  background: rgba(0, 0, 0, .7);
+  background: rgba(0, 0, 0, .3);
   width: 100%;
   height: 100%;
+  font-size: .16rem;
 }
 
 #passwordBox>div {
-  padding-top: 40px;
+  padding-top: .3rem;
   margin: 50% auto;
   width: 70%;
   background: #fff;
-  border-radius: 5px;
+  border-radius: .05rem;
 }
 
-#passwordBox>div div {
+#passwordBox>div>div {
+  margin: .3rem auto;
+  padding-bottom: .1rem;
+  display: flex;
+  justify-content: space-around;
   text-align: center;
+  width: 90%;
 }
 
 #passwordBox input {
-  padding: 0 5px;
-  width: 100%;
-  height: 50px;
+  padding: 0 .05rem;
+  margin: .1rem auto;
+  width: 90%;
+  line-height: .5rem;
   border: 1px solid rgba(185, 185, 185, 0.84);
-}
-
-#passwordBox input:first-child {
-  border-bottom: none;
+  border-radius: .05rem;
 }
 
 #passwordBox span {
-  margin: 20px 15px;
-  padding: 5px 30px;
+  padding: 0 .3rem;
   display: inline-block;
-  height: 40px;
-  line-height: 30px;
-  text-align: center;
-  background: red;
+  line-height: .3rem;
+  background: rgb(139, 139, 135);
   color: #fff;
-  border-radius: 10px;
+  font-size: .14rem;
+  border-radius: 5px;
 }
 
 #passwordBox span:last-child {
-  background: rgb(18, 13, 238);
+  background: rgb(210, 179, 16);
 }
 
 
@@ -650,32 +666,33 @@ a {
 
 #pay {
   background: #f5f5f5;
+  font-size: .14rem;
 }
 
 #pay .pay-order {
-  padding: 20px 10px;
+  padding: .2rem .1rem;
   background: #fff;
-  border-bottom: 1px solid #c0c0c0;
-  font-size: 16px;
+  border-bottom: .01rem solid #c0c0c0;
+  font-size: .16rem;
 }
 
 #pay .pay-order li {
-  margin: 10px 0;
+  margin: .1rem 0;
 }
 
 .pay-order li:first-child span {
-  font-size: 30px;
+  font-size: .3rem;
   color: red;
 }
 
 #pay .pay-payselector {
-  margin-top: 20px;
+  margin-top: .2rem;
   background: #fff;
-  border-top: 1px solid #c0c0c0;
+  border-top: .01rem solid #c0c0c0;
 }
 
 #pay .pay-payselector li {
-  padding: 10px;
+  padding: .1rem;
   border-bottom: 1px solid #c0c0c0;
   vertical-align: middle;
 }
@@ -683,9 +700,9 @@ a {
 .pay-payselector li input {
   float: right;
   display: inline-block;
-  margin-top: 8px;
-  width: 18px;
-  height: 18px;
+  margin-top: .08rem;
+  width: .18rem;
+  height: .18rem;
 }
 
 .pay-payselector li img {
@@ -693,21 +710,39 @@ a {
 }
 
 #pay .paybtn {
-  margin: 40px auto 0;
-  padding: 8px 0;
+  margin: .4rem auto 0;
+  padding: .08rem 0;
   display: block;
   width: 80%;
   background: red;
   border: none;
   outline: none;
-  border-radius: 5px;
+  border-radius: .05rem;
   color: #fff;
-  font-size: 16px;
+  font-size: .16rem;
 }
 
 #pay .stop-pay {
-  margin-top: 20px;
+  margin-top: .2rem;
   text-align: center;
   color: #909090;
   text-decoration: underline;
+}
+
+
+/*我的二维码*/
+
+#invite img, #qrcodepay img {
+  width: 100%;
+}
+
+
+/*扫二维码支付*/
+
+#qrcodepay p {
+  position: relative;
+  top: .60rem;
+  text-align: center;
+  color: red;
+  font-size: .16rem;
 }

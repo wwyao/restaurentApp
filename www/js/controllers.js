@@ -224,6 +224,9 @@ angular.module('starter.controllers', [])
 			}
 		});
 	};
+	$scope.more = function() {
+		$('.more-list').slideToggle();
+	};
 	// 点菜
 	$scope.toMenu = function() {
 		$state.go('menu', {
@@ -295,12 +298,12 @@ angular.module('starter.controllers', [])
 	// }
 	$scope.userData = datas.getUserDatas();
 	$scope.meItems1 = [{
-		href: '#/tab/RecommendRestaurent',
+		href: 'recommendRestaurent',
 		show: false,
 		otherMsg: "18826255298",
 		tagText: '推荐餐厅'
 	}, {
-		href: '#/tab/myconcern',
+		href: 'myconcern',
 		show: false,
 		otherMsg: "18826255298",
 		tagText: '我的关注'
@@ -317,12 +320,12 @@ angular.module('starter.controllers', [])
 		tagText: '加价投诉'
 	}];
 	$scope.meItems3 = [{
-		href: '#/tab/about',
+		href: 'about',
 		show: false,
 		otherMsg: "18826255298",
 		tagText: '关于小明点餐'
 	}, {
-		href: '#/tab/userprotocol',
+		href: 'userprotocol',
 		show: false,
 		otherMsg: "18826255298",
 		tagText: '小明点餐用户协议'
@@ -331,10 +334,14 @@ angular.module('starter.controllers', [])
 		$state.go('setting');
 		$ionicViewSwitcher.nextDirection("forward");
 	};
+	$scope.itemClick = function(url) {
+		$state.go(url);
+		$ionicViewSwitcher.nextDirection("forward");
+	};
 })
 
 //未消费页面
-.controller('page1', function(datas, $scope, $rootScope, $http, $cordovaDialogs) {
+.controller('page1', function(datas, $scope, $rootScope, $http, $cordovaDialogs, $state, $ionicViewSwitcher) {
 	$scope.datas = [];
 	$scope.start = 0;
 
@@ -362,6 +369,7 @@ angular.module('starter.controllers', [])
 			//处理响应失败
 		});
 	};
+	$scope.loadMore();
 	var i = 0;
 	$scope.cancel = function(e, orderId) {
 		e.stopPropagation();
@@ -401,10 +409,17 @@ angular.module('starter.controllers', [])
 			});
 		}
 	};
+	$scope.toPay = function(orderId) {
+		$state.go('pay', {
+			orderId: orderId,
+			from: 'orders'
+		});
+		$ionicViewSwitcher.nextDirection("forward");
+	};
 })
 
 //就餐中页面
-.controller('page2', function(datas, $scope, $rootScope, $http) {
+.controller('page2', function(datas, $scope, $rootScope, $http, $state, $ionicViewSwitcher) {
 	$scope.datas = [];
 	$scope.start = 0;
 	$scope.isBottom = true;
@@ -430,6 +445,21 @@ angular.module('starter.controllers', [])
 		}).error(function(data, header, config, status) {
 			//处理响应失败
 		});
+	};
+	$scope.loadMore();
+	$scope.toPay = function(orderId) {
+		$state.go('pay', {
+			orderId: orderId,
+			from: 'orders'
+		});
+		$ionicViewSwitcher.nextDirection("forward");
+	};
+	$scope.addMenu = function(orderId) {
+		$state.go('menu', {
+			restaurentId: null,
+			from: 'orders'
+		});
+		$ionicViewSwitcher.nextDirection("forward");
 	};
 })
 
@@ -461,6 +491,7 @@ angular.module('starter.controllers', [])
 			//处理响应失败
 		});
 	};
+	$scope.loadMore();
 	$scope.toWrite = function(orderId, restaurentId, title) {
 		// alert(orderId);
 		var writeUrl = '/writeComment/' + orderId + '/' + restaurentId + '/' + title;
@@ -966,7 +997,7 @@ angular.module('starter.controllers', [])
 //推荐餐厅页面
 .controller('RecommendRestaurentCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $ionicHistory) {
 	$scope.itemDatas = [{
-		name: '11'
+		name: '请选择要推荐的餐厅'
 	}, {
 		name: '22'
 	}, {
@@ -1173,7 +1204,7 @@ angular.module('starter.controllers', [])
 	$scope.delOrder = function() {
 		datas.setCurrentOrder('');
 		datas.setMenuMsg('');
-		$location.path('/tab/home/' + $scope.orderMsg.restaurentId);
+		$ionicHistory.goBack(-3);
 		$ionicViewSwitcher.nextDirection("back");
 	};
 })
@@ -1221,10 +1252,6 @@ angular.module('starter.controllers', [])
 		orderId: '12312312312'
 	};
 	$scope.payData = [{
-		imgsrc: 'img/zhifubao.png',
-		title: '支付宝支付',
-		value: '支付宝'
-	}, {
 		imgsrc: 'img/wxpay.png',
 		title: '微信支付',
 		value: '微信'
@@ -1232,9 +1259,18 @@ angular.module('starter.controllers', [])
 		imgsrc: 'img/yinlian.png',
 		title: '银联支付',
 		value: '银联'
+	}, {
+		imgsrc: 'img/zhifubao.png',
+		title: '支付宝支付',
+		value: '支付宝'
 	}];
 	$scope.stopPay = function() {
-		$ionicHistory.goBack(-4);
+		if ($stateParams.from == 'orders') {
+			$ionicHistory.goBack(-1);
+		} else {
+			$ionicHistory.goBack(-4);
+		}
+		$ionicViewSwitcher.nextDirection("back");
 	};
 })
 
@@ -1334,6 +1370,11 @@ angular.module('starter.controllers', [])
 		}
 
 	};
+})
+
+// 扫二维码自动支付
+.controller('QrcodepayCtrl', function($scope, $state, $rootScope) {
+
 })
 
 //用户注册

@@ -1,3 +1,7 @@
+#menu {
+  font-size: .14rem;
+}
+
 #menu #scroll1 {
   display: inline-block;
   width: 25%;
@@ -22,9 +26,9 @@
 #menu .location-box {
   display: none;
   position: absolute;
-  padding: 5px 0;
+  padding: .05rem 0;
   z-index: 100000;
-  top: 43px;
+  top: .43rem;
   width: 100%;
   background: rgba(32, 119, 182, .9);
   color: #fff;
@@ -34,63 +38,57 @@
 .menu-list li {
   border-bottom: 1px solid rgba(0, 0, 0, .1);
   text-align: center;
-  padding: 15px 0;
+  padding: .15rem 0;
   background: #c8c8c8;
 }
 
 #menu .current-location {
   position: absolute;
   z-index: 10000;
-  right: 10px;
-  top: 14px;
-  font-size: 22px;
+  right: .1rem;
+  top: .14rem;
+  font-size: .22rem;
 }
 
 #menu .active-location {
   background: red;
 }
 
-
-/*.menu-list li:hover {
-  background: #fff;
-}*/
-
 #menu .menu-list-detail {
   display: inline-block;
-  padding-bottom: 45px;
+  padding-bottom: .45rem;
   margin-left: 2%;
   width: 100%;
-  /*background: red;*/
   list-style: none;
   vertical-align: top;
 }
 
 #menu .menu-list-detail li {
   position: relative;
-  margin-top: 20px;
-  height: 75px;
+  margin-top: .2rem;
+  height: .75rem;
   border-bottom: 1px solid rgba(187, 186, 187, .6);
 }
 
 .menu-list-detail li img {
   float: left;
-  margin-left: 3px;
-  width: 55px;
-  height: 55px;
+  margin-left: .03rem;
+  width: .55rem;
+  height: .55rem;
 }
 
 .menu-list-detail li .msg-box {
-  margin: 0 0 0 63px;
+  margin: 0 0 0 .63rem;
 }
 
 .msg-box p {
-  padding-top: 5px;
-  font-size: 12px;
+  padding-top: .05rem;
+  font-size: .12rem;
   color: red;
 }
 
 .menu-list-detail .peopleNum-sub {
-  right: 3px;
+  right: .03rem;
 }
 
 #menuFooter {
@@ -98,51 +96,50 @@
   z-index: 10000;
   bottom: 0;
   width: 100%;
-  height: 45px;
-  /*border-top: 1px solid #505050;*/
+  height: .45rem;
   background: rgb(237, 236, 237);
 }
 
 #menuFooter .shoppingCar {
   position: absolute;
-  top: -20px;
-  left: 20px;
-  width: 40px;
-  height: 40px;
+  top: -.2rem;
+  left: .2rem;
+  width: .4rem;
+  height: .4rem;
   border: 2px solid rgba(214, 33, 49, .9);
   border-radius: 100%;
-  font-size: 30px;
+  font-size: .3rem;
   color: red;
   text-align: center;
-  line-height: 40px;
+  line-height: .4rem;
   background: #fff;
 }
 
 #menuFooter .menu-num {
   position: absolute;
-  top: -5px;
+  top: -.05rem;
   right: 0;
-  width: 15px;
-  height: 15px;
+  width: .15rem;
+  height: .15rem;
   border-radius: 100%;
-  font-size: 12px;
+  font-size: .12rem;
   color: #fff;
   text-align: center;
-  line-height: 15px;
+  line-height: .15rem;
   background: red;
 }
 
 #menuFooter .totle-money {
-  margin: 0 0 0 60px;
-  line-height: 45px;
+  margin: 0 0 0 .6rem;
+  line-height: .45rem;
 }
 
 #menuFooter .menu-btn {
   position: absolute;
-  padding: 0 20px;
+  padding: 0 .2rem;
   right: 0;
-  height: 45px;
-  line-height: 44px;
+  height: .45rem;
+  line-height: .44rem;
   background: red;
   color: #fff;
 }
@@ -171,8 +168,8 @@
 }
 
 #menu .detail-box .detail-cancel {
-  margin: 10px;
-  font-size: 20px;
+  margin: .1rem;
+  font-size: .2rem;
   float: right;
 }
 
@@ -182,15 +179,15 @@
 }
 
 .detail-box ul li {
-  margin: 10px 0;
+  margin: .1rem 0;
   text-align: center;
 }
 
 .detail-box ul li:last-child {
-  margin-top: 30px;
+  margin-top: .3rem;
   text-align: left;
-  font-size: 16px;
-  letter-spacing: 3px;
+  font-size: .16rem;
+  letter-spacing: .03rem;
 }
 
 .detail-box img {
@@ -200,8 +197,8 @@
 
 #menu .my-order {
   position: absolute;
-  padding: 5px 5px 30px;
-  bottom: 45px;
+  padding: .05rem .05rem .3rem;
+  bottom: .45rem;
   background: #fff;
   width: 100%;
 }
@@ -210,21 +207,21 @@
   position: relative;
   list-style: none;
   border-bottom: 1px solid #909090;
-  padding: 5px 0;
+  padding: .05rem 0;
 }
 
 .my-order .peopleNum-sub {
-  top: 5px;
+  top: .05rem;
   right: 0;
   font-size: 14px;
 }
 
 .my-order li:first-child span {
   float: right;
-  font-size: 12px;
+  font-size: .12rem;
   color: red;
 }
 
 .my-order li>span {
-  margin-left: 20px;
+  margin-left: .2rem;
 }
