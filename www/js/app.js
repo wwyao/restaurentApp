@@ -25,14 +25,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 	});
 })
 
-.directive('payBox', function() {
-	return {
-		restrict: 'EACM',
-		scope: true,
-		templateUrl: '../templates/common/payBox.html'
-	}
-})
-
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 	// 设置字体大小
 	let winWidth = $(window).width();
@@ -297,6 +289,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 	//支付
 	.state('pay', {
 		url: '/tab/pay',
+		cache: false,
 		params: {
 			orderId: null,
 			from: ''

@@ -340,7 +340,7 @@ angular.module('starter.controllers', [])
 	};
 })
 
-//未消费页面
+//未付款页面
 .controller('page1', function(datas, $scope, $rootScope, $http, $cordovaDialogs, $state, $ionicViewSwitcher) {
 	$scope.datas = [];
 	$scope.start = 0;
@@ -412,7 +412,7 @@ angular.module('starter.controllers', [])
 	$scope.toPay = function(orderId) {
 		$state.go('pay', {
 			orderId: orderId,
-			from: 'orders'
+			from: 'nopay'
 		});
 		$ionicViewSwitcher.nextDirection("forward");
 	};
@@ -1245,9 +1245,10 @@ angular.module('starter.controllers', [])
 })
 
 //支付
-.controller('PayCtrl', function($scope, $rootScope, $ionicHistory, $ionicViewSwitcher, $stateParams, $location, $state) {
+.controller('PayCtrl', function($scope, $rootScope, $ionicHistory, $ionicViewSwitcher, $stateParams, $location, $state, $timeout, $cordovaToast) {
 	$scope.orderData = {
-		money: '￥30',
+		money: 30,
+		moneyType: '定金',
 		name: '小明餐厅',
 		orderId: '12312312312'
 	};
@@ -1264,13 +1265,66 @@ angular.module('starter.controllers', [])
 		title: '支付宝支付',
 		value: '支付宝'
 	}];
+	$scope.rightimg = 'img/right.png';
+	$scope.payBox = {
+		password: '',
+	};
+	if ($stateParams.from == 'orders') {
+		$scope.orderData.moneyType = '应付金额';
+	}
+	$scope.showPay = true;
+	$scope.beforePay = true;
+	$scope.paying = false;
+	$scope.payResult = false;
 	$scope.stopPay = function() {
 		if ($stateParams.from == 'orders') {
+			$ionicHistory.goBack(-1);
+		} else if ($stateParams.from == 'nopay') {
 			$ionicHistory.goBack(-1);
 		} else {
 			$ionicHistory.goBack(-4);
 		}
 		$ionicViewSwitcher.nextDirection("back");
+	};
+	// 付款
+	$scope.pay = function() {
+		if ($scope.payBox.password == '123456') {
+			$scope.beforePay = false;
+			$scope.paying = true;
+			$timeout(function() {
+				$scope.beforePay = false;
+				$scope.payResult = true;
+				$timeout(function() {
+					$('.pay-mask').fadeToggle();
+					$scope.payBox.password = '';
+					$ionicHistory.goBack(-1);
+					$ionicViewSwitcher.nextDirection("back");
+					// $timeout(function() {
+					// 	$scope.beforePay = true;
+					// 	$scope.paying = false;
+					// 	$scope.payResult = false;
+					// }, 500);
+				}, 1500);
+			}, 1500);
+		} else {
+			$cordovaToast
+				.show('密码错误', 'short', 'bottom')
+				.then(function() {
+					// alert('success');
+				}, function() {
+					// alert('fail');
+				});
+		}
+	};
+	// 取消支付
+	$scope.cancelPay = function() {
+		$('.pay-mask').fadeToggle();
+	};
+	$scope.showPaybox = function() {
+		$scope.beforePay = true;
+		$scope.paying = false;
+		$scope.payResult = false;
+		$('.pay-mask').fadeToggle();
 	};
 })
 

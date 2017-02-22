@@ -1,3 +1,4 @@
+.psw
 <ion-view title="支付" id="pay" class="headerBg">
   <ion-header-bar class="bar" title="支付">
     <ion-nav-bar>
@@ -8,7 +9,7 @@
   </ion-header-bar>
   <ion-content>
     <ul class="pay-order">
-      <li>订金：<span>{{orderData.money}}</span></li>
+      <li>{{orderData.moneyType}}：￥<span>{{orderData.money}}</span></li>
       <li>餐厅名称：<span>{{orderData.name}}</span></li>
       <li>订单号：<span>{{orderData.orderId}}</span></li>
     </ul>
@@ -18,7 +19,31 @@
         <input type="radio" name="pay" value="{{item.value}}" ng-model="item.value">
       </li>
     </ul>
-    <button type="button" class="paybtn">确定支付</button>
+    <button type="button" class="paybtn" ng-click="showPaybox()">确定支付</button>
     <div class="stop-pay" ng-click="stopPay()">暂不支付</div>
   </ion-content>
+  <!-- <div class="pay-box"> -->
+  <div class="pay-mask">
+    <div class="pay-wrap" ng-if="beforePay">
+      <p>钱包密码</p>
+      <p>￥{{orderData.money}}</p>
+      <p>
+        <input id="pay-password" type="password" class="pay-password" maxlength="6" ng-model="payBox.password">
+        <label for="pay-password"><span ng-repeat="i in payBox.password track by $index"></span></label>
+      </p>
+      <p>
+        <button class="pay-cancal" ng-click="cancelPay()">取消</button>
+        <button class="pay-refine" ng-click="pay()">付款</button>
+      </p>
+    </div>
+    <div class="paying-box" ng-if="paying">
+      <ion-spinner icon="bubbles" class="spinner-energized spinner-size"></ion-spinner>
+      <p>正在支付...</p>
+    </div>
+    <div class="pay-result" ng-if="payResult">
+      <img ng-src="{{rightimg}}" alt="">
+      <p>支付成功!</p>
+    </div>
+  </div>
+  <!-- </div> -->
 </ion-view>
