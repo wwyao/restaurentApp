@@ -8,35 +8,38 @@
 }
 
 #home .location {
-  position: absolute;
-  left: .09rem;
+  margin-right: .05rem;
   font-size: .16rem;
-  line-height: .24rem;
   color: #fff;
 }
 
-.place i {
-  margin-right: .05rem;
+.place {
+  position: absolute;
+  left: .12rem;
+  font-size: .14rem;
+  line-height: .24rem;
 }
 
 .search {
+  position: relative;
+  top: -.03rem;
   padding-left: 10%;
-  margin-left: .15rem;
+  margin-left: .3rem;
   width: 55%;
-  height: .28rem;
+  height: .3rem;
   font-size: .12rem;
-  background: rgba(255, 255, 255, 0.2) url(../img/search.png) no-repeat 8% center;
+  background: rgba(255, 255, 255, 0) url(../img/search.png) no-repeat 8% center;
   background-size: .15rem .15rem;
   color: #B9B9B9;
-  line-height: .28rem;
-  border: .01rem solid #C5D2DC;
+  line-height: .3rem;
+  border: 1px solid #C5D2DC;
   text-decoration: none;
-  border-radius: .1rem;
+  border-radius: 5px;
 }
 
 .swipe {
   position: absolute;
-  bottom: .07rem;
+  bottom: .1rem;
   right: .05rem;
   width: .22rem;
   height: .22rem;
@@ -52,12 +55,10 @@
 }
 
 .kinds {
-  margin-bottom: .03rem;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  /*width: 120%;*/
-  /*box-shadow: 0 0 1px 1px #e0e0e0;*/
+  background: #f5f5f5;
 }
 
 .kinds span {
@@ -115,7 +116,7 @@
   justify-content: space-around;
   z-index: 1000;
   width: 100%;
-  height: .4rem;
+  height: .3rem;
   background: rgba(32, 119, 182, 0.9);
   border-bottom: .01rem solid #B5BECA;
   text-align: center;
@@ -132,8 +133,8 @@
 
 .sort li select {
   position: absolute;
-  top: 30%;
-  left: 30%;
+  top: 15%;
+  left: 20%;
   background: rgba(32, 119, 182, 0);
   border: none;
   color: #fff;
@@ -144,24 +145,26 @@
   border-right: .01rem dotted rgba(205, 227, 206, .2);
 }
 
-.item {
+.aitem {
   border: none;
 }
 
 .aitem img {
+  margin-right: .05rem;
   float: left;
-  width: 1.1rem;
-  height: .8rem;
-}
-
-.aitem div {
-  margin-left: 1.2rem;
+  width: 1.2rem;
+  height: .95rem;
 }
 
 .aitem div p {
-  margin: 0;
+  margin: 0 0 .05rem;
   padding: 0;
   font-size: .12rem;
+}
+
+.aitem div h3 {
+  font-size: .14rem;
+  margin-bottom: .05rem;
 }
 
 .item-complex .item-content {
@@ -189,5 +192,10 @@
   text-align: center;
   color: rgb(14, 40, 217);
   margin: .1rem 0;
+  font-size: .16rem;
+}
+
+.red-front {
+  color: red;
   font-size: .16rem;
 }

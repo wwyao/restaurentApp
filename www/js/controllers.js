@@ -14,6 +14,14 @@ angular.module('starter.controllers', [])
 			$rootScope.isLogined = true;
 		}
 	};
+	$scope.goOrders = function() {
+		var tempUser = datas.getUserDatas();
+		if (!tempUser) {
+			$state.go('tab.ordernologined');
+		} else {
+			$state.go('tab.order');
+		}
+	};
 	//返回按钮
 	$rootScope.goBack = function(target) {
 		if (target) {
@@ -150,7 +158,7 @@ angular.module('starter.controllers', [])
 			.scan()
 			.then(function(barcodeData) {
 				var url = barcodeData.text;
-				alert(barcodeData.text);
+				// alert(barcodeData.text);
 				$location.path(url);
 			}, function(error) {
 				// An error occurred
@@ -236,10 +244,14 @@ angular.module('starter.controllers', [])
 	};
 	// 预约
 	$scope.book = function() {
-		$state.go('bookTable', {
-			restaurentId: $scope.restaurentId,
-			from: 'detail'
-		});
+		if (datas.getUserDatas()) {
+			$state.go('bookTable', {
+				restaurentId: $scope.restaurentId,
+				from: 'detail'
+			});
+		} else {
+			alert('请先登录！');
+		}
 	};
 })
 
@@ -268,23 +280,23 @@ angular.module('starter.controllers', [])
 	$scope.text1 = $stateParams.name;
 	$scope.text2 = $stateParams.deskId;
 	$timeout(function() {
-		$state.go('menu');
+		$state.go('menu', {
+			restaurentId: null,
+			deskId: $scope.text2,
+			name: $scope.text1
+		});
 		$ionicViewSwitcher.nextDirection("forward");
 	}, 3000);
 })
 
 //订单页面
-.controller('OrdersCtrl', function($scope, $cordovaBarcodeScanner) {
-	$scope.scan = function() {
-		$cordovaBarcodeScanner
-			.scan()
-			.then(function(barcodeData) {
-				// Success! Barcode data is here 扫描数据：barcodeData.text
-			}, function(error) {
-				// An error occurred
-			});
+.controller('OrdersCtrl', function($scope) {
 
-	};
+})
+
+//未登录的订单页面
+.controller('OrdersNoLoginedCtrl', function($scope) {
+
 })
 
 //我的页面
@@ -344,7 +356,6 @@ angular.module('starter.controllers', [])
 .controller('page1', function(datas, $scope, $rootScope, $http, $cordovaDialogs, $state, $ionicViewSwitcher) {
 	$scope.datas = [];
 	$scope.start = 0;
-
 	$scope.isBottom = true;
 	$scope.loadMore = function() {
 		$http({
@@ -358,7 +369,7 @@ angular.module('starter.controllers', [])
 			}
 		}).success(function(data, header, config, status) {
 			//响应成功
-			// console.log(data);
+			console.log(data);
 			$scope.datas = $scope.datas.concat(data);
 			$scope.start += data.length;
 			if (data.length < 4) {
@@ -369,15 +380,10 @@ angular.module('starter.controllers', [])
 			//处理响应失败
 		});
 	};
-	$scope.loadMore();
 	var i = 0;
 	$scope.cancel = function(e, orderId) {
 		e.stopPropagation();
-		// console.log(i++,'cancel');
-
-		// var isCancel = $cordovaDialogs.confirm('确定取消订单？', '');
 		var isCancel = confirm('确定取消订单？', '');
-		// alert(orderId+':'+isCancel);
 		console.log(isCancel);
 		if (isCancel) {
 			$http.get('http://localhost/restaurent/cancelOrder.php?orderId=' + orderId).success(function(data) {
@@ -435,7 +441,6 @@ angular.module('starter.controllers', [])
 			}
 		}).success(function(data, header, config, status) {
 			//响应成功
-			// console.log(data);
 			$scope.datas = $scope.datas.concat(data);
 			$scope.start += data.length;
 			if (data.length < 4) {
@@ -446,7 +451,6 @@ angular.module('starter.controllers', [])
 			//处理响应失败
 		});
 	};
-	$scope.loadMore();
 	$scope.toPay = function(orderId) {
 		$state.go('pay', {
 			orderId: orderId,
@@ -480,7 +484,6 @@ angular.module('starter.controllers', [])
 			}
 		}).success(function(data, header, config, status) {
 			//响应成功
-			// console.log(data);
 			$scope.datas = $scope.datas.concat(data);
 			$scope.start += data.length;
 			if (data.length < 4) {
@@ -491,9 +494,7 @@ angular.module('starter.controllers', [])
 			//处理响应失败
 		});
 	};
-	$scope.loadMore();
 	$scope.toWrite = function(orderId, restaurentId, title) {
-		// alert(orderId);
 		var writeUrl = '/writeComment/' + orderId + '/' + restaurentId + '/' + title;
 		$location.path(writeUrl);
 		$ionicViewSwitcher.nextDirection("forward");
@@ -529,10 +530,12 @@ angular.module('starter.controllers', [])
 					return str.join("&");
 				}
 			}).success(function(data) {
+				console.log(data);
 				if (data.result) {
 					$rootScope.isLogined = true;
 					var tempObj = {
 						name: $scope.msg.username,
+						userId: data.userId,
 						date: '2011-6-6',
 						avatar: 'img/img2.jpg',
 						phone: "12345678912"
@@ -550,26 +553,6 @@ angular.module('starter.controllers', [])
 						});
 				}
 			});
-			// if ($scope.msg.username == "admin" && $scope.msg.password == "admin") {
-			// 	$rootScope.isLogined = true;
-			// 	var tempObj = {
-			// 		name: $scope.msg.username,
-			// 		date: '2011-6-6',
-			// 		avatar: 'img/img2.jpg',
-			// 		phone: "12345678912"
-			// 	}
-			// 	datas.setUserDatas(tempObj);
-			// 	$state.go('tab.me');
-			// 	$ionicViewSwitcher.nextDirection("back");
-			// } else {
-			// 	$cordovaToast
-			// 		.show('账户或密码输入错误!', 'short', 'bottom')
-			// 		.then(function() {
-			// 			// alert('success');
-			// 		}, function() {
-			// 			// alert('fail');
-			// 		});
-			// }
 		} else {
 			$cordovaToast
 				.show('请输入账户、密码', 'short', 'bottom')
@@ -1140,27 +1123,28 @@ angular.module('starter.controllers', [])
 	};
 	// 选好了
 	$scope.goHadOrders = function() {
-		var tempMenu = [];
-		for (var i = 0; i < $scope.allMenu.length; i++) {
-			if ($scope.allMenu[i].num != 0) {
-				tempMenu.push($scope.allMenu[i]);
+		if (datas.getUserDatas()) {
+			var tempMenu = [];
+			for (var i = 0; i < $scope.allMenu.length; i++) {
+				if ($scope.allMenu[i].num != 0) {
+					tempMenu.push($scope.allMenu[i]);
+				}
 			}
+			datas.setMenuMsg(tempMenu);
+			if ($stateParams.from == 'booktable') {
+				$state.go('shoppingCar', {
+					orderId: datas.getCurrentOrder().orderId
+				});
+			} else if ($stateParams.from == 'detail') {
+				$state.go('bookTable', {
+					restaurentId: $scope.restaurentId,
+					from: 'menu'
+				});
+			}
+			$ionicViewSwitcher.nextDirection("forward");
+		} else {
+			alert('请先登录！');
 		}
-		console.log(tempMenu);
-		datas.setMenuMsg(tempMenu);
-		if ($stateParams.from == 'booktable') {
-			$state.go('shoppingCar', {
-				orderId: datas.getCurrentOrder().orderId
-			});
-		} else if ($stateParams.from == 'detail') {
-			$state.go('bookTable', {
-				restaurentId: $scope.restaurentId,
-				from: 'menu'
-			});
-		}
-
-		// $location.path('/tab/shoppingCar/'+);
-		$ionicViewSwitcher.nextDirection("forward");
 	};
 })
 
@@ -1466,8 +1450,10 @@ angular.module('starter.controllers', [])
 	};
 	//检查用户名是否已存在
 	$scope.checkName = function() {
-		var url = 'http://www.wy.cn:8888/restaurent/checkName.php?username=' + $scope.registerMsg.name;
+		console.log('name change');
+		var url = 'http://localhost/restaurent/checkName.php?username=' + $scope.registerMsg.name;
 		$http.get(url).success(function(data) {
+			console.log('register:', data);
 			$scope.isResult = true;
 			if (data.result == 0) {
 				$scope.isRight = true;
@@ -1478,41 +1464,59 @@ angular.module('starter.controllers', [])
 	};
 	//注册
 	$scope.register = function() {
-		var url = 'http://www.wy.cn:8888/restaurent/register.php';
-		$http({
-			method: 'post',
-			url: url,
-			data: {
-				username: $scope.registerMsg.name,
-				password: $scope.registerMsg.psw1
-			},
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded'
-			},
-			transformRequest: function(obj) {
-				var str = [];
-				for (var p in obj) {
-					str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-				}
-				return str.join("&");
-			}
-		}).success(function(data) {
-			var resultText = "";
-			if (data.result) {
-				resultText = '注册成功';
-
-				$state.go('login');
-				$ionicViewSwitcher.nextDirection("back");
-			} else {
-				resultText = '服务器错误，请重新注册';
-			}
+		if ($scope.registerMsg.psw1.length < 6) {
 			$cordovaToast
-				.show(resultText, 'short', 'bottom')
+				.show('密码长度少于6位', 'short', 'bottom')
 				.then(function() {
 					// alert('success');
 				}, function() {
 					// alert('fail');
 				});
-		});
+		} else if ($scope.registerMsg.psw1 !== $scope.registerMsg.psw2) {
+			$cordovaToast
+				.show('密码不一致', 'short', 'bottom')
+				.then(function() {
+					// alert('success');
+				}, function() {
+					// alert('fail');
+				});
+		} else {
+			var url = 'http://localhost/restaurent/register.php';
+			$http({
+				method: 'post',
+				url: url,
+				data: {
+					username: $scope.registerMsg.name,
+					password: $scope.registerMsg.psw1
+				},
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				transformRequest: function(obj) {
+					var str = [];
+					for (var p in obj) {
+						str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+					}
+					return str.join("&");
+				}
+			}).success(function(data) {
+				var resultText = "";
+				if (data.result) {
+					resultText = '注册成功';
+
+					$state.go('login');
+					$ionicViewSwitcher.nextDirection("back");
+				} else {
+					resultText = '服务器错误，请重新注册';
+				}
+				$cordovaToast
+					.show(resultText, 'short', 'bottom')
+					.then(function() {
+						// alert('success');
+					}, function() {
+						// alert('fail');
+					});
+			});
+		}
 	};
 });

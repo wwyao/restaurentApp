@@ -7,9 +7,11 @@
     </ion-nav-bar>
     <i class="ion-information-circled current-location" ng-click="locationClick()"></i>
   </ion-header-bar>
-  <div class="location-box">
-    您的位置为：{{restaurentName}} {{deskNum}}号桌
-  </div>
+  <ion-content overflow-scroll="true" scrollbar-y="false" class="location-box">
+    <div>
+      您的位置为：{{restaurentName}} {{deskNum}}号桌
+    </div>
+  </ion-content>
   <ion-content overflow-scroll="true" id="scroll1" scrollbar-y="false">
     <ul class="menu-list">
       <li ng-repeat="item in listDatas track by $index" ng-class="{'item-selected':item.isFocus}" ng-click="listClick($index,item.name)">

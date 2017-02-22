@@ -15,7 +15,7 @@
   display: none;
   padding: .08rem;
   position: fixed;
-  top: .44rem;
+  top: 0;
   right: 0;
   z-index: 1000;
   background: rgb(10, 108, 209);

@@ -25,11 +25,11 @@
 
 #menu .location-box {
   display: none;
-  position: absolute;
+  position: fixed;
   padding: .05rem 0;
   z-index: 100000;
-  top: .43rem;
-  width: 100%;
+  height: .3rem;
+  width: 100% !important;
   background: rgba(32, 119, 182, .9);
   color: #fff;
   text-align: center;

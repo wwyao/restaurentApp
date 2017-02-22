@@ -99,6 +99,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 		url: '/tab/menu',
 		params: {
 			restaurentId: null,
+			deskId: '',
+			name: '',
 			from: ''
 		},
 		templateUrl: 'templates/menu.html',
@@ -123,6 +125,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 			'tab-order': {
 				templateUrl: 'templates/tab-orders.html',
 				controller: 'OrdersCtrl'
+			}
+		}
+	})
+
+	// 未登录的订单页面
+	.state('tab.ordernologined', {
+		url: '/order',
+		// abstract: true,
+		views: {
+			'tab-order': {
+				templateUrl: 'templates/tab-orders-nologined.html',
+				controller: 'OrdersNoLoginedCtrl'
 			}
 		}
 	})

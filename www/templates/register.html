@@ -11,7 +11,7 @@
   <ion-content>
     <form class="register-box" ng-submit="register()">
       <div>
-        <span>用户名:</span><input type="text" ng-model="registerMsg.name" placeholder="请输入用户名" required ng-change="checkName()">
+        <span>用户名:</span><input type="text" ng-model="registerMsg.name" placeholder="请输入用户名" ng-change="checkName()">
         <i class="ion-ios-checkmark check-result name-right" ng-if="isResult&&isRight"></i>
         <i class="ion-ios-close check-result name-wrong" ng-if="isResult&&!isRight"></i>
       </div>
