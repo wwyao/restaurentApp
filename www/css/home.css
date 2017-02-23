@@ -63,51 +63,42 @@
 
 .kinds span {
   display: inline-block;
-  margin: .05rem 0;
+  margin: .05rem 6%;
   padding: .25rem .05rem 0;
   font-size: .12rem;
-  width: 25%;
   text-align: center;
 }
 
 .kinds span:nth-child(1) {
-  background: url(../img/huoguo.png) no-repeat center top;
-  background-size: .25rem .25rem;
+  background: url(../img/sprite.png) 1px 0 no-repeat;
 }
 
 .kinds span:nth-child(2) {
-  background: url(../img/chuan.png) no-repeat center top;
-  background-size: .25rem .25rem;
+  background: url(../img/sprite.png) -33px 0 no-repeat;
 }
 
 .kinds span:nth-child(3) {
-  background: url(../img/fish.png) no-repeat center top;
-  background-size: .25rem .25rem;
+  background: url(../img/sprite.png) -66px 0 no-repeat;
 }
 
 .kinds span:nth-child(4) {
-  background: url(../img/bbq.png) no-repeat center top;
-  background-size: .25rem .25rem;
+  background: url(../img/sprite.png) -99px 0 no-repeat;
 }
 
 .kinds span:nth-child(5) {
-  background: url(../img/xican.png) no-repeat center top;
-  background-size: .25rem .25rem;
+  background: url(../img/sprite.png) -135px 0 no-repeat;
 }
 
 .kinds span:nth-child(6) {
-  background: url(../img/yuecai.png) no-repeat center top;
-  background-size: .25rem .25rem;
+  background: url(../img/sprite.png) -168px 0 no-repeat;
 }
 
 .kinds span:nth-child(7) {
-  background: url(../img/kuaican.png) no-repeat center top;
-  background-size: .25rem .25rem;
+  background: url(../img/sprite.png) -200px 0 no-repeat;
 }
 
 .kinds span:nth-child(8) {
-  background: url(../img/tea.png) no-repeat center top;
-  background-size: .25rem .25rem;
+  background: url(../img/sprite.png) -233px 0 no-repeat;
 }
 
 .sort {

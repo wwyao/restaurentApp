@@ -4,6 +4,7 @@
 
 #orders {
   font-size: .14rem;
+  background: #f5f5f5;
 }
 
 #orders .tabs {
@@ -24,7 +25,7 @@
 }
 
 .page-item {
-  margin-bottom: .2rem;
+  margin-bottom: .15rem;
   background: #fff;
   border-bottom: 1px solid #e0e0e0;
   border-top: 1px solid #e0e0e0;
