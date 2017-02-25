@@ -63,7 +63,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 	// Each tab has its own nav history stack:
 	//首页
 	.state('tab.home', {
-		url: '/home/:tag/:city',
+		url: '/home',
+		params: {
+			city: ''
+		},
 		views: {
 			'tab-home': {
 				templateUrl: 'templates/tab-home.html',
@@ -121,6 +124,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 	.state('tab.order', {
 		url: '/order',
 		// abstract: true,
+		cache: false,
 		views: {
 			'tab-order': {
 				templateUrl: 'templates/tab-orders.html',
@@ -233,6 +237,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 		controller: 'MyconcernCtrl'
 	})
 
+	//足迹
+	.state('history', {
+		url: '/tab/history',
+		cache: false,
+		templateUrl: 'templates/history.html',
+		controller: 'HistoryCtrl'
+	})
+
 	//推荐餐厅
 	.state('recommendRestaurent', {
 		url: '/tab/RecommendRestaurent',
@@ -326,6 +338,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 		controller: 'AboutlCtrl'
 	});
 	// if none of the above states are matched, use this as the fallback
-	$urlRouterProvider.otherwise('/tab/home/1/city');
+	$urlRouterProvider.otherwise('/tab/home');
 
 });

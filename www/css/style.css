@@ -349,7 +349,7 @@ a {
   background: #f5f5f5;
   border-bottom-right-radius: .1rem;
   border-bottom-left-radius: .1rem;
-  font-size: .2rem;
+  font-size: .16rem;
   color: rgb(26, 61, 210);
 }
 
@@ -360,8 +360,12 @@ a {
 
 .evaluation-content li>div:last-child i {
   float: right;
-  margin: 0 .05rem;
-  letter-spacing: .1rem;
+  margin: 0 .1rem;
+  letter-spacing: .01rem;
+}
+
+.evaluation-content li>div:last-child i:last-child {
+  color: rgb(209, 71, 27);
 }
 
 
@@ -624,7 +628,7 @@ a {
 #passwordBox>div {
   padding-top: .3rem;
   margin: 50% auto;
-  width: 70%;
+  width: 90%;
   background: #fff;
   border-radius: .05rem;
 }
@@ -642,15 +646,17 @@ a {
   padding: 0 .05rem;
   margin: .1rem auto;
   width: 90%;
+  height: .5rem;
   line-height: .5rem;
+  font-size: .18rem;
   border: 1px solid rgba(185, 185, 185, 0.84);
   border-radius: .05rem;
 }
 
 #passwordBox span {
-  padding: 0 .3rem;
+  padding: 0 17%;
   display: inline-block;
-  line-height: .3rem;
+  line-height: .4rem;
   background: rgb(139, 139, 135);
   color: #fff;
   font-size: .14rem;

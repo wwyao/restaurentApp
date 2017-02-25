@@ -1,0 +1,27 @@
+<ion-view title="足迹" id="concern" class="headerBg">
+  <ion-header-bar class="bar">
+    <ion-nav-bar>
+      <ion-nav-buttons side="left" class="backBtn">
+        <i class="ion-chevron-left back-btn" ng-click="goBack()"></i>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+  </ion-header-bar>
+
+  <ion-content>
+    <ion-list>
+      <ion-item collection-repeat="item in items track by $index" class="aitem" ng-click="forwardClick(item.restaurentId)">
+        <div>
+          <img ng-src="{{item.imgSrc1}}" alt="">
+          <div class="item-con">
+            <h3>{{item.title}}</h3>
+            <p>{{item.address}}</p>
+            <p>{{item.feature}}</p>
+            <p>人均消费：￥{{item.money}}</p>
+            <!-- <p><span class="light-text">9.6</span>分</p> -->
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+
+  </ion-content>
+</ion-view>

@@ -35,7 +35,7 @@ angular.module('starter.controllers', [])
 
 //主页页面
 .controller('HomeCtrl', function($scope, datas, $rootScope, $stateParams, $http, $cordovaGeolocation, $ionicHistory, $ionicViewSwitcher, $ionicScrollDelegate, $cordovaBarcodeScanner, $timeout, $state, $location) {
-	$rootScope.currentCity = "";
+	$rootScope.currentCity = "广州市";
 	$scope.start = 0;
 	$scope.count = 6;
 	$scope.isDatas = true;
@@ -56,7 +56,7 @@ angular.module('starter.controllers', [])
 		timeout: 100000,
 		enableHighAccuracy: true
 	};
-	if ($stateParams.tag == 1) {
+	if ($stateParams.city == '') {
 		document.addEventListener("deviceready", function() {
 			$cordovaGeolocation
 				.getCurrentPosition(posOptions)
@@ -76,7 +76,7 @@ angular.module('starter.controllers', [])
 					// alert(err);
 				});
 		}, false);
-	} else if ($stateParams.tag == 2) {
+	} else {
 		$rootScope.currentCity = $stateParams.city;
 	}
 
@@ -84,21 +84,7 @@ angular.module('starter.controllers', [])
 	$scope.isItemSort = false;
 	$scope.items = [];
 	//获取餐厅数据
-	// function getRestaurentData(start, count) {
-	// 	$scope.start += 6;
-	// 	var url = 'http://localhost/restaurent/allRestaurent.php?start=' + start + '&count=' + count;
-	// 	$http.get(url).success(function(data) {
-	// 		console.log(data.length != 0);
-	// 		if (data.length != 0) {
-	// 			$scope.items = $scope.items.concat(data);
-	// 		} else {
-	// 			$scope.isDatas = false;
-	// 			// console.log('没有更多数据了');
-	// 		}
-	// 		$scope.$broadcast('scroll.infiniteScrollComplete');
-	// 	});
-	// }
-	function getRestaurentData(start, count) {
+	$scope.getRestaurentData = function(start, count) {
 		$http({
 			method: 'GET',
 			url: 'http://localhost/restaurent/allRestaurent.php',
@@ -111,8 +97,13 @@ angular.module('starter.controllers', [])
 			}
 		}).success(function(data, header, config, status) {
 			//响应成功
+			$scope.isDatas = true;
 			if (data.length != 0) {
-				$scope.items = $scope.items.concat(data);
+				if (start != 0) {
+					$scope.items = $scope.items.concat(data);
+				} else {
+					$scope.items = data;
+				}
 			} else {
 				$scope.isDatas = false;
 				// console.log('没有更多数据了');
@@ -123,7 +114,7 @@ angular.module('starter.controllers', [])
 			//处理响应失败
 		});
 	}
-	getRestaurentData($scope.start, $scope.count);
+	$scope.getRestaurentData($scope.start, $scope.count);
 	$scope.itemIndex = 8;
 	$scope.forwardAnim = function() {
 		$ionicViewSwitcher.nextDirection("forward");
@@ -145,12 +136,8 @@ angular.module('starter.controllers', [])
 	//下拉加载更多的数据
 	$scope.loadMoreData = function() {
 		$timeout(function() {
-			getRestaurentData($scope.start, $scope.count);
-			// $scope.$broadcast('scroll.infiniteScrollComplete');
+			$scope.getRestaurentData($scope.start, $scope.count);
 		}, 1400);
-		// getRestaurentData($scope.start, $scope.count);
-		// $scope.$broadcast('scroll.infiniteScrollComplete');
-
 	};
 	//扫二维码
 	$scope.scan = function() {
@@ -158,47 +145,48 @@ angular.module('starter.controllers', [])
 			.scan()
 			.then(function(barcodeData) {
 				var url = barcodeData.text;
-				// alert(barcodeData.text);
 				$location.path(url);
 			}, function(error) {
 				// An error occurred
 			});
-
 	};
 	//选择分类
 	$scope.kindClick = function(value) {
+		$scope.start = 0;
 		$ionicScrollDelegate.scrollTo(0, 229, true);
 		$scope.values.classifyValue = value;
-	};
-	//选择地区
-	$scope.placeChange = function() {
-		alert($scope.values.placeValue);
-	};
-	//分类改变
-	$scope.classifyChange = function() {
-		$scope.start = 0;
 		$http({
 			method: 'GET',
 			url: 'http://localhost/restaurent/particularResData.php',
 			params: {
-				text: $scope.values.classifyValue,
+				text: value,
 				start: $scope.start
 			}
 		}).success(function(data, header, config, status) {
 			//响应成功
-			// console.log(data);
+			console.log(data);
 			$scope.items = data;
 			$scope.start += 6;
+			$scope.isDatas = true;
 		}).error(function(data, header, config, status) {
 			//处理响应失败
 		});
-		// alert($scope.values.classifyValue);
+	};
+	//选择地区
+	$scope.placeChange = function() {
+		// alert($scope.values.placeValue);
+		$scope.start = 0;
+		$scope.getRestaurentData($scope.start, $scope.count);
+	};
+	//分类改变
+	$scope.classifyChange = function() {
+		$scope.start = 0;
+		$scope.getRestaurentData($scope.start, $scope.count);
 	};
 	//排序改变
 	$scope.rankChange = function() {
 		alert($scope.values.rankValue);
 	};
-	// document.querySelector('.bigScroll').style.height = window.screen.height + 'px';
 })
 
 //餐厅详细页面
@@ -283,7 +271,8 @@ angular.module('starter.controllers', [])
 		$state.go('menu', {
 			restaurentId: null,
 			deskId: $scope.text2,
-			name: $scope.text1
+			name: $scope.text1,
+			from: 'scan'
 		});
 		$ionicViewSwitcher.nextDirection("forward");
 	}, 3000);
@@ -297,6 +286,23 @@ angular.module('starter.controllers', [])
 //未登录的订单页面
 .controller('OrdersNoLoginedCtrl', function($scope) {
 
+})
+
+//足迹
+.controller('HistoryCtrl', function($scope, $rootScope, $http, datas, $location, $ionicViewSwitcher) {
+	$scope.userData = datas.getUserDatas();
+	$scope.items = [];
+	var start = 0;
+	var count = 6;
+	var url = 'http://localhost/restaurent/getConcern.php?userId=' + $scope.userData.userId + '&start=' + start + '&count=' + count;
+	$http.get(url).success(function(data) {
+		$scope.items = data;
+	});
+	$scope.forwardClick = function(restaurentId) {
+		var itemUrl = '/tab/home/' + restaurentId;
+		$location.path(itemUrl);
+		$ionicViewSwitcher.nextDirection("forward");
+	};
 })
 
 //我的页面
@@ -930,22 +936,21 @@ angular.module('starter.controllers', [])
 	//打开相册
 	$scope.imgPicker = function() {
 		if (!$scope.isEditable) {
-			// $cordovaImagePicker.getPictures(imgoptions)
-			// 	.then(function(results) {
-			// 		$cordovaFile.readAsText(cordova.file.dataDirectory, $scope.readFile)
-			// 			.then(function(success) {
-			// 				// success
-			// 			}, function(error) {
-			// 				// error
-			// 			});
-			// 		alert(results)
-			// 		$scope.userData.avatar = results[0];
-			// 		//*******************
-			// 		datas.setUserDatas($scope.userData);
-			// 	}, function(error) {
-			// 		// error getting photos
-			// 	});
-			$('#file').trigger('click');
+			$cordovaImagePicker.getPictures(imgoptions)
+				.then(function(results) {
+					// $cordovaFile.readAsText(cordova.file.dataDirectory, $scope.readFile)
+					// 	.then(function(success) {
+					// 		// success
+					// 	}, function(error) {
+					// 		// error
+					// 	});
+					// alert(results)
+					$scope.userData.avatar = results[0];
+					datas.setUserDatas($scope.userData);
+				}, function(error) {
+					// error getting photos
+				});
+			// $('#file').trigger('click');
 			// $scope.userData.avatar = $('#file').files[0];
 
 		}
@@ -1040,17 +1045,21 @@ angular.module('starter.controllers', [])
 	}];
 	$scope.detailDatas = [];
 	$scope.allMenu = [];
-	// $scope.detailDatas = $scope.allMenu;
 	//获取菜单
-	// getMenu();
-	// function getMenu(){
 	$http.get('http://localhost/restaurent/getMenu.php?restaurentId=' + $scope.restaurentId).success(function(data) {
 		console.log(data);
 		$scope.allMenu = data;
 		$scope.detailDatas = data;
 	});
-	// }
-	// alert($scope.restaurentId);
+	// 返回按钮
+	$scope.menuGoBack = function() {
+		if ($stateParams.from == 'scan') {
+			$state.go('tab.home');
+		} else {
+			$ionicHistory.goBack(-1);
+		}
+		$ionicViewSwitcher.nextDirection("back");
+	};
 	$scope.listClick = function(index, tag) {
 		for (var i = 0; i < $scope.listDatas.length; i++) {
 			$scope.listDatas[i].isFocus = false;
@@ -1261,9 +1270,7 @@ angular.module('starter.controllers', [])
 	$scope.paying = false;
 	$scope.payResult = false;
 	$scope.stopPay = function() {
-		if ($stateParams.from == 'orders') {
-			$ionicHistory.goBack(-1);
-		} else if ($stateParams.from == 'nopay') {
+		if ($stateParams.from == 'orders' || $stateParams.from == 'nopay') {
 			$ionicHistory.goBack(-1);
 		} else {
 			$ionicHistory.goBack(-4);
@@ -1281,7 +1288,11 @@ angular.module('starter.controllers', [])
 				$timeout(function() {
 					$('.pay-mask').fadeToggle();
 					$scope.payBox.password = '';
-					$ionicHistory.goBack(-1);
+					if ($stateParams.from == 'orders' || $stateParams.from == 'nopay') {
+						$ionicHistory.goBack(-1);
+					} else {
+						$ionicHistory.goBack(-4);
+					}
 					$ionicViewSwitcher.nextDirection("back");
 					// $timeout(function() {
 					// 	$scope.beforePay = true;
@@ -1332,29 +1343,29 @@ angular.module('starter.controllers', [])
 		$scope.evaluationDatas = data;
 	});
 	$scope.usefulClick = function(id) {
-		$http.get('http://localhost/restaurent/addUseful.php?commetId=' + id).success(function(data) {
-			if (data.result) {
-				for (var i = 0; i < $scope.evaluationDatas.length; i++) {
-					if ($scope.evaluationDatas[i].commetId == id) {
-						$scope.evaluationDatas[i].useful = parseInt($scope.evaluationDatas[i].useful) + 1;
-						break;
-					}
-				}
-			}
-		});
+		// $http.get('http://localhost/restaurent/addUseful.php?commetId=' + id).success(function(data) {
+		// 	if (data.result) {
+		// 		for (var i = 0; i < $scope.evaluationDatas.length; i++) {
+		// 			if ($scope.evaluationDatas[i].commetId == id) {
+		// 				$scope.evaluationDatas[i].useful = parseInt($scope.evaluationDatas[i].useful) + 1;
+		// 				break;
+		// 			}
+		// 		}
+		// 	}
+		// });
 
 	};
 	$scope.uselessClick = function(id) {
-		$http.get('http://localhost/restaurent/useless.php?commetId=' + id).success(function(data) {
-			if (data.result) {
-				for (var i = 0; i < $scope.evaluationDatas.length; i++) {
-					if ($scope.evaluationDatas[i].commetId == id) {
-						$scope.evaluationDatas[i].useless = parseInt($scope.evaluationDatas[i].useless) + 1;
-						break;
-					}
-				}
-			}
-		});
+		// $http.get('http://localhost/restaurent/useless.php?commetId=' + id).success(function(data) {
+		// 	if (data.result) {
+		// 		for (var i = 0; i < $scope.evaluationDatas.length; i++) {
+		// 			if ($scope.evaluationDatas[i].commetId == id) {
+		// 				$scope.evaluationDatas[i].useless = parseInt($scope.evaluationDatas[i].useless) + 1;
+		// 				break;
+		// 			}
+		// 		}
+		// 	}
+		// });
 	};
 })
 
@@ -1401,7 +1412,6 @@ angular.module('starter.controllers', [])
 	$scope.citySelected = function(text) {
 		if ($scope.alphabet.indexOf(text) == -1) {
 			$state.go('tab.home', {
-				tag: 2,
 				city: text
 			});
 			$ionicViewSwitcher.nextDirection("back");
